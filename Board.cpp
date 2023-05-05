@@ -20,4 +20,64 @@ Board::Board() :
     m_blackKing(bitfields::BLACK_KING_START)
 {
 }
+
+Bitboard Board::WhitePawns()
+{
+    return m_whitePawns;
+}
+
+Bitboard Board::BlackPawns()
+{
+    return m_blackPawns;
+}
+
+Bitboard Board::WhiteRooks()
+{
+    return m_whiteRooks;
+}
+
+Bitboard Board::BlackRooks()
+{
+    return m_blackRooks;
+}
+
+Bitboard Board::WhiteKnights()
+{
+    return m_whiteKnights;
+}
+
+Bitboard Board::BlackKnights()
+{
+    return m_blackKnights;
+}
+
+Bitboard Board::WhiteBishops()
+{
+    return m_whiteBishops;
+}
+
+Bitboard Board::BlackBishops()
+{
+    return m_blackBishops;
+}
+
+Bitboard Board::WhiteQueens()
+{
+    return m_whiteQueens;
+}
+
+Bitboard Board::BlackQueens()
+{
+    return m_blackQueens;
+}
+
+Bitboard Board::WhiteKing()
+{
+    return m_whiteKing;
+}
+
+Bitboard Board::BlackKing()
+{
+    return m_blackKing;
+}
 } // namespace sablefish::board

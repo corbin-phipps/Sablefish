@@ -9,6 +9,19 @@ class Board
 public:
     Board();
 
+    Bitboard WhitePawns();
+    Bitboard BlackPawns();
+    Bitboard WhiteRooks();
+    Bitboard BlackRooks();
+    Bitboard WhiteKnights();
+    Bitboard BlackKnights();
+    Bitboard WhiteBishops();
+    Bitboard BlackBishops();
+    Bitboard WhiteQueens();
+    Bitboard BlackQueens();
+    Bitboard WhiteKing();
+    Bitboard BlackKing();
+
 private:
     Bitboard m_whitePawns;
     Bitboard m_blackPawns;
