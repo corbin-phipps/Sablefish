@@ -1,6 +1,7 @@
 #include "Board.hpp"
 
 using namespace sablefish::board;
+using namespace sablefish::board::piece;
 using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
@@ -8,16 +9,30 @@ namespace sablefish::board
 {
 /* constructor */
 Board::Board() :
-    m_bitboards{}
+    m_bitboards{},
+    m_squares{}
 {
-    InitializeBitboards();
+    Initialize();
 }
 
 /* public */
+void
+Board::Initialize()
+{
+    InitializeBitboards();
+    InitializeSquares();
+}
+
 Bitboard
 Board::GetBitboard(PieceType pieceType, PieceColor pieceColor)
 {
     return m_bitboards.at(GetBitboardIndex(pieceType, pieceColor));
+}
+
+Square
+Board::GetSquare(BoardSquare boardSquare)
+{
+    return m_squares.at(static_cast<int>(boardSquare));
 }
 
 /* private */
@@ -36,6 +51,12 @@ Board::InitializeBitboards()
     m_bitboards.at(GetBitboardIndex(PieceType::Queen, PieceColor::Black)) = BLACK_QUEENS_START;
     m_bitboards.at(GetBitboardIndex(PieceType::King, PieceColor::White)) = WHITE_KING_START;
     m_bitboards.at(GetBitboardIndex(PieceType::King, PieceColor::Black)) = BLACK_KING_START;
+}
+
+void
+Board::InitializeSquares()
+{
+    // TODO
 }
 
 int
