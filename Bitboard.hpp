@@ -16,6 +16,7 @@ namespace sablefish::board
 class Bitboard
 {
 public:
+    Bitboard() = default;
     Bitboard(uint64_t bitboard);
 
     uint64_t GetBitBoard();

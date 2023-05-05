@@ -1,39 +1,38 @@
 #pragma once
 
+#include <array>
+
 #include "Bitboard.hpp"
+#include "Constants.hpp"
 
 namespace sablefish::board
 {
+// TODO: Would these be better somewhere else?
+enum class PieceType {
+    Pawn = 0,
+    Rook = 1,
+    Knight = 2,
+    Bishop = 3,
+    Queen = 4,
+    King = 5
+};
+
+enum class PieceColor {
+    White = 0,
+    Black = 1
+};
+
 class Board
 {
 public:
     Board();
 
-    Bitboard WhitePawns();
-    Bitboard BlackPawns();
-    Bitboard WhiteRooks();
-    Bitboard BlackRooks();
-    Bitboard WhiteKnights();
-    Bitboard BlackKnights();
-    Bitboard WhiteBishops();
-    Bitboard BlackBishops();
-    Bitboard WhiteQueens();
-    Bitboard BlackQueens();
-    Bitboard WhiteKing();
-    Bitboard BlackKing();
+    Bitboard GetBitboard(PieceType pieceType, PieceColor pieceColor);
 
 private:
-    Bitboard m_whitePawns;
-    Bitboard m_blackPawns;
-    Bitboard m_whiteRooks;
-    Bitboard m_blackRooks;
-    Bitboard m_whiteKnights;
-    Bitboard m_blackKnights;
-    Bitboard m_whiteBishops;
-    Bitboard m_blackBishops;
-    Bitboard m_whiteQueens;
-    Bitboard m_blackQueens;
-    Bitboard m_whiteKing;
-    Bitboard m_blackKing;
+    void InitializeBitboards();
+    int GetBitboardIndex(PieceType pieceType, PieceColor pieceColor);
+
+    std::array<Bitboard, constants::NUM_PIECE_TYPES * constants::NUM_COLORS> m_bitboards;
 };
 } // namespace sablefish::board

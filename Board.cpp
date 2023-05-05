@@ -1,83 +1,46 @@
 #include "Board.hpp"
-#include "Bitfields.hpp"
 
 using namespace sablefish::board;
+using namespace sablefish::constants;
+using namespace sablefish::constants::bitfields;
 
 namespace sablefish::board
 {
+/* constructor */
 Board::Board() :
-    m_whitePawns(bitfields::WHITE_PAWNS_START),
-    m_blackPawns(bitfields::BLACK_PAWNS_START),
-    m_whiteRooks(bitfields::WHITE_ROOKS_START),
-    m_blackRooks(bitfields::BLACK_ROOKS_START),
-    m_whiteKnights(bitfields::WHITE_KNIGHTS_START),
-    m_blackKnights(bitfields::BLACK_KNIGHTS_START),
-    m_whiteBishops(bitfields::WHITE_BISHOPS_START),
-    m_blackBishops(bitfields::BLACK_BISHOPS_START),
-    m_whiteQueens(bitfields::WHITE_QUEENS_START),
-    m_blackQueens(bitfields::BLACK_QUEENS_START),
-    m_whiteKing(bitfields::WHITE_KING_START),
-    m_blackKing(bitfields::BLACK_KING_START)
+    m_bitboards{}
 {
+    InitializeBitboards();
 }
 
-Bitboard Board::WhitePawns()
+/* public */
+Bitboard
+Board::GetBitboard(PieceType pieceType, PieceColor pieceColor)
 {
-    return m_whitePawns;
+    return m_bitboards.at(GetBitboardIndex(pieceType, pieceColor));
 }
 
-Bitboard Board::BlackPawns()
+/* private */
+void
+Board::InitializeBitboards()
 {
-    return m_blackPawns;
+    m_bitboards.at(GetBitboardIndex(PieceType::Pawn, PieceColor::White)) = WHITE_PAWNS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::Pawn, PieceColor::Black)) = BLACK_PAWNS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::Rook, PieceColor::White)) = WHITE_ROOKS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::Rook, PieceColor::Black)) = BLACK_ROOKS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::Knight, PieceColor::White)) = WHITE_KNIGHTS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::Knight, PieceColor::Black)) = BLACK_KNIGHTS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::Bishop, PieceColor::White)) = WHITE_BISHOPS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::Bishop, PieceColor::Black)) = BLACK_BISHOPS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::Queen, PieceColor::White)) = WHITE_QUEENS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::Queen, PieceColor::Black)) = BLACK_QUEENS_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::King, PieceColor::White)) = WHITE_KING_START;
+    m_bitboards.at(GetBitboardIndex(PieceType::King, PieceColor::Black)) = BLACK_KING_START;
 }
 
-Bitboard Board::WhiteRooks()
+int
+Board::GetBitboardIndex(PieceType pieceType, PieceColor pieceColor)
 {
-    return m_whiteRooks;
-}
-
-Bitboard Board::BlackRooks()
-{
-    return m_blackRooks;
-}
-
-Bitboard Board::WhiteKnights()
-{
-    return m_whiteKnights;
-}
-
-Bitboard Board::BlackKnights()
-{
-    return m_blackKnights;
-}
-
-Bitboard Board::WhiteBishops()
-{
-    return m_whiteBishops;
-}
-
-Bitboard Board::BlackBishops()
-{
-    return m_blackBishops;
-}
-
-Bitboard Board::WhiteQueens()
-{
-    return m_whiteQueens;
-}
-
-Bitboard Board::BlackQueens()
-{
-    return m_blackQueens;
-}
-
-Bitboard Board::WhiteKing()
-{
-    return m_whiteKing;
-}
-
-Bitboard Board::BlackKing()
-{
-    return m_blackKing;
+    return (static_cast<int>(pieceType) * NUM_COLORS) + static_cast<int>(pieceColor);
 }
 } // namespace sablefish::board

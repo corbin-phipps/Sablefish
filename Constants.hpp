@@ -2,7 +2,14 @@
 
 #include <cstdint>
 
-namespace sablefish::board::bitfields
+namespace sablefish::constants
+{
+    constexpr int NUM_SQUARES = 64;         // 8 * 8
+    constexpr int NUM_PIECE_TYPES = 6;      // Pawn, Rook, Knight, Bishop, Queen, King
+    constexpr int NUM_COLORS = 2;           // White and Black
+} // namespace sablefish::constants
+
+namespace sablefish::constants::bitfields
 {
     constexpr uint64_t RANK_1 = 0b00000000'00000000'00000000'00000000'00000000'00000000'00000000'11111111;
     constexpr uint64_t RANK_2 = 0b00000000'00000000'00000000'00000000'00000000'00000000'11111111'00000000;
@@ -34,4 +41,4 @@ namespace sablefish::board::bitfields
     constexpr uint64_t BLACK_QUEENS_START = 0b00001000'00000000'00000000'00000000'00000000'00000000'00000000'00000000;
     constexpr uint64_t WHITE_KING_START = 0b00000000'00000000'00000000'00000000'00000000'00000000'00000000'00010000;
     constexpr uint64_t BLACK_KING_START = 0b00010000'00000000'00000000'00000000'00000000'00000000'00000000'00000000;
-} // namespace sablefish::board::bitfields
+} // namespace sablefish::constants::bitfields
