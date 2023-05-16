@@ -5,8 +5,6 @@ using namespace sablefish::board::piece;
 using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
-namespace sablefish::board
-{
 /* constructor */
 Board::Board() :
     m_bitboards{},
@@ -64,4 +62,3 @@ Board::GetBitboardIndex(PieceType pieceType, PieceColor pieceColor)
 {
     return (static_cast<int>(pieceType) * NUM_COLORS) + static_cast<int>(pieceColor);
 }
-} // namespace sablefish::board

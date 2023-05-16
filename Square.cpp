@@ -1,9 +1,8 @@
 #include "Square.hpp"
 
+using namespace sablefish::board;
 using namespace sablefish::board::piece;
 
-namespace sablefish::board
-{
 /* constructors */
 Square::Square() :
     m_piece(Piece()),
@@ -29,4 +28,3 @@ Square::IsOccupied()
 {
     return m_isOccupied;
 }
-} // namespace sablefish::board

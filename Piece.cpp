@@ -1,7 +1,7 @@
 #include "Piece.hpp"
 
-namespace sablefish::board::piece
-{
+using namespace sablefish::board::piece;
+
 /* constructors */
 Piece::Piece() :
     m_pieceType(PieceType::Empty),
@@ -27,4 +27,3 @@ Piece::GetPieceColor()
 {
     return m_pieceColor;
 }
-} // namespace sablefish::board::piece

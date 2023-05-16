@@ -1,7 +1,7 @@
 #include "Bitboard.hpp"
 
-namespace sablefish::board
-{
+using namespace sablefish::board;
+
 /* constructor */
 Bitboard::Bitboard(uint64_t bitboard) :
     m_bitboard(bitboard)
@@ -14,4 +14,3 @@ Bitboard::GetBitBoard()
 {
     return m_bitboard;
 }
-} // namespace sablefish::board
