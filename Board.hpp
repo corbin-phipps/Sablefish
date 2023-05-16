@@ -16,7 +16,9 @@ public:
 
     void Initialize();
     Bitboard GetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor);
+    void SetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor, Bitboard bitboard);
     Square GetSquare(BoardSquare boardSquare);
+    void SetSquare(BoardSquare boardSquare, Square square);
 
 private:
     void InitializeBitboards();

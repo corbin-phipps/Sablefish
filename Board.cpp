@@ -27,34 +27,48 @@ Board::GetBitboard(PieceType pieceType, PieceColor pieceColor)
     return m_bitboards.at(GetBitboardIndex(pieceType, pieceColor));
 }
 
+void
+Board::SetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor, Bitboard bitboard)
+{
+    m_bitboards.at(GetBitboardIndex(pieceType, pieceColor)) = bitboard.GetBitBoard();
+}
+
 Square
 Board::GetSquare(BoardSquare boardSquare)
 {
     return m_squares.at(static_cast<int>(boardSquare));
 }
 
+void
+Board::SetSquare(BoardSquare boardSquare, Square square)
+{
+    m_squares.at(static_cast<int>(boardSquare)) = square;
+}
+
 /* private */
 void
 Board::InitializeBitboards()
 {
-    m_bitboards.at(GetBitboardIndex(PieceType::Pawn, PieceColor::White)) = WHITE_PAWNS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::Pawn, PieceColor::Black)) = BLACK_PAWNS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::Rook, PieceColor::White)) = WHITE_ROOKS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::Rook, PieceColor::Black)) = BLACK_ROOKS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::Knight, PieceColor::White)) = WHITE_KNIGHTS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::Knight, PieceColor::Black)) = BLACK_KNIGHTS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::Bishop, PieceColor::White)) = WHITE_BISHOPS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::Bishop, PieceColor::Black)) = BLACK_BISHOPS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::Queen, PieceColor::White)) = WHITE_QUEENS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::Queen, PieceColor::Black)) = BLACK_QUEENS_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::King, PieceColor::White)) = WHITE_KING_START;
-    m_bitboards.at(GetBitboardIndex(PieceType::King, PieceColor::Black)) = BLACK_KING_START;
+    SetBitboard(PieceType::Pawn, PieceColor::White, Bitboard(WHITE_PAWNS_START));
+    SetBitboard(PieceType::Pawn, PieceColor::Black, Bitboard(BLACK_PAWNS_START));
+    SetBitboard(PieceType::Rook, PieceColor::White, Bitboard(WHITE_ROOKS_START));
+    SetBitboard(PieceType::Rook, PieceColor::Black, Bitboard(BLACK_ROOKS_START));
+    SetBitboard(PieceType::Knight, PieceColor::White, Bitboard(WHITE_KNIGHTS_START));
+    SetBitboard(PieceType::Knight, PieceColor::Black, Bitboard(BLACK_KNIGHTS_START));
+    SetBitboard(PieceType::Bishop, PieceColor::White, Bitboard(WHITE_BISHOPS_START));
+    SetBitboard(PieceType::Bishop, PieceColor::Black, Bitboard(BLACK_BISHOPS_START));
+    SetBitboard(PieceType::Queen, PieceColor::White, Bitboard(WHITE_QUEENS_START));
+    SetBitboard(PieceType::Queen, PieceColor::Black, Bitboard(BLACK_QUEENS_START));
+    SetBitboard(PieceType::King, PieceColor::White, Bitboard(WHITE_KING_START));
+    SetBitboard(PieceType::King, PieceColor::Black, Bitboard(BLACK_KING_START));
 }
 
 void
 Board::InitializeSquares()
 {
-    // TODO
+    // TODO: Make this more efficient
+    SetSquare(BoardSquare::A1, Square(Piece(PieceType::Rook, PieceColor::White)));
+    // ...remaining 63 squares
 }
 
 int
