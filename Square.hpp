@@ -19,7 +19,7 @@ class Square
 {
 public:
     Square();
-    Square(Piece piece);
+    Square(piece::Piece piece);
 
     piece::Piece GetPiece();
     bool IsOccupied();
