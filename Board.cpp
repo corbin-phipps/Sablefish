@@ -1,4 +1,5 @@
 #include "Board.hpp"
+#include "Utilities.hpp"
 
 using namespace sablefish::board;
 using namespace sablefish::board::piece;
@@ -66,9 +67,55 @@ Board::InitializeBitboards()
 void
 Board::InitializeSquares()
 {
-    // TODO: Make this more efficient
-    SetSquare(BoardSquare::A1, Square(Piece(PieceType::Rook, PieceColor::White)));
-    // ...remaining 63 squares
+    std::vector<BoardSquare> whitePawnsBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Pawn, PieceColor::White));
+    std::vector<BoardSquare> blackPawnsBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Pawn, PieceColor::Black));
+    std::vector<BoardSquare> whiteRookBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Rook, PieceColor::White));
+    std::vector<BoardSquare> blackRookBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Rook, PieceColor::Black));
+    std::vector<BoardSquare> whiteKnightBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Knight, PieceColor::White));
+    std::vector<BoardSquare> blackKnightBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Knight, PieceColor::Black));
+    std::vector<BoardSquare> whiteBishopBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Bishop, PieceColor::White));
+    std::vector<BoardSquare> blackBishopBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Bishop, PieceColor::Black));
+    std::vector<BoardSquare> whiteQueenBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Queen, PieceColor::White));
+    std::vector<BoardSquare> blackQueenBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::Queen, PieceColor::Black));
+    std::vector<BoardSquare> whiteKingBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::King, PieceColor::White));
+    std::vector<BoardSquare> blackKingBoardSquares = ConvertBitboardToBoardSquares(GetBitboard(PieceType::King, PieceColor::Black));
+
+    for (const auto& boardSquare : whitePawnsBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Pawn, PieceColor::White)));
+    }
+    for (const auto& boardSquare : blackPawnsBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Pawn, PieceColor::Black)));
+    }
+    for (const auto& boardSquare : whiteRookBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Rook, PieceColor::White)));
+    }
+    for (const auto& boardSquare : blackRookBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Rook, PieceColor::Black)));
+    }
+    for (const auto& boardSquare : whiteKnightBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Knight, PieceColor::White)));
+    }
+    for (const auto& boardSquare : blackKnightBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Knight, PieceColor::Black)));
+    }
+    for (const auto& boardSquare : whiteBishopBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Bishop, PieceColor::White)));
+    }
+    for (const auto& boardSquare : blackBishopBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Bishop, PieceColor::Black)));
+    }
+    for (const auto& boardSquare : whiteQueenBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Queen, PieceColor::White)));
+    }
+    for (const auto& boardSquare : blackQueenBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::Queen, PieceColor::Black)));
+    }
+    for (const auto& boardSquare : whiteKingBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::King, PieceColor::White)));
+    }
+    for (const auto& boardSquare : blackKingBoardSquares) {
+        SetSquare(boardSquare, Square(Piece(PieceType::King, PieceColor::Black)));
+    }
 }
 
 int
