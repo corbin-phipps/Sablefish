@@ -8,6 +8,7 @@ using namespace sablefish::board::piece;
 using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
+// Returns an array of BoardSquares that are occupied according to the given Bitboard.
 std::vector<BoardSquare>
 ConvertBitboardToBoardSquares(const Bitboard& bitboard)
 {
@@ -23,8 +24,9 @@ ConvertBitboardToBoardSquares(const Bitboard& bitboard)
     return boardSquares;
 }
 
+// Returns the starting Bitboard of the piece represented by the given PieceType and PieceColor.
 Bitboard
-ConvertPieceDataToBitboard(PieceType pieceType, PieceColor pieceColor)
+ConvertPieceDataToStartingBitboard(PieceType pieceType, PieceColor pieceColor)
 {
     if (pieceType == PieceType::Pawn) {
         return (pieceColor == PieceColor::White) ? Bitboard(WHITE_PAWNS_START) : Bitboard(BLACK_PAWNS_START);

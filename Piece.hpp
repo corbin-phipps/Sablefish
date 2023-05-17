@@ -18,6 +18,10 @@ enum class PieceColor {
     Empty = 2
 };
 
+// A Piece represents a chess piece, consisting of a PieceType and PieceColor.
+//
+// The PieceTypes are: Pawn, Rook, Knight, Bishop, Queen, and King.
+// The PieceColors are: White and Black.
 class Piece
 {
 public:

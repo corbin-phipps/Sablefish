@@ -10,9 +10,9 @@ namespace sablefish::constants
     using sablefish::board::piece::PieceType;
     using sablefish::board::piece::PieceColor;
 
-    constexpr int NUM_SQUARES = 64;         // 8 * 8
-    constexpr int NUM_PIECE_TYPES = 6;      // Pawn, Rook, Knight, Bishop, Queen, King
-    constexpr int NUM_COLORS = 2;           // White and Black
+    constexpr int NUM_SQUARES = 64;    // 8 * 8
+    constexpr int NUM_PIECE_TYPES = 6; // Pawn, Rook, Knight, Bishop, Queen, King
+    constexpr int NUM_COLORS = 2;      // White and Black
 
     constexpr std::array<std::pair<PieceType, PieceColor>, NUM_PIECE_TYPES * NUM_COLORS> PIECE_DATA = {
         { { PieceType::Pawn, PieceColor::White },

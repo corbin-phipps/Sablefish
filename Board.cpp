@@ -7,6 +7,8 @@ using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
 /* constructor */
+
+// Default constructor for a Board that also initializes it.
 Board::Board() :
     m_bitboards{},
     m_squares{}
@@ -15,6 +17,8 @@ Board::Board() :
 }
 
 /* public */
+
+// Initializes both representations of the Board.
 void
 Board::Initialize()
 {
@@ -22,24 +26,28 @@ Board::Initialize()
     InitializeSquares();
 }
 
+// Given a PieceType and PieceColor, returns the appropriate Bitboard.
 const Bitboard&
 Board::GetBitboard(PieceType pieceType, PieceColor pieceColor)
 {
     return m_bitboards.at(GetBitboardIndex(pieceType, pieceColor));
 }
 
+// Given a PieceType, PieceColor, and Bitboard, sets the appropriate Bitboard.
 void
 Board::SetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor, const Bitboard& bitboard)
 {
     m_bitboards.at(GetBitboardIndex(pieceType, pieceColor)) = bitboard.GetBitboard();
 }
 
+// Given a BoardSquare, returns the appropriate Square in the Board.
 const Square&
 Board::GetSquare(BoardSquare boardSquare)
 {
     return m_squares.at(static_cast<int>(boardSquare));
 }
 
+// Given a BoardSquare and a Square, sets the appropriate Square in the Board.
 void
 Board::SetSquare(BoardSquare boardSquare, const Square& square)
 {
@@ -47,14 +55,17 @@ Board::SetSquare(BoardSquare boardSquare, const Square& square)
 }
 
 /* private */
+
+// Initializes all Bitboards in the Board to the starting positions of each Piece.
 void
 Board::InitializeBitboards()
 {
     for (const auto& [pieceType, pieceColor] : PIECE_DATA) {
-        SetBitboard(pieceType, pieceColor, ConvertPieceDataToBitboard(pieceType, pieceColor));
+        SetBitboard(pieceType, pieceColor, ConvertPieceDataToStartingBitboard(pieceType, pieceColor));
     }
 }
 
+// Initializes all Squares in the Board to the starting positions of each Piece.
 void
 Board::InitializeSquares()
 {
@@ -66,6 +77,7 @@ Board::InitializeSquares()
     }
 }
 
+// Given a PieceType and PieceColor, returns the index of the appropriate Bitboard.
 int
 Board::GetBitboardIndex(PieceType pieceType, PieceColor pieceColor)
 {

@@ -15,6 +15,9 @@ enum class BoardSquare {
     A8, B8, C8, D8, E8, F8, G8, H8,
 };
 
+// A Square represents an individual square in a chess board and is used in one of the Board representations.
+//
+// Each Square contains a Piece object. A Square is "occupied" if the Square's Piece is not Piece::Empty.
 class Square
 {
 public:
