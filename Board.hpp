@@ -15,10 +15,10 @@ public:
     Board();
 
     void Initialize();
-    Bitboard GetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor);
-    void SetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor, Bitboard bitboard);
-    Square GetSquare(BoardSquare boardSquare);
-    void SetSquare(BoardSquare boardSquare, Square square);
+    const Bitboard& GetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor);
+    void SetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor, const Bitboard& bitboard);
+    const Square& GetSquare(BoardSquare boardSquare);
+    void SetSquare(BoardSquare boardSquare, const Square& square);
 
 private:
     void InitializeBitboards();

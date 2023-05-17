@@ -1,12 +1,33 @@
 #pragma once
 
 #include <cstdint>
+#include <array>
+
+#include "Piece.hpp"
 
 namespace sablefish::constants
 {
+    using sablefish::board::piece::PieceType;
+    using sablefish::board::piece::PieceColor;
+
     constexpr int NUM_SQUARES = 64;         // 8 * 8
     constexpr int NUM_PIECE_TYPES = 6;      // Pawn, Rook, Knight, Bishop, Queen, King
     constexpr int NUM_COLORS = 2;           // White and Black
+
+    constexpr std::array<std::pair<PieceType, PieceColor>, NUM_PIECE_TYPES * NUM_COLORS> PIECE_DATA = {
+        { { PieceType::Pawn, PieceColor::White },
+          { PieceType::Pawn, PieceColor::Black },
+          { PieceType::Rook, PieceColor::White },
+          { PieceType::Rook, PieceColor::Black },
+          { PieceType::Knight, PieceColor::White },
+          { PieceType::Knight, PieceColor::Black },
+          { PieceType::Bishop, PieceColor::White },
+          { PieceType::Bishop, PieceColor::Black },
+          { PieceType::Queen, PieceColor::White },
+          { PieceType::Queen, PieceColor::Black },
+          { PieceType::King, PieceColor::White },
+          { PieceType::King, PieceColor::Black } }
+    };
 } // namespace sablefish::constants
 
 namespace sablefish::constants::bitfields
