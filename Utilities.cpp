@@ -37,7 +37,7 @@ ConvertPieceDataToStartingBitboard(PieceType pieceType, PieceColor pieceColor)
     } else if (pieceType == PieceType::Bishop) {
         return (pieceColor == PieceColor::White) ? Bitboard(WHITE_BISHOPS_START) : Bitboard(BLACK_BISHOPS_START);
     } else if (pieceType == PieceType::Queen) {
-        return (pieceColor == PieceColor::White) ? Bitboard(WHITE_QUEENS_START) : Bitboard(BLACK_QUEENS_START);
+        return (pieceColor == PieceColor::White) ? Bitboard(WHITE_QUEEN_START) : Bitboard(BLACK_QUEEN_START);
     } else { // pieceType == PieceType::King
         return (pieceColor == PieceColor::White) ? Bitboard(WHITE_KING_START) : Bitboard(BLACK_KING_START);
     }
