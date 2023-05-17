@@ -7,6 +7,6 @@
 
 namespace sablefish::board
 {
-std::vector<BoardSquare> ConvertBitboardToBoardSquares(Bitboard bitboard);
+std::vector<BoardSquare> ConvertBitboardToBoardSquares(const Bitboard& bitboard);
 Bitboard ConvertPieceDataToBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor);
 } // namespace sablefish::board

@@ -19,9 +19,9 @@ class Square
 {
 public:
     Square();
-    Square(piece::Piece piece);
+    Square(const piece::Piece& piece);
 
-    piece::Piece GetPiece();
+    const piece::Piece& GetPiece();
     bool IsOccupied();
 
 private:

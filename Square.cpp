@@ -10,14 +10,14 @@ Square::Square() :
 {
 }
 
-Square::Square(Piece piece) :
+Square::Square(const Piece& piece) :
     m_piece(piece),
     m_isOccupied(true)
 {
 }
 
 /* public */
-Piece
+const Piece&
 Square::GetPiece()
 {
     return m_piece;

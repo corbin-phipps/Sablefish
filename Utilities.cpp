@@ -9,7 +9,7 @@ using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
 std::vector<BoardSquare>
-ConvertBitboardToBoardSquares(Bitboard bitboard)
+ConvertBitboardToBoardSquares(const Bitboard& bitboard)
 {
     std::vector<BoardSquare> boardSquares{};
 
