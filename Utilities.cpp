@@ -10,7 +10,7 @@ ConvertBitboardToBoardSquares(Bitboard bitboard)
 {
     std::vector<BoardSquare> boardSquares{};
 
-    std::bitset<NUM_SQUARES> bits(bitboard.GetBitBoard());
+    std::bitset<NUM_SQUARES> bits(bitboard.GetBitboard());
     for (size_t i = 0; i < bits.size(); i++) {
         if (bits[i]) {
             boardSquares.push_back(static_cast<BoardSquare>(i));

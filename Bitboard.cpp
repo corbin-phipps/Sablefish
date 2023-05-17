@@ -10,7 +10,7 @@ Bitboard::Bitboard(uint64_t bitboard) :
 
 /* public */
 uint64_t
-Bitboard::GetBitBoard()
+Bitboard::GetBitboard()
 {
     return m_bitboard;
 }

@@ -19,7 +19,7 @@ public:
     Bitboard() = default;
     Bitboard(uint64_t bitboard);
 
-    uint64_t GetBitBoard();
+    uint64_t GetBitboard();
 
 private:
     uint64_t m_bitboard{};

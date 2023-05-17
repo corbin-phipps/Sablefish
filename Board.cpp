@@ -31,7 +31,7 @@ Board::GetBitboard(PieceType pieceType, PieceColor pieceColor)
 void
 Board::SetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor, Bitboard bitboard)
 {
-    m_bitboards.at(GetBitboardIndex(pieceType, pieceColor)) = bitboard.GetBitBoard();
+    m_bitboards.at(GetBitboardIndex(pieceType, pieceColor)) = bitboard.GetBitboard();
 }
 
 Square
