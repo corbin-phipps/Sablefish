@@ -37,21 +37,21 @@ Board::GetBitboard(PieceType pieceType, PieceColor pieceColor)
 void
 Board::SetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor, const Bitboard& bitboard)
 {
-    m_bitboards.at(GetBitboardIndex(pieceType, pieceColor)) = bitboard.GetBitboard();
+    m_bitboards.at(GetBitboardIndex(pieceType, pieceColor)) = bitboard;
 }
 
 // Given a BoardSquare, returns the appropriate Square in the Board.
 const Square&
 Board::GetSquare(BoardSquare boardSquare)
 {
-    return m_squares.at(static_cast<int>(boardSquare));
+    return m_squares.at(static_cast<size_t>(boardSquare));
 }
 
 // Given a BoardSquare and a Square, sets the appropriate Square in the Board.
 void
 Board::SetSquare(BoardSquare boardSquare, const Square& square)
 {
-    m_squares.at(static_cast<int>(boardSquare)) = square;
+    m_squares.at(static_cast<size_t>(boardSquare)) = square;
 }
 
 /* private */
@@ -78,8 +78,8 @@ Board::InitializeSquares()
 }
 
 // Given a PieceType and PieceColor, returns the index of the appropriate Bitboard.
-int
+size_t
 Board::GetBitboardIndex(PieceType pieceType, PieceColor pieceColor)
 {
-    return (static_cast<int>(pieceType) * NUM_COLORS) + static_cast<int>(pieceColor);
+    return (static_cast<size_t>(pieceType) * NUM_COLORS) + static_cast<size_t>(pieceColor);
 }
