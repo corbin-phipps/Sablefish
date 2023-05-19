@@ -145,7 +145,55 @@ GenerateKnightMoves()
     return knightMoves;
 }
 
+constexpr std::array<Bitboard, NUM_SQUARES>
+GenerateBishopMoves()
+{
+    std::array<Bitboard, NUM_SQUARES> bishopMoves{};
+    for (size_t square = 0; square < NUM_SQUARES; square++) {
+        Bitboard bishopBitboard = 0;
+        int bishopRank = square / NUM_RANKS;
+        int bishopFile = square % NUM_FILES;
+
+        // Positive rank; positive file
+        int offset = 1;
+        while (bishopRank + offset < NUM_RANKS && bishopFile + offset < NUM_FILES) {
+            BoardSquare targetSquare = static_cast<BoardSquare>(((bishopRank + offset) * NUM_RANKS) + (bishopFile + offset));
+            SetBit(bishopBitboard, targetSquare);
+            offset++;
+        }
+        offset = 1;
+
+        // Positive rank; negative file
+        while (bishopRank + offset < NUM_RANKS && bishopFile - offset >= 0) {
+            BoardSquare targetSquare = static_cast<BoardSquare>(((bishopRank + offset) * NUM_RANKS) + (bishopFile - offset));
+            SetBit(bishopBitboard, targetSquare);
+            offset++;
+        }
+        offset = 1;
+
+        // Negative rank; positive file
+        while (bishopRank - offset >= 0 && bishopFile + offset < NUM_FILES) {
+            BoardSquare targetSquare = static_cast<BoardSquare>(((bishopRank - offset) * NUM_RANKS) + (bishopFile + offset));
+            SetBit(bishopBitboard, targetSquare);
+            offset++;
+        }
+        offset = 1;
+
+        // Negative rank; negative file
+        while (bishopRank - offset >= 0 && bishopFile - offset >= 0) {
+            BoardSquare targetSquare = static_cast<BoardSquare>(((bishopRank - offset) * NUM_RANKS) + (bishopFile - offset));
+            SetBit(bishopBitboard, targetSquare);
+            offset++;
+        }
+
+        bishopMoves[square] = bishopBitboard;
+    }
+
+    return bishopMoves;
+}
+
 // Declarations
 constexpr std::array<Bitboard, NUM_SQUARES> ROOK_MOVES = GenerateRookMoves();
 constexpr std::array<Bitboard, NUM_SQUARES> KNIGHT_MOVES = GenerateKnightMoves();
+constexpr std::array<Bitboard, NUM_SQUARES> BISHOP_MOVES = GenerateBishopMoves();
 } // namespace sablefish::constants::moves
