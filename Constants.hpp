@@ -83,7 +83,8 @@ using sablefish::board::BoardSquare;
 using namespace sablefish::constants::functions;
 
 // Definitions
-constexpr std::array<Bitboard, NUM_SQUARES> GenerateRookMoves()
+constexpr std::array<Bitboard, NUM_SQUARES>
+GenerateRookMoves()
 {
     std::array<Bitboard, NUM_SQUARES> rookMoves{};
     for (size_t square = 0; square < NUM_SQUARES; square++) {
@@ -111,6 +112,40 @@ constexpr std::array<Bitboard, NUM_SQUARES> GenerateRookMoves()
     return rookMoves;
 }
 
+constexpr std::array<Bitboard, NUM_SQUARES>
+GenerateKnightMoves()
+{
+    std::array<Bitboard, NUM_SQUARES> knightMoves{};
+    for (size_t square = 0; square < NUM_SQUARES; square++) {
+        Bitboard knightBitboard = 0;
+        size_t knightRank = square / NUM_RANKS;
+        size_t knightFile = square % NUM_FILES;
+
+        std::array<std::array<size_t, 2>, 8> possibleKnightMoves = {{
+            {knightRank + 1, knightFile + 2},
+            {knightRank + 2, knightFile + 1},
+            {knightRank + 1, knightFile - 2},
+            {knightRank + 2, knightFile - 1},
+            {knightRank - 1, knightFile + 2},
+            {knightRank - 2, knightFile + 1},
+            {knightRank - 1, knightFile - 2},
+            {knightRank - 2, knightFile - 1}
+        }};
+
+        for (const auto& [targetRank, targetFile] : possibleKnightMoves) {
+            if (targetRank >= 0 && targetRank < NUM_RANKS && targetFile >= 0 && targetFile < NUM_FILES) {
+                BoardSquare targetSquare = static_cast<BoardSquare>((targetRank * NUM_RANKS) + targetFile);
+                SetBit(knightBitboard, targetSquare);
+            }
+        }
+
+        knightMoves[square] = knightBitboard;
+    }
+
+    return knightMoves;
+}
+
 // Declarations
 constexpr std::array<Bitboard, NUM_SQUARES> ROOK_MOVES = GenerateRookMoves();
+constexpr std::array<Bitboard, NUM_SQUARES> KNIGHT_MOVES = GenerateKnightMoves();
 } // namespace sablefish::constants::moves
