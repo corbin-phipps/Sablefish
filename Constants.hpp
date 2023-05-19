@@ -12,11 +12,11 @@ namespace sablefish::constants
 using sablefish::board::piece::PieceType;
 using sablefish::board::piece::PieceColor;
 
-constexpr int NUM_RANKS = 8;
-constexpr int NUM_FILES = 8;
-constexpr int NUM_SQUARES = NUM_RANKS * NUM_FILES;
-constexpr int NUM_PIECE_TYPES = 6;                  // Pawn, Rook, Knight, Bishop, Queen, King
-constexpr int NUM_COLORS = 2;                       // White and Black
+constexpr size_t NUM_RANKS = 8;
+constexpr size_t NUM_FILES = 8;
+constexpr size_t NUM_SQUARES = NUM_RANKS * NUM_FILES;
+constexpr size_t NUM_PIECE_TYPES = 6;                  // Pawn, Rook, Knight, Bishop, Queen, King
+constexpr size_t NUM_COLORS = 2;                       // White and Black
 
 constexpr std::array<std::pair<PieceType, PieceColor>, NUM_PIECE_TYPES * NUM_COLORS> PIECE_DATA = {
     { { PieceType::Pawn, PieceColor::White },
