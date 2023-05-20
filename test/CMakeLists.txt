@@ -8,6 +8,9 @@ FetchContent_MakeAvailable(catch2)
 
 add_executable(sablefish-test
     Main.cpp
+    TestConversions.cpp
+    TestPiece.cpp
+    TestSquare.cpp
 )
 
 target_link_libraries(sablefish-test PRIVATE sablefish Catch2::Catch2)

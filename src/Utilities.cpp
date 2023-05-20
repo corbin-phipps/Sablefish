@@ -1,13 +1,14 @@
 #include <bitset>
+#include <iostream>
 
 #include <sablefish/Constants.hpp>
 #include <sablefish/Utilities.hpp>
 
-using namespace sablefish::board;
 using namespace sablefish::board::piece;
 using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
+namespace sablefish::board {
 // Returns an array of BoardSquares that are occupied according to the given Bitboard.
 std::vector<BoardSquare>
 ConvertBitboardToBoardSquares(const Bitboard& bitboard)
@@ -38,7 +39,11 @@ ConvertPieceDataToStartingBitboard(PieceType pieceType, PieceColor pieceColor)
         return (pieceColor == PieceColor::White) ? WHITE_BISHOPS_START : BLACK_BISHOPS_START;
     } else if (pieceType == PieceType::Queen) {
         return (pieceColor == PieceColor::White) ? WHITE_QUEEN_START : BLACK_QUEEN_START;
-    } else { // pieceType == PieceType::King
+    } else if (pieceType == PieceType::King) {
         return (pieceColor == PieceColor::White) ? WHITE_KING_START : BLACK_KING_START;
+    } else { // pieceType == PieceType::Empty
+        std::cerr << "PieceType::Empty is unexpected" << std::endl;
+        return 0ULL;
     }
 }
+} // namespace sablefish::board
