@@ -5,8 +5,6 @@
 #include <sablefish/Square.hpp>
 #include <sablefish/Utilities.hpp>
 
-#include <iostream>
-
 using namespace sablefish::board;
 using namespace sablefish::board::piece;
 using namespace sablefish::constants;

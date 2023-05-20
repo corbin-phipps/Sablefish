@@ -9,22 +9,17 @@ using namespace sablefish::constants::bitfields;
 
 TEST_CASE("Bitboard can be converted to a list of BoardSquares") {
     SECTION("Empty Bitboard") {
-        Bitboard emptyBitboard = 0ULL;
-        auto boardSquares = ConvertBitboardToBoardSquares(emptyBitboard);
-
+        auto boardSquares = ConvertBitboardToBoardSquares(EMPTY_BITBOARD);
         REQUIRE(boardSquares.size() == 0);
     }
 
     SECTION("Full Bitboard") {
-        Bitboard fullBitboard = 0b11111111'11111111'11111111'11111111'11111111'11111111'11111111'11111111;
-        auto boardSquares = ConvertBitboardToBoardSquares(fullBitboard);
-
+        auto boardSquares = ConvertBitboardToBoardSquares(FULL_BITBOARD);
         REQUIRE(boardSquares.size() == NUM_SQUARES);
     }
 
     SECTION("Realistic Bitboard - White pawns starting position") {
         auto boardSquares = ConvertBitboardToBoardSquares(WHITE_PAWNS_START);
-
         REQUIRE(boardSquares.size() == NUM_FILES);
 
         REQUIRE(boardSquares[0] == BoardSquare::A2);
@@ -35,6 +30,45 @@ TEST_CASE("Bitboard can be converted to a list of BoardSquares") {
         REQUIRE(boardSquares[5] == BoardSquare::F2);
         REQUIRE(boardSquares[6] == BoardSquare::G2);
         REQUIRE(boardSquares[7] == BoardSquare::H2);
+    }
+}
+
+TEST_CASE("List of BoardSquares can be converted to a Bitboard") {
+    std::vector<BoardSquare> boardSquares{};
+    SECTION("Empty list of BoardSquares") {
+        REQUIRE(ConvertBoardSquaresToBitboard(boardSquares) == EMPTY_BITBOARD);
+    }
+
+    SECTION("Full list of BoardSquares") {
+        for (size_t i = 0; i < NUM_SQUARES; i++) {
+            boardSquares.push_back(static_cast<BoardSquare>(i));
+        }
+
+        REQUIRE(ConvertBoardSquaresToBitboard(boardSquares) == FULL_BITBOARD);
+    }
+
+    SECTION("Single rank") {
+        for (size_t i = 0; i < NUM_FILES; i++) {
+            boardSquares.push_back(static_cast<BoardSquare>(i));
+        }
+
+        REQUIRE(ConvertBoardSquaresToBitboard(boardSquares) == RANK_1);
+    }
+
+    SECTION("Single file") {
+        for (size_t i = 0; i < NUM_RANKS; i++) {
+            boardSquares.push_back(static_cast<BoardSquare>(i * NUM_RANKS));
+        }
+
+        REQUIRE(ConvertBoardSquaresToBitboard(boardSquares) == FILE_A);
+    }
+
+    SECTION("Diagonal across entire board") {
+        for (size_t i = 0; i < NUM_RANKS; i++) {
+            boardSquares.push_back(static_cast<BoardSquare>(i * NUM_RANKS + i));
+        }
+
+        REQUIRE(ConvertBoardSquaresToBitboard(boardSquares) == 0b10000000'01000000'00100000'00010000'00001000'00000100'00000010'00000001);
     }
 }
 

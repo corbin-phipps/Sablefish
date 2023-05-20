@@ -10,6 +10,7 @@ add_executable(sablefish-test
     Main.cpp
     TestBoard.cpp
     TestConversions.cpp
+    TestMoveGeneration.cpp
     TestPiece.cpp
     TestSquare.cpp
 )

@@ -25,6 +25,18 @@ ConvertBitboardToBoardSquares(const Bitboard bitboard)
     return boardSquares;
 }
 
+const Bitboard
+ConvertBoardSquaresToBitboard(const std::vector<BoardSquare>& boardSquares)
+{
+    std::bitset<NUM_SQUARES> bits;
+    for (const auto& boardSquare : boardSquares) {
+        size_t boardSquareIndex = static_cast<size_t>(boardSquare);
+        bits.set(boardSquareIndex);
+    }
+
+    return bits.to_ullong();
+}
+
 // Returns the starting Bitboard of the piece represented by the given PieceType and PieceColor.
 const Bitboard
 ConvertPieceDataToStartingBitboard(const PieceType pieceType, const PieceColor pieceColor)
