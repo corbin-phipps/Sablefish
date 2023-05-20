@@ -35,6 +35,7 @@
 bin/
 build/
 obj/
+Testing/
 
 # Other
 *.ilk
