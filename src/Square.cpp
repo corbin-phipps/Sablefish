@@ -1,4 +1,4 @@
-#include "Square.hpp"
+#include <sablefish/Square.hpp>
 
 using namespace sablefish::board;
 using namespace sablefish::board::piece;

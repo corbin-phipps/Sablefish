@@ -1,5 +1,5 @@
-#include "Board.hpp"
-#include "Utilities.hpp"
+#include <sablefish/Board.hpp>
+#include <sablefish/Utilities.hpp>
 
 using namespace sablefish::board;
 using namespace sablefish::board::piece;

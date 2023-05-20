@@ -31,8 +31,11 @@
 *.out
 *.app
 
-# Other
+# Directories
 bin/
+build/
 obj/
+
+# Other
 *.ilk
 *.pdb

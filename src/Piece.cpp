@@ -1,4 +1,4 @@
-#include "Piece.hpp"
+#include <sablefish/Piece.hpp>
 
 using namespace sablefish::board::piece;
 

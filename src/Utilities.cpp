@@ -1,7 +1,7 @@
 #include <bitset>
 
-#include "Constants.hpp"
-#include "Utilities.hpp"
+#include <sablefish/Constants.hpp>
+#include <sablefish/Utilities.hpp>
 
 using namespace sablefish::board;
 using namespace sablefish::board::piece;
