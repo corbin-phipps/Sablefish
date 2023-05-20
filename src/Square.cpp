@@ -14,23 +14,28 @@ Square::Square() :
 
 // Constructs a Square with a given Piece.
 Square::Square(const Piece& piece) :
-    m_piece(piece),
-    m_isOccupied(true)
+    m_piece(piece)
 {
+    m_isOccupied = piece.GetPieceType() != PieceType::Empty;
 }
 
 /* public */
 
 // Returns the Piece occupying the current Square instance.
 const Piece&
-Square::GetPiece()
+Square::GetPiece() const
 {
     return m_piece;
 }
 
 // Returns a boolean representing whether or not the Square is occupied.
 bool
-Square::IsOccupied()
+Square::IsOccupied() const
 {
     return m_isOccupied;
+}
+
+bool
+Square::operator==(const Square& other) const {
+    return m_piece == other.m_piece && m_isOccupied == other.m_isOccupied;
 }

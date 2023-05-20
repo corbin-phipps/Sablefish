@@ -22,14 +22,19 @@ Piece::Piece(PieceType pieceType, PieceColor pieceColor) :
 
 // Returns the PieceType of the current Piece instance.
 PieceType
-Piece::GetPieceType()
+Piece::GetPieceType() const
 {
     return m_pieceType;
 }
 
 // Returns the PieceColor of the current Piece instance.
 PieceColor
-Piece::GetPieceColor()
+Piece::GetPieceColor() const
 {
     return m_pieceColor;
+}
+
+bool
+Piece::operator==(const Piece& other) const {
+    return m_pieceType == other.m_pieceType && m_pieceColor == other.m_pieceColor;
 }

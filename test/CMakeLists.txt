@@ -8,6 +8,7 @@ FetchContent_MakeAvailable(catch2)
 
 add_executable(sablefish-test
     Main.cpp
+    TestBoard.cpp
     TestConversions.cpp
     TestPiece.cpp
     TestSquare.cpp

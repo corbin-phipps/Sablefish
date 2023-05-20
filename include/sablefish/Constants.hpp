@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstdint>
+#include <unordered_map>
 
 #include "Bitboard.hpp"
 #include "Piece.hpp"
@@ -9,6 +10,7 @@
 
 namespace sablefish::constants
 {
+using sablefish::board::BoardSquare;
 using sablefish::board::piece::PieceType;
 using sablefish::board::piece::PieceColor;
 
@@ -31,6 +33,81 @@ constexpr std::array<std::pair<PieceType, PieceColor>, NUM_PIECE_TYPES * NUM_COL
       { PieceType::Queen, PieceColor::Black },
       { PieceType::King, PieceColor::White },
       { PieceType::King, PieceColor::Black } }
+};
+
+// TODO: Since std::unordered_map can't be constexpr, then there's no point in hardcoding it like this
+const std::unordered_map<BoardSquare, sablefish::board::piece::Piece> STARTING_BOARDSQUARE_TO_PIECE_MAP = {
+    {BoardSquare::A1, {PieceType::Rook, PieceColor::White}},
+    {BoardSquare::B1, {PieceType::Knight, PieceColor::White}},
+    {BoardSquare::C1, {PieceType::Bishop, PieceColor::White}},
+    {BoardSquare::D1, {PieceType::Queen, PieceColor::White}},
+    {BoardSquare::E1, {PieceType::King, PieceColor::White}},
+    {BoardSquare::F1, {PieceType::Bishop, PieceColor::White}},
+    {BoardSquare::G1, {PieceType::Knight, PieceColor::White}},
+    {BoardSquare::H1, {PieceType::Rook, PieceColor::White}},
+
+    {BoardSquare::A2, {PieceType::Pawn, PieceColor::White}},
+    {BoardSquare::B2, {PieceType::Pawn, PieceColor::White}},
+    {BoardSquare::C2, {PieceType::Pawn, PieceColor::White}},
+    {BoardSquare::D2, {PieceType::Pawn, PieceColor::White}},
+    {BoardSquare::E2, {PieceType::Pawn, PieceColor::White}},
+    {BoardSquare::F2, {PieceType::Pawn, PieceColor::White}},
+    {BoardSquare::G2, {PieceType::Pawn, PieceColor::White}},
+    {BoardSquare::H2, {PieceType::Pawn, PieceColor::White}},
+
+    {BoardSquare::A3, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::B3, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::C3, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::D3, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::E3, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::F3, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::G3, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::H3, {PieceType::Empty, PieceColor::Empty}},
+
+    {BoardSquare::A4, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::B4, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::C4, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::D4, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::E4, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::F4, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::G4, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::H4, {PieceType::Empty, PieceColor::Empty}},
+
+    {BoardSquare::A5, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::B5, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::C5, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::D5, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::E5, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::F5, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::G5, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::H5, {PieceType::Empty, PieceColor::Empty}},
+
+    {BoardSquare::A6, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::B6, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::C6, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::D6, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::E6, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::F6, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::G6, {PieceType::Empty, PieceColor::Empty}},
+    {BoardSquare::H6, {PieceType::Empty, PieceColor::Empty}},
+
+    {BoardSquare::A7, {PieceType::Pawn, PieceColor::Black}},
+    {BoardSquare::B7, {PieceType::Pawn, PieceColor::Black}},
+    {BoardSquare::C7, {PieceType::Pawn, PieceColor::Black}},
+    {BoardSquare::D7, {PieceType::Pawn, PieceColor::Black}},
+    {BoardSquare::E7, {PieceType::Pawn, PieceColor::Black}},
+    {BoardSquare::F7, {PieceType::Pawn, PieceColor::Black}},
+    {BoardSquare::G7, {PieceType::Pawn, PieceColor::Black}},
+    {BoardSquare::H7, {PieceType::Pawn, PieceColor::Black}},
+
+    {BoardSquare::A8, {PieceType::Rook, PieceColor::Black}},
+    {BoardSquare::B8, {PieceType::Knight, PieceColor::Black}},
+    {BoardSquare::C8, {PieceType::Bishop, PieceColor::Black}},
+    {BoardSquare::D8, {PieceType::Queen, PieceColor::Black}},
+    {BoardSquare::E8, {PieceType::King, PieceColor::Black}},
+    {BoardSquare::F8, {PieceType::Bishop, PieceColor::Black}},
+    {BoardSquare::G8, {PieceType::Knight, PieceColor::Black}},
+    {BoardSquare::H8, {PieceType::Rook, PieceColor::Black}},
 };
 } // namespace sablefish::constants
 

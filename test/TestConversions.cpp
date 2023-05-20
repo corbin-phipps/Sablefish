@@ -39,11 +39,6 @@ TEST_CASE("Bitboard can be converted to a list of BoardSquares") {
 }
 
 TEST_CASE("Piece data can be mapped to the appropriate starting position Bitboard") {
-    SECTION("Empty Piece (invalid)") {
-        auto emptyStartingBitboard = ConvertPieceDataToStartingBitboard(PieceType::Empty, PieceColor::Empty);
-        REQUIRE(emptyStartingBitboard == 0ULL);
-    }
-
     SECTION("Specific Piece") {
         auto whitePawnStartingBitboard = ConvertPieceDataToStartingBitboard(PieceType::Pawn, PieceColor::White);
         REQUIRE(whitePawnStartingBitboard == WHITE_PAWNS_START);

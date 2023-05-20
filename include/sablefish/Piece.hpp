@@ -28,8 +28,10 @@ public:
     Piece();
     Piece(PieceType pieceType, PieceColor pieceColor);
 
-    PieceType GetPieceType();
-    PieceColor GetPieceColor();
+    PieceType GetPieceType() const;
+    PieceColor GetPieceColor() const;
+
+    bool operator==(const Piece& other) const;
 
 private:
     PieceType m_pieceType{ PieceType::Empty };

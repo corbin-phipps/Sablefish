@@ -24,8 +24,10 @@ public:
     Square();
     Square(const piece::Piece& piece);
 
-    const piece::Piece& GetPiece();
-    bool IsOccupied();
+    const piece::Piece& GetPiece() const;
+    bool IsOccupied() const;
+
+    bool operator==(const Square& other) const;
 
 private:
     piece::Piece m_piece{};
