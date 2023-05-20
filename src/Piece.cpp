@@ -21,14 +21,14 @@ Piece::Piece(PieceType pieceType, PieceColor pieceColor) :
 /* public */
 
 // Returns the PieceType of the current Piece instance.
-PieceType
+const PieceType
 Piece::GetPieceType() const
 {
     return m_pieceType;
 }
 
 // Returns the PieceColor of the current Piece instance.
-PieceColor
+const PieceColor
 Piece::GetPieceColor() const
 {
     return m_pieceColor;

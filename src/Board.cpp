@@ -27,29 +27,29 @@ Board::Initialize()
 }
 
 // Given a PieceType and PieceColor, returns the appropriate Bitboard.
-const Bitboard&
-Board::GetBitboard(PieceType pieceType, PieceColor pieceColor) const
+const Bitboard
+Board::GetBitboard(const PieceType pieceType, const PieceColor pieceColor) const
 {
     return m_bitboards.at(GetBitboardIndex(pieceType, pieceColor));
 }
 
 // Given a PieceType, PieceColor, and Bitboard, sets the appropriate Bitboard.
 void
-Board::SetBitboard(piece::PieceType pieceType, piece::PieceColor pieceColor, const Bitboard& bitboard)
+Board::SetBitboard(const PieceType pieceType, const PieceColor pieceColor, const Bitboard bitboard)
 {
     m_bitboards.at(GetBitboardIndex(pieceType, pieceColor)) = bitboard;
 }
 
 // Given a BoardSquare, returns the appropriate Square in the Board.
 const Square&
-Board::GetSquare(BoardSquare boardSquare) const
+Board::GetSquare(const BoardSquare boardSquare) const
 {
     return m_squares.at(static_cast<size_t>(boardSquare));
 }
 
 // Given a BoardSquare and a Square, sets the appropriate Square in the Board.
 void
-Board::SetSquare(BoardSquare boardSquare, const Square& square)
+Board::SetSquare(const BoardSquare boardSquare, const Square& square)
 {
     m_squares.at(static_cast<size_t>(boardSquare)) = square;
 }
@@ -78,8 +78,8 @@ Board::InitializeSquares()
 }
 
 // Given a PieceType and PieceColor, returns the index of the appropriate Bitboard.
-size_t
-Board::GetBitboardIndex(PieceType pieceType, PieceColor pieceColor) const
+const size_t
+Board::GetBitboardIndex(const PieceType pieceType, const PieceColor pieceColor) const
 {
     return (static_cast<size_t>(pieceType) * NUM_COLORS) + static_cast<size_t>(pieceColor);
 }

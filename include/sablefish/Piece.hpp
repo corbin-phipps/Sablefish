@@ -26,10 +26,10 @@ class Piece
 {
 public:
     Piece();
-    Piece(PieceType pieceType, PieceColor pieceColor);
+    Piece(const PieceType pieceType, const PieceColor pieceColor);
 
-    PieceType GetPieceType() const;
-    PieceColor GetPieceColor() const;
+    const PieceType GetPieceType() const;
+    const PieceColor GetPieceColor() const;
 
     bool operator==(const Piece& other) const;
 
