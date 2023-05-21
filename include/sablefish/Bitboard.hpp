@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BITBOARD_HPP
+#define BITBOARD_HPP
 
 #include <cstdint>
 
@@ -12,3 +13,5 @@
 // e.g. The starting position of the white pawns take up board positions A2-H2:
 // 0000000000000000000000000000000000000000000000001111111100000000
 using Bitboard = uint64_t;
+
+#endif // BITBOARD_HPP

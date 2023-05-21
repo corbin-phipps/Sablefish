@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SQUARE_HPP
+#define SQUARE_HPP
 
 #include "Piece.hpp"
 
@@ -34,3 +35,5 @@ private:
     bool m_isOccupied{ false };
 };
 } // namespace sablefish::board
+
+#endif // SQUARE_HPP

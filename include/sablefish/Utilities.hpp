@@ -1,4 +1,5 @@
-#pragma once
+#ifndef UTILITIES_HPP
+#define UTILITIES_HPP
 
 #include <vector>
 
@@ -13,3 +14,5 @@ const Bitboard ConvertBoardSquaresToBitboard(const std::vector<BoardSquare>& boa
 const Bitboard ConvertPieceDataToStartingBitboard(const PieceType pieceType, const PieceColor pieceColor);
 Piece ConvertBoardSquareToStartingPiece(const BoardSquare boardSquare);
 } // namespace sablefish::board
+
+#endif // UTILITIES_HPP

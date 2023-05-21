@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BOARD_HPP
+#define BOARD_HPP
 
 #include <array>
 
@@ -36,3 +37,5 @@ private:
     std::array<Square, constants::NUM_SQUARES> m_squares{};
 };
 } // namespace sablefish::board
+
+#endif // BOARD_HPP

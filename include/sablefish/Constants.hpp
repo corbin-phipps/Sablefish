@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CONSTANTS_HPP
+#define CONSTANTS_HPP
 
 #include <array>
 #include <cstdint>
@@ -159,7 +160,8 @@ constexpr void ClearBit(Bitboard& bitboard, const sablefish::board::BoardSquare 
 namespace sablefish::constants::moves
 {
 using sablefish::board::BoardSquare;
-using namespace sablefish::constants::functions;
+using sablefish::constants::functions::SetBit;
+using sablefish::constants::functions::ClearBit;
 
 // Definitions
 constexpr std::array<Bitboard, NUM_SQUARES>
@@ -174,14 +176,14 @@ GenerateRookMoves()
         for (size_t rank = 0; rank < NUM_RANKS; rank++) {
             if (rank != rookRank) {
                 BoardSquare targetSquare = static_cast<BoardSquare>((rank * NUM_RANKS) + rookFile);
-                SetBit(rookBitboard, targetSquare);
+                sablefish::constants::functions::SetBit(rookBitboard, targetSquare);
             }
         }
 
         for (size_t file = 0; file < NUM_FILES; file++) {
             if (file != rookFile) {
                 BoardSquare targetSquare = static_cast<BoardSquare>((rookRank * NUM_RANKS) + file);
-                SetBit(rookBitboard, targetSquare);
+                sablefish::constants::functions::SetBit(rookBitboard, targetSquare);
             }
         }
 
@@ -376,3 +378,5 @@ constexpr std::array<Bitboard, NUM_SQUARES> BISHOP_MOVES = GenerateBishopMoves()
 constexpr std::array<Bitboard, NUM_SQUARES> QUEEN_MOVES = GenerateQueenMoves();
 constexpr std::array<Bitboard, NUM_SQUARES> KING_MOVES = GenerateKingMoves();
 } // namespace sablefish::constants::moves
+
+#endif // CONSTANTS_HPP

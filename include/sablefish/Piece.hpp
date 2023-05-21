@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PIECE_HPP
+#define PIECE_HPP
 
 namespace sablefish::board
 {
@@ -38,3 +39,5 @@ private:
     PieceColor m_pieceColor{ PieceColor::Empty };
 };
 } // namespace sablefish::board::piece
+
+#endif // PIECE_HPP
