@@ -46,7 +46,17 @@ TEST_CASE("Pseudo-legal bishop moves are generated correctly") {
 }
 
 TEST_CASE("Pseudo-legal queen moves are generated correctly") {
-    
+    SECTION("Queen in corner") {
+        Bitboard generatedQueenMoves = QUEEN_MOVES.at(static_cast<size_t>(BoardSquare::A1));
+        Bitboard expectedQueenMoves = 0b10000001'01000001'00100001'00010001'00001001'00000101'00000011'11111110;
+        REQUIRE(generatedQueenMoves == expectedQueenMoves);
+    }
+
+    SECTION("Queen in middle") {
+        Bitboard generatedQueenMoves = QUEEN_MOVES.at(static_cast<size_t>(BoardSquare::E5));
+        Bitboard expectedQueenMoves = 0b10010010'01010100'00111000'11101111'00111000'01010100'10010010'00010001;
+        REQUIRE(generatedQueenMoves == expectedQueenMoves);
+    }
 }
 
 TEST_CASE("Pseudo-legal king moves are generated correctly") {

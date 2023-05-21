@@ -150,12 +150,12 @@ constexpr Bitboard FULL_BITBOARD = 0xFFFFFFFFFFFFFFFFULL;
 
 namespace sablefish::constants::functions
 {
-constexpr void SetBit(Bitboard bitboard, sablefish::board::BoardSquare boardSquare)
+constexpr void SetBit(Bitboard& bitboard, sablefish::board::BoardSquare boardSquare)
 {
     bitboard |= (1ULL << static_cast<size_t>(boardSquare));
 }
 
-constexpr void ClearBit(Bitboard bitboard, sablefish::board::BoardSquare boardSquare)
+constexpr void ClearBit(Bitboard& bitboard, sablefish::board::BoardSquare boardSquare)
 {
     bitboard |= (0ULL << static_cast<size_t>(boardSquare));
 }
