@@ -60,9 +60,15 @@ TEST_CASE("Pseudo-legal queen moves are generated correctly") {
 }
 
 TEST_CASE("Pseudo-legal king moves are generated correctly") {
-    
-}
+    SECTION("King in corner") {
+        Bitboard generatedKingMoves = KING_MOVES.at(static_cast<size_t>(BoardSquare::A1));
+        Bitboard expectedKingMoves = 0b00000000'00000000'00000000'00000000'00000000'00000000'00000001'00000010;
+        REQUIRE(generatedKingMoves == expectedKingMoves);
+    }
 
-TEST_CASE("Pseudo-legal pawn moves are generated correctly") {
-    
+    SECTION("King in middle") {
+        Bitboard generatedKingMoves = KING_MOVES.at(static_cast<size_t>(BoardSquare::E5));
+        Bitboard expectedKingMoves = 0b00000000'00000000'00010000'00101000'00010000'00000000'00000000'00000000;
+        REQUIRE(generatedKingMoves == expectedKingMoves);
+    }
 }
