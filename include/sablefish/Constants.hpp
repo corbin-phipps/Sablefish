@@ -150,9 +150,14 @@ constexpr Bitboard FULL_BITBOARD = 0xFFFFFFFFFFFFFFFFULL;
 
 namespace sablefish::constants::functions
 {
-constexpr void SetBit(Bitboard& bitboard, sablefish::board::BoardSquare square)
+constexpr void SetBit(Bitboard bitboard, sablefish::board::BoardSquare boardSquare)
 {
-    bitboard |= (1ULL << static_cast<size_t>(square));
+    bitboard |= (1ULL << static_cast<size_t>(boardSquare));
+}
+
+constexpr void ClearBit(Bitboard bitboard, sablefish::board::BoardSquare boardSquare)
+{
+    bitboard |= (0ULL << static_cast<size_t>(boardSquare));
 }
 } // namespace sablefish::constants::bitmanipulations
 
@@ -272,8 +277,108 @@ GenerateBishopMoves()
     return bishopMoves;
 }
 
+constexpr std::array<Bitboard, NUM_SQUARES>
+GenerateQueenMoves()
+{
+    std::array<Bitboard, NUM_SQUARES> queenMoves{};
+    for (size_t square = 0; square < NUM_SQUARES; square++) {
+        Bitboard queenBitboard = 0;
+        int queenRank = square / NUM_RANKS;
+        int queenFile = square % NUM_FILES;
+
+        // Add rook-style moves
+        for (size_t rank = 0; rank < NUM_RANKS; rank++) {
+            if (rank != queenRank) {
+                BoardSquare targetSquare = static_cast<BoardSquare>((rank * NUM_RANKS) + queenFile);
+                SetBit(queenBitboard, targetSquare);
+            }
+        }
+
+        for (size_t file = 0; file < NUM_FILES; file++) {
+            if (file != queenFile) {
+                BoardSquare targetSquare = static_cast<BoardSquare>((queenRank * NUM_RANKS) + file);
+                SetBit(queenBitboard, targetSquare);
+            }
+        }
+
+        // Add bishop-style moves
+        // Positive rank; positive file
+        int offset = 1;
+        while (queenRank + offset < NUM_RANKS && queenFile + offset < NUM_FILES) {
+            BoardSquare targetSquare = static_cast<BoardSquare>(((queenRank + offset) * NUM_RANKS) + (queenFile + offset));
+            SetBit(queenBitboard, targetSquare);
+            offset++;
+        }
+        offset = 1;
+
+        // Positive rank; negative file
+        while (queenRank + offset < NUM_RANKS && queenFile - offset >= 0) {
+            BoardSquare targetSquare = static_cast<BoardSquare>(((queenRank + offset) * NUM_RANKS) + (queenFile - offset));
+            SetBit(queenBitboard, targetSquare);
+            offset++;
+        }
+        offset = 1;
+
+        // Negative rank; positive file
+        while (queenRank - offset >= 0 && queenFile + offset < NUM_FILES) {
+            BoardSquare targetSquare = static_cast<BoardSquare>(((queenRank - offset) * NUM_RANKS) + (queenFile + offset));
+            SetBit(queenBitboard, targetSquare);
+            offset++;
+        }
+        offset = 1;
+
+        // Negative rank; negative file
+        while (queenRank - offset >= 0 && queenFile - offset >= 0) {
+            BoardSquare targetSquare = static_cast<BoardSquare>(((queenRank - offset) * NUM_RANKS) + (queenFile - offset));
+            SetBit(queenBitboard, targetSquare);
+            offset++;
+        }
+
+        queenMoves[square] = queenBitboard;
+    }
+
+    return queenMoves;
+}
+
+constexpr std::array<Bitboard, NUM_SQUARES>
+GenerateKingMoves()
+{
+    std::array<Bitboard, NUM_SQUARES> kingMoves{};
+    for (size_t square = 0; square < NUM_SQUARES; square++) {
+        Bitboard kingBitboard = 0;
+        size_t kingRank = square / NUM_RANKS;
+        size_t kingFile = square % NUM_FILES;
+
+        // Due to constexpr, at compile time, the compiler thinks "kingRank - 1" could be negative, even if placed within
+        // "if (kingRank - 1 >= 0)". These conditional statements allow the code to build with unsigned integer variables (size_t).
+        size_t previousKingRank = (kingRank > 0) ? (kingRank - 1) : kingRank;
+        size_t previousKingFile = (kingFile > 0) ? (kingFile - 1) : kingFile;
+        size_t nextKingRank = (kingRank < NUM_RANKS - 1) ? (kingRank + 1) : kingRank;
+        size_t nextKingFile = (kingFile < NUM_FILES - 1) ? (kingFile + 1) : kingFile;
+
+        BoardSquare targetSquare = static_cast<BoardSquare>((nextKingRank * NUM_RANKS) + kingFile);
+        SetBit(kingBitboard, targetSquare);
+        
+        targetSquare = static_cast<BoardSquare>((previousKingRank * NUM_RANKS) + kingFile);
+        SetBit(kingBitboard, targetSquare);
+
+        targetSquare = static_cast<BoardSquare>((kingRank * NUM_RANKS) + nextKingFile);
+        SetBit(kingBitboard, targetSquare);
+
+        targetSquare = static_cast<BoardSquare>((kingRank * NUM_RANKS) + previousKingFile);
+        SetBit(kingBitboard, targetSquare);
+
+        ClearBit(kingBitboard, static_cast<BoardSquare>(square));
+        kingMoves[square] = kingBitboard;
+    }
+
+    return kingMoves;
+}
+
 // Declarations
 constexpr std::array<Bitboard, NUM_SQUARES> ROOK_MOVES = GenerateRookMoves();
 constexpr std::array<Bitboard, NUM_SQUARES> KNIGHT_MOVES = GenerateKnightMoves();
 constexpr std::array<Bitboard, NUM_SQUARES> BISHOP_MOVES = GenerateBishopMoves();
+constexpr std::array<Bitboard, NUM_SQUARES> QUEEN_MOVES = GenerateQueenMoves();
+constexpr std::array<Bitboard, NUM_SQUARES> KING_MOVES = GenerateKingMoves();
 } // namespace sablefish::constants::moves
