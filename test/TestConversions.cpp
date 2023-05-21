@@ -78,3 +78,9 @@ TEST_CASE("Piece data can be mapped to the appropriate starting position Bitboar
         REQUIRE(whitePawnStartingBitboard == WHITE_PAWNS_START);
     }
 }
+
+TEST_CASE("BoardSquare can be mapped to the appropriate starting Piece on that square") {
+    BoardSquare boardSquare = BoardSquare::A1;
+    Piece startingPiece = ConvertBoardSquareToStartingPiece(boardSquare);
+    REQUIRE(startingPiece == Piece(PieceType::Rook, PieceColor::White));
+}

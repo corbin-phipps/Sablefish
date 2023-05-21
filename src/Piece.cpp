@@ -1,6 +1,8 @@
+#include <sablefish/Constants.hpp>
 #include <sablefish/Piece.hpp>
 
-using namespace sablefish::board::piece;
+using namespace sablefish::board;
+using namespace sablefish::constants;
 
 /* constructors */
 

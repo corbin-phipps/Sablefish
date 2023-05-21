@@ -22,15 +22,15 @@ class Square
 {
 public:
     Square();
-    Square(const piece::Piece& piece);
+    Square(const Piece& piece);
 
-    const piece::Piece& GetPiece() const;
+    const Piece& GetPiece() const;
     bool IsOccupied() const;
 
     bool operator==(const Square& other) const;
 
 private:
-    piece::Piece m_piece{};
+    Piece m_piece{};
     bool m_isOccupied{ false };
 };
 } // namespace sablefish::board

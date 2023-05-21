@@ -2,7 +2,6 @@
 #include <sablefish/Utilities.hpp>
 
 using namespace sablefish::board;
-using namespace sablefish::board::piece;
 using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 

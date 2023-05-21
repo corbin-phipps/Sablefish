@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <sablefish/Piece.hpp>
 
-using namespace sablefish::board::piece;
+using namespace sablefish::board;
 
 TEST_CASE("Piece objects can be constructed") {
     SECTION("Empty Piece") {

@@ -6,7 +6,6 @@
 #include <sablefish/Utilities.hpp>
 
 using namespace sablefish::board;
-using namespace sablefish::board::piece;
 using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
@@ -22,11 +21,11 @@ TEST_CASE("Board can be constructed and initialized") {
     }
 
     SECTION("Initial array of Squares representation is correct") {
-        for (size_t i = 0; i < static_cast<size_t>(BoardSquare::H8) + 1; i++) {
+        for (size_t i = 0; i < NUM_SQUARES; i++) {
             BoardSquare boardSquare = static_cast<BoardSquare>(i);
 
             Square actualSquare = board.GetSquare(boardSquare);
-            Square expectedSquare = Square(STARTING_BOARDSQUARE_TO_PIECE_MAP.at(boardSquare));
+            Square expectedSquare = Square(ConvertBoardSquareToStartingPiece(boardSquare));
             REQUIRE(actualSquare == expectedSquare);
         }
     }

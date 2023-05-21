@@ -3,7 +3,6 @@
 #include <sablefish/Square.hpp>
 
 using namespace sablefish::board;
-using namespace sablefish::board::piece;
 
 TEST_CASE("Square objects can be constructed") {
     SECTION("Empty Square") {

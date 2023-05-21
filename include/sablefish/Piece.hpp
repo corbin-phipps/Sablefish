@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sablefish::board::piece
+namespace sablefish::board
 {
 enum class PieceType {
     Pawn = 0,

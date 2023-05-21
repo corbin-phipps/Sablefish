@@ -4,7 +4,7 @@
 #include <sablefish/Constants.hpp>
 #include <sablefish/Utilities.hpp>
 
-using namespace sablefish::board::piece;
+using namespace sablefish::board;
 using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
@@ -57,5 +57,13 @@ ConvertPieceDataToStartingBitboard(const PieceType pieceType, const PieceColor p
         std::cerr << "PieceType::Empty is unexpected" << std::endl;
         return 0ULL;
     }
+}
+
+// Creates a Piece object representing the starting Piece at a given BoardSquare.
+Piece
+ConvertBoardSquareToStartingPiece(const BoardSquare boardSquare)
+{
+    const auto& [pieceType, pieceColor] = STARTING_BOARD_SQUARE_DATA.at(static_cast<size_t>(boardSquare));
+    return Piece(pieceType, pieceColor);
 }
 } // namespace sablefish::board
