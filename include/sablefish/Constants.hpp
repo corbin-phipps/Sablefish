@@ -187,7 +187,7 @@ GenerateRookMoves()
             }
         }
 
-        rookMoves[square] = rookBitboard;
+        rookMoves.at(square) = rookBitboard;
     }
 
     return rookMoves;
@@ -220,7 +220,7 @@ GenerateKnightMoves()
             }
         }
 
-        knightMoves[square] = knightBitboard;
+        knightMoves.at(square) = knightBitboard;
     }
 
     return knightMoves;
@@ -267,7 +267,7 @@ GenerateBishopMoves()
             offset++;
         }
 
-        bishopMoves[square] = bishopBitboard;
+        bishopMoves.at(square) = bishopBitboard;
     }
 
     return bishopMoves;
@@ -330,7 +330,7 @@ GenerateQueenMoves()
             offset++;
         }
 
-        queenMoves[square] = queenBitboard;
+        queenMoves.at(square) = queenBitboard;
     }
 
     return queenMoves;
@@ -365,7 +365,7 @@ GenerateKingMoves()
         SetBit(kingBitboard, targetSquare);
 
         ClearBit(kingBitboard, static_cast<BoardSquare>(square));
-        kingMoves[square] = kingBitboard;
+        kingMoves.at(square) = kingBitboard;
     }
 
     return kingMoves;
