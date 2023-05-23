@@ -1,9 +1,9 @@
 #include <catch2/catch.hpp>
 #include <sablefish/Constants.hpp>
 
-using namespace sablefish::constants::moves;
+using namespace sablefish::board;
 
-TEST_CASE("Pseudo-legal rook moves are generated correctly") {
+TEST_CASE("Pre-computed rook moves are generated correctly") {
     SECTION("Rook in corner") {
         Bitboard generatedRookMoves = ROOK_MOVES.at(static_cast<size_t>(BoardSquare::A1));
         Bitboard expectedRookMoves = 0b00000001'00000001'00000001'00000001'00000001'00000001'00000001'11111110;
@@ -17,7 +17,7 @@ TEST_CASE("Pseudo-legal rook moves are generated correctly") {
     }
 }
 
-TEST_CASE("Pseudo-legal knight moves are generated correctly") {
+TEST_CASE("Pre-computed knight moves are generated correctly") {
     SECTION("Knight in corner") {
         Bitboard generatedKnightMoves = KNIGHT_MOVES.at(static_cast<size_t>(BoardSquare::A1));
         Bitboard expectedKnightMoves = 0b00000000'00000000'00000000'00000000'00000000'00000010'00000100'00000000;
@@ -31,7 +31,7 @@ TEST_CASE("Pseudo-legal knight moves are generated correctly") {
     }
 }
 
-TEST_CASE("Pseudo-legal bishop moves are generated correctly") {
+TEST_CASE("Pre-computed bishop moves are generated correctly") {
     SECTION("Bishop in corner") {
         Bitboard generatedBishopMoves = BISHOP_MOVES.at(static_cast<size_t>(BoardSquare::A1));
         Bitboard expectedBishopMoves = 0b10000000'01000000'00100000'00010000'00001000'00000100'00000010'00000000;
@@ -45,7 +45,7 @@ TEST_CASE("Pseudo-legal bishop moves are generated correctly") {
     }
 }
 
-TEST_CASE("Pseudo-legal queen moves are generated correctly") {
+TEST_CASE("Pre-computed queen moves are generated correctly") {
     SECTION("Queen in corner") {
         Bitboard generatedQueenMoves = QUEEN_MOVES.at(static_cast<size_t>(BoardSquare::A1));
         Bitboard expectedQueenMoves = 0b10000001'01000001'00100001'00010001'00001001'00000101'00000011'11111110;
@@ -59,7 +59,7 @@ TEST_CASE("Pseudo-legal queen moves are generated correctly") {
     }
 }
 
-TEST_CASE("Pseudo-legal king moves are generated correctly") {
+TEST_CASE("Pre-computed king moves are generated correctly") {
     SECTION("King in corner") {
         Bitboard generatedKingMoves = KING_MOVES.at(static_cast<size_t>(BoardSquare::A1));
         Bitboard expectedKingMoves = 0b00000000'00000000'00000000'00000000'00000000'00000000'00000001'00000010;

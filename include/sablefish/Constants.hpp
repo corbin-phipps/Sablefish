@@ -157,11 +157,11 @@ constexpr void ClearBit(Bitboard& bitboard, const sablefish::board::BoardSquare 
 } // namespace sablefish::constants::bitmanipulations
 
 // This namespace defines the pre-computed lookup tables of pseudo-legal moves
-namespace sablefish::constants::moves
+namespace
 {
+using namespace sablefish::constants;
+using namespace sablefish::constants::functions;
 using sablefish::board::BoardSquare;
-using sablefish::constants::functions::SetBit;
-using sablefish::constants::functions::ClearBit;
 
 // Definitions
 constexpr std::array<Bitboard, NUM_SQUARES>
@@ -176,14 +176,14 @@ GenerateRookMoves()
         for (size_t rank = 0; rank < NUM_RANKS; rank++) {
             if (rank != rookRank) {
                 BoardSquare targetSquare = static_cast<BoardSquare>((rank * NUM_RANKS) + rookFile);
-                sablefish::constants::functions::SetBit(rookBitboard, targetSquare);
+                SetBit(rookBitboard, targetSquare);
             }
         }
 
         for (size_t file = 0; file < NUM_FILES; file++) {
             if (file != rookFile) {
                 BoardSquare targetSquare = static_cast<BoardSquare>((rookRank * NUM_RANKS) + file);
-                sablefish::constants::functions::SetBit(rookBitboard, targetSquare);
+                SetBit(rookBitboard, targetSquare);
             }
         }
 
@@ -370,13 +370,13 @@ GenerateKingMoves()
 
     return kingMoves;
 }
+}
 
 // Declarations
-constexpr std::array<Bitboard, NUM_SQUARES> ROOK_MOVES = GenerateRookMoves();
-constexpr std::array<Bitboard, NUM_SQUARES> KNIGHT_MOVES = GenerateKnightMoves();
-constexpr std::array<Bitboard, NUM_SQUARES> BISHOP_MOVES = GenerateBishopMoves();
-constexpr std::array<Bitboard, NUM_SQUARES> QUEEN_MOVES = GenerateQueenMoves();
-constexpr std::array<Bitboard, NUM_SQUARES> KING_MOVES = GenerateKingMoves();
-} // namespace sablefish::constants::moves
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> ROOK_MOVES = GenerateRookMoves();
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> KNIGHT_MOVES = GenerateKnightMoves();
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> BISHOP_MOVES = GenerateBishopMoves();
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> QUEEN_MOVES = GenerateQueenMoves();
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> KING_MOVES = GenerateKingMoves();
 
 #endif // CONSTANTS_HPP

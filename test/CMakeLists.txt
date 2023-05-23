@@ -10,7 +10,7 @@ add_executable(sablefish-test
     Main.cpp
     TestBoard.cpp
     TestConversions.cpp
-    TestMoveGeneration.cpp
+    TestPrecomputedMoveGeneration.cpp
     TestPiece.cpp
     TestSquare.cpp
 )
