@@ -4,6 +4,7 @@ target_sources(sablefish
     PRIVATE
         Board.cpp
         Piece.cpp
+        Player.cpp
         Square.cpp
         Utilities.cpp
 )
