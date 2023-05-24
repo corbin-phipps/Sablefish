@@ -26,7 +26,7 @@ public:
     const Bitboard GetBitboard(const PieceType pieceType, const PieceColor pieceColor) const;
     void SetBitboard(const PieceType pieceType, const PieceColor pieceColor, const Bitboard bitboard);
     const Square& GetSquare(const BoardSquare boardSquare) const;
-    void SetSquare(const BoardSquare boardSquare, const Square& square);
+    void SetSquare(const Square& square);
 
 private:
     void InitializeBitboards();

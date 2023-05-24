@@ -25,7 +25,8 @@ TEST_CASE("Board can be constructed and initialized") {
             BoardSquare boardSquare = static_cast<BoardSquare>(i);
 
             Square actualSquare = board.GetSquare(boardSquare);
-            Square expectedSquare = Square(ConvertBoardSquareToStartingPiece(boardSquare));
+            Square expectedSquare = ConvertBoardSquareToStartingSquare(boardSquare);
+
             REQUIRE(actualSquare == expectedSquare);
         }
     }
@@ -44,10 +45,10 @@ TEST_CASE("Board representations can be viewed and modified") {
 
     SECTION("Get and set Squares") {
         Square startingA1Square = board.GetSquare(BoardSquare::A1);
-        REQUIRE(startingA1Square == Square(Piece(PieceType::Rook, PieceColor::White)));
+        REQUIRE(startingA1Square == Square(Piece(PieceType::Rook, PieceColor::White), BoardSquare::A1));
 
-        board.SetSquare(BoardSquare::A1, Square(Piece(PieceType::King, PieceColor::Black)));
+        board.SetSquare(Square(Piece(PieceType::King, PieceColor::Black), BoardSquare::A1));
         Square modifiedA1Square = board.GetSquare(BoardSquare::A1);
-        REQUIRE(modifiedA1Square == Square(Piece(PieceType::King, PieceColor::Black)));
+        REQUIRE(modifiedA1Square == Square(Piece(PieceType::King, PieceColor::Black), BoardSquare::A1));
     }
 }

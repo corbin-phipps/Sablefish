@@ -59,11 +59,11 @@ ConvertPieceDataToStartingBitboard(const PieceType pieceType, const PieceColor p
     }
 }
 
-// Creates a Piece object representing the starting Piece at a given BoardSquare.
-Piece
-ConvertBoardSquareToStartingPiece(const BoardSquare boardSquare)
+// Creates a Square object representing the starting Square at a given BoardSquare.
+Square
+ConvertBoardSquareToStartingSquare(const BoardSquare boardSquare)
 {
     const auto& [pieceType, pieceColor] = STARTING_BOARD_SQUARE_DATA.at(static_cast<size_t>(boardSquare));
-    return Piece(pieceType, pieceColor);
+    return Square(Piece(pieceType, pieceColor), boardSquare);
 }
 } // namespace sablefish::board

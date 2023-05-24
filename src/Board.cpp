@@ -48,9 +48,9 @@ Board::GetSquare(const BoardSquare boardSquare) const
 
 // Given a BoardSquare and a Square, sets the appropriate Square in the Board.
 void
-Board::SetSquare(const BoardSquare boardSquare, const Square& square)
+Board::SetSquare(const Square& square)
 {
-    m_squares.at(static_cast<size_t>(boardSquare)) = square;
+    m_squares.at(static_cast<size_t>(square.GetBoardSquare())) = square;
 }
 
 /* private */
@@ -71,7 +71,7 @@ Board::InitializeSquares()
     for (const auto& [pieceType, pieceColor] : PIECE_DATA) {
         std::vector<BoardSquare> boardSquares = ConvertBitboardToBoardSquares(GetBitboard(pieceType, pieceColor));
         for (const auto& boardSquare : boardSquares) {
-            SetSquare(boardSquare, Square(Piece(pieceType, pieceColor)));
+            SetSquare(Square(Piece(pieceType, pieceColor), boardSquare));
         }
     }
 }

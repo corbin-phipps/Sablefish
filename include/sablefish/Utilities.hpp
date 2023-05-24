@@ -6,13 +6,14 @@
 #include "Bitboard.hpp"
 #include "Board.hpp"
 #include "Piece.hpp"
+#include "Square.hpp"
 
 namespace sablefish::board
 {
 const std::vector<BoardSquare> ConvertBitboardToBoardSquares(const Bitboard bitboard);
 const Bitboard ConvertBoardSquaresToBitboard(const std::vector<BoardSquare>& boardSquares);
 const Bitboard ConvertPieceDataToStartingBitboard(const PieceType pieceType, const PieceColor pieceColor);
-Piece ConvertBoardSquareToStartingPiece(const BoardSquare boardSquare);
+Square ConvertBoardSquareToStartingSquare(const BoardSquare boardSquare);
 } // namespace sablefish::board
 
 #endif // UTILITIES_HPP

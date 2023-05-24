@@ -23,14 +23,16 @@ class Square
 {
 public:
     Square();
-    Square(const Piece& piece);
+    Square(const Piece& piece, const BoardSquare boardSquare);
 
+    const BoardSquare GetBoardSquare() const;
     const Piece& GetPiece() const;
     bool IsOccupied() const;
 
     bool operator==(const Square& other) const;
 
 private:
+    BoardSquare m_boardSquare{};
     Piece m_piece{};
     bool m_isOccupied{ false };
 };

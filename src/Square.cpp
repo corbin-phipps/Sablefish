@@ -12,13 +12,21 @@ Square::Square() :
 }
 
 // Constructs a Square with a given Piece.
-Square::Square(const Piece& piece) :
+Square::Square(const Piece& piece, const BoardSquare boardSquare) :
     m_piece(piece)
 {
+    m_boardSquare = piece.GetPieceType() != PieceType::Empty ? boardSquare : BoardSquare::A1;
     m_isOccupied = piece.GetPieceType() != PieceType::Empty;
 }
 
 /* public */
+
+// Returns the BoardSquare of the current Square instance.
+const BoardSquare
+Square::GetBoardSquare() const
+{
+    return m_boardSquare;
+}
 
 // Returns the Piece occupying the current Square instance.
 const Piece&
@@ -36,5 +44,5 @@ Square::IsOccupied() const
 
 bool
 Square::operator==(const Square& other) const {
-    return m_piece == other.m_piece && m_isOccupied == other.m_isOccupied;
+    return m_boardSquare == other.m_boardSquare && m_piece == other.m_piece && m_isOccupied == other.m_isOccupied;
 }

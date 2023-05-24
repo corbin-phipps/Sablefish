@@ -17,10 +17,11 @@ TEST_CASE("Square objects can be constructed") {
 
     SECTION("Specific Square") {
         auto whitePawn = Piece(PieceType::Pawn, PieceColor::White);
-        auto square = Square(whitePawn);
+        auto square = Square(whitePawn, BoardSquare::A2);
 
         REQUIRE(whitePawn.GetPieceType() == PieceType::Pawn);
         REQUIRE(whitePawn.GetPieceColor() == PieceColor::White);
+        REQUIRE(square.GetBoardSquare() == BoardSquare::A2);
         REQUIRE(square.IsOccupied());
     }
 }
