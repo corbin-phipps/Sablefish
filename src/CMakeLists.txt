@@ -3,6 +3,7 @@ add_library(sablefish STATIC "")
 target_sources(sablefish
     PRIVATE
         Board.cpp
+        MoveGenerator.cpp
         Piece.cpp
         Player.cpp
         Square.cpp
