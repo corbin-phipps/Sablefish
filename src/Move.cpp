@@ -1,6 +1,9 @@
+#include <sablefish/Bitboard.hpp>
+#include <sablefish/Constants.hpp>
 #include <sablefish/Move.hpp>
 
 using namespace sablefish::board;
+using namespace sablefish::constants::bitfields;
 
 namespace sablefish::moves
 {
@@ -20,5 +23,24 @@ CreateMove(BoardSquare startingSquare, BoardSquare targetSquare, MoveType moveTy
     move |= static_cast<uint16_t>(moveType) & MOVE_TYPE_MASK;
 
     return move;
+}
+
+// Returns a boolean representing whether or not a Move is a promotion based on the given Piece and target BoardSquare
+bool
+IsPromotion(Piece piece, BoardSquare targetSquare)
+{
+    Bitboard square = 1ULL << static_cast<Bitboard>(targetSquare);
+    if (piece.GetPieceType() == PieceType::Pawn) {
+        if (piece.GetPieceColor() == PieceColor::White) {
+            return square & RANK_8;
+        } else if (piece.GetPieceColor() == PieceColor::Black) {
+            return square & RANK_1;
+        } else { // PieceColor::Empty
+            // TODO: Log error
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
 } // namespace sablefish::moves

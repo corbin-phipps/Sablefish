@@ -28,45 +28,62 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
 
         // Generate moves for each piece of the current PieceType and PieceColor
         while (pieceBitboard != EMPTY_BITBOARD) {
-            Bitboard attacks;
+            Bitboard targets;
             BoardSquare pieceSquare = PopLsb(pieceBitboard);
             auto square = static_cast<size_t>(pieceSquare);
             
-            // Generate attack Bitboard for the current piece
+            // Generate target Bitboard for the current piece
             switch (pieceType) {
                 case PieceType::Pawn:
                     // TODO: Fix once implemented
-                    attacks = 0ULL;
+                    targets = 0ULL;
                     break;
                 case PieceType::Rook:
-                    attacks = ROOK_MOVES.at(square);
+                    targets = ROOK_MOVES.at(square);
                     break;
                 case PieceType::Knight:
-                    attacks = KNIGHT_MOVES.at(square);
+                    targets = KNIGHT_MOVES.at(square);
                     break;
                 case PieceType::Bishop:
-                    attacks = BISHOP_MOVES.at(square);
+                    targets = BISHOP_MOVES.at(square);
                     break;
                 case PieceType::Queen:
-                    attacks = QUEEN_MOVES.at(square);
+                    targets = QUEEN_MOVES.at(square);
                     break;
                 case PieceType::King:
-                    attacks = KING_MOVES.at(square);
+                    targets = KING_MOVES.at(square);
                     break;
                 default:
                     // TODO: Log error
-                    attacks = 0ULL;
+                    targets = 0ULL;
                     break;
             }
 
-            // Construct Moves based on current piece's square and the potential attack squares
+            // Construct Moves based on current piece's square and the potential target squares
             //
-            // TODO: Should only include moves that don't land on any pieces of the same PieceColor
-            // TODO: Need to accurately set MoveType
-            while (attacks != EMPTY_BITBOARD) {
-                BoardSquare attackSquare = PopLsb(attacks);
-                Move move = CreateMove(pieceSquare, attackSquare, MoveType::Quiet);
-                pseudoLegalMoves.push_back(move);
+            // TODO: Promotion piece is Queen by default, but this should be configurable
+            // TODO: Some MoveTypes are missing: Double Pawn Push, King/Queen Castle, En Passant
+            while (targets != EMPTY_BITBOARD) {
+                BoardSquare targetSquare = PopLsb(targets);
+                MoveType moveType;
+                const auto& attackedSquare = m_board->GetSquare(targetSquare);
+
+                // Construct Move based on its MoveType
+                if (!attackedSquare.IsOccupied()) {
+                    if (IsPromotion(Piece(pieceType, pieceColor), targetSquare)) {
+                        moveType = MoveType::QueenPromotion;
+                    } else {
+                        moveType = MoveType::Quiet;
+                    }
+                } else {
+                    if (IsPromotion(Piece(pieceType, pieceColor), targetSquare)) {
+                        moveType = MoveType::QueenPromotionCapture;
+                    } else if (attackedSquare.GetPiece().GetPieceColor() != pieceColor) {
+                        moveType = MoveType::Capture;
+                    }
+                }
+
+                pseudoLegalMoves.push_back(CreateMove(pieceSquare, targetSquare, moveType));
             }
         }
     }

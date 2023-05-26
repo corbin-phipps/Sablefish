@@ -56,6 +56,8 @@ constexpr uint16_t TARGET_SQUARE_MASK = 0b00000011'11110000;
 constexpr uint16_t MOVE_TYPE_MASK = 0b00000000'00001111;
 
 Move CreateMove(sablefish::board::BoardSquare startingSquare, sablefish::board::BoardSquare targetSquare, MoveType moveType);
+
+bool IsPromotion(sablefish::board::Piece piece, sablefish::board::BoardSquare targetSquare);
 } // namespace sablefish::moves
 
 #endif // MOVE_HPP
