@@ -66,6 +66,7 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
             while (attacks != EMPTY_BITBOARD) {
                 BoardSquare attackSquare = PopLsb(attacks);
                 Move move = CreateMove(pieceSquare, attackSquare, MoveType::Quiet);
+                pseudoLegalMoves.push_back(move);
             }
         }
     }
