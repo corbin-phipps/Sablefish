@@ -154,6 +154,24 @@ constexpr void ClearBit(Bitboard& bitboard, const sablefish::board::BoardSquare 
 {
     bitboard &= ~(1ULL << static_cast<size_t>(boardSquare));
 }
+
+constexpr sablefish::board::BoardSquare PopLsb(Bitboard& bitboard)
+{
+    if (bitboard == 0ULL) {
+        // TODO: Log error
+        return sablefish::board::BoardSquare::A1;
+    }
+    size_t lsb = 0;
+    Bitboard mask = 1ULL;
+    while ((bitboard & mask) == 0) {
+        mask <<= 1ULL;
+        lsb++;
+    }
+
+    bitboard &= ~mask;
+
+    return static_cast<sablefish::board::BoardSquare>(lsb);
+}
 } // namespace sablefish::constants::bitmanipulations
 
 // This namespace defines the pre-computed lookup tables of pseudo-legal moves

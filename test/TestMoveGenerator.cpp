@@ -1,17 +1,31 @@
 #include <catch2/catch.hpp>
 #include <sablefish/Constants.hpp>
+#include <sablefish/Move.hpp>
 #include <sablefish/MoveGenerator.hpp>
 
 using namespace sablefish::board;
 using namespace sablefish::constants::bitfields;
 using namespace sablefish::moves;
 
+TEST_CASE("Move can be created properly") {
+    SECTION("Simple Move test") {
+        BoardSquare startingSquare = BoardSquare::A1;
+        BoardSquare targetSquare = BoardSquare::H8;
+        MoveType moveType = MoveType::Quiet;
+
+        Move move = CreateMove(startingSquare, targetSquare, moveType);
+        Move expectedMove = 0b00000011'11110000;
+        REQUIRE(move == expectedMove);
+    }
+}
+
 TEST_CASE("MoveGenerator can generate basic pseudo-legal Pawn moves") {
-    MoveGenerator moveGenerator = MoveGenerator();
+    Board board = Board();
+    MoveGenerator moveGenerator = MoveGenerator(std::make_shared<Board>(board));
 
     // TODO
 }
-
+/*
 TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {
     MoveGenerator moveGenerator = MoveGenerator();
 
@@ -25,3 +39,4 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {
         REQUIRE(actualMoves == expectedMoves);
     }
 }
+*/

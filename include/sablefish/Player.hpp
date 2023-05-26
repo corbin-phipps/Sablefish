@@ -25,7 +25,7 @@ private:
     const Bitboard CalculatePlayerPiecesBitboard();
 
     board::PieceColor m_playerPieceColor{};
-    std::stack<Move> m_completedMoves{};
+    std::stack<sablefish::moves::Move> m_completedMoves{};
     std::shared_ptr<board::Board> m_board{};
     Bitboard m_playerPiecesBitboard{};
 };
