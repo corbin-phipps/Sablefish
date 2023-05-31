@@ -22,8 +22,6 @@ class Board
 public:
     Board();
 
-    void Initialize();
-
     const Bitboard GetBitboard(const PieceType pieceType, const PieceColor pieceColor) const;
     void SetBitboard(const PieceType pieceType, const PieceColor pieceColor, const Bitboard bitboard);
     const Square& GetSquare(const BoardSquare boardSquare) const;
@@ -32,6 +30,7 @@ public:
     void Clear();
 
 private:
+    void Initialize();
     void InitializeBitboards();
     void InitializeSquares();
     const size_t GetBitboardIndex(const PieceType pieceType, const PieceColor pieceColor) const;
