@@ -13,9 +13,9 @@ Square::Square() :
 
 // Constructs a Square with a given Piece.
 Square::Square(const Piece& piece, const BoardSquare boardSquare) :
+    m_boardSquare(boardSquare),
     m_piece(piece)
 {
-    m_boardSquare = piece.GetPieceType() != PieceType::Empty ? boardSquare : BoardSquare::A1;
     m_isOccupied = piece.GetPieceType() != PieceType::Empty;
 }
 

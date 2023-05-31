@@ -83,12 +83,20 @@ Board::InitializeBitboards()
 void
 Board::InitializeSquares()
 {
+    // Set Squares for actual Pieces
     for (const auto& [pieceType, pieceColor] : PIECE_DATA) {
         auto piece = Piece(pieceType, pieceColor);
         std::vector<BoardSquare> boardSquares = ConvertBitboardToBoardSquares(GetBitboard(piece));
         for (const auto& boardSquare : boardSquares) {
             SetSquare(Square(piece, boardSquare));
         }
+    }
+
+    // Set empty Squares
+    Bitboard startingEmptyRanks = RANK_3 | RANK_4 | RANK_5 | RANK_6;
+    std::vector<BoardSquare> boardSquares = ConvertBitboardToBoardSquares(startingEmptyRanks);
+    for (const auto& boardSquare : boardSquares) {
+        SetSquare(Square({ PieceType::Empty, PieceColor::Empty }, boardSquare));
     }
 }
 
