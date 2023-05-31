@@ -51,4 +51,19 @@ TEST_CASE("Board representations can be viewed and modified") {
         Square modifiedA1Square = board.GetSquare(BoardSquare::A1);
         REQUIRE(modifiedA1Square == Square(Piece(PieceType::King, PieceColor::Black), BoardSquare::A1));
     }
+
+    SECTION("Clear Board") {
+        board.Clear();
+
+        // Check Bitboards
+        for (const auto& [pieceType, pieceData] : PIECE_DATA) {
+            REQUIRE(board.GetBitboard(pieceType, pieceData) == EMPTY_BITBOARD);
+        }
+
+        // Check Squares
+        Square emptySquare = Square();
+        for (size_t i = 0; i < NUM_SQUARES; i++) {
+            REQUIRE(board.GetSquare(static_cast<BoardSquare>(i)) == emptySquare);
+        }
+    }
 }

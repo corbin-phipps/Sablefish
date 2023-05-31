@@ -23,10 +23,13 @@ public:
     Board();
 
     void Initialize();
+
     const Bitboard GetBitboard(const PieceType pieceType, const PieceColor pieceColor) const;
     void SetBitboard(const PieceType pieceType, const PieceColor pieceColor, const Bitboard bitboard);
     const Square& GetSquare(const BoardSquare boardSquare) const;
     void SetSquare(const Square& square);
+
+    void Clear();
 
 private:
     void InitializeBitboards();

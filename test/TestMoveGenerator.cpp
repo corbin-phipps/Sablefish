@@ -2,6 +2,7 @@
 #include <sablefish/Constants.hpp>
 #include <sablefish/Move.hpp>
 #include <sablefish/MoveGenerator.hpp>
+#include <sablefish/Utilities.hpp>
 
 using namespace sablefish::board;
 using namespace sablefish::constants::bitfields;
@@ -57,23 +58,39 @@ TEST_CASE("Special moves can be identified correctly") {
 }
 
 TEST_CASE("MoveGenerator can generate basic pseudo-legal Pawn moves") {
-    Board board = Board();
-    MoveGenerator moveGenerator = MoveGenerator(std::make_shared<Board>(board));
+    std::shared_ptr<Board> board = std::make_shared<Board>();
+    MoveGenerator moveGenerator = MoveGenerator(board);
 
     // TODO
 }
-/*
+
 TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {
-    MoveGenerator moveGenerator = MoveGenerator();
+    std::shared_ptr<Board> board = std::make_shared<Board>();
+    MoveGenerator moveGenerator = MoveGenerator(board);
 
     SECTION("Simple Rook quiet moves on empty Board") {
-        Square square = Square(Piece(PieceType::Rook, PieceColor::White), BoardSquare::A1);
-        auto boardSquare = 1ULL << static_cast<Bitboard>(square.GetBoardSquare());
-        Bitboard piecesBitboard = EMPTY_BITBOARD | boardSquare;
+        // Clear the default starting Board
+        board->Clear();
+
+        // Add the Rook
+        // TODO: Could this be improved??
+        Square startingRookSquare = Square(Piece(PieceType::Rook, PieceColor::White), BoardSquare::A1);
+        Bitboard startingBoardSquare = 1ULL << static_cast<Bitboard>(startingRookSquare.GetBoardSquare());
+        Bitboard startingRookBitboard = EMPTY_BITBOARD | startingBoardSquare;
+        board->SetSquare(startingRookSquare);
+        board->SetBitboard(startingRookSquare.GetPiece().GetPieceType(), startingRookSquare.GetPiece().GetPieceColor(), startingRookBitboard);
+
+        // Generate actual pseudo-legal moves
+        std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::White);
         
-        const Bitboard actualMoves = moveGenerator.GeneratePseudoLegalMoves(square, piecesBitboard);
-        const Bitboard expectedMoves = (RANK_1 | FILE_A) & ~(boardSquare);
+        // Generate expected pseudo-legal moves
+        std::vector<Move> expectedMoves{};
+        auto expectedMovesBitboard = (RANK_1 | FILE_A) & ~(startingBoardSquare);
+        auto expectedMovesBoardSquares = ConvertBitboardToBoardSquares(expectedMovesBitboard);
+        for (const auto& targetBoardSquare : expectedMovesBoardSquares) {
+            expectedMoves.push_back(CreateMove(startingRookSquare.GetBoardSquare(), targetBoardSquare, MoveType::Quiet));
+        }
+
         REQUIRE(actualMoves == expectedMoves);
     }
 }
-*/

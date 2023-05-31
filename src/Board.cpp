@@ -53,6 +53,21 @@ Board::SetSquare(const Square& square)
     m_squares.at(static_cast<size_t>(square.GetBoardSquare())) = square;
 }
 
+// Clears the current Board
+void
+Board::Clear()
+{
+    // Clear Bitboard representation
+    for (auto& bitboard : m_bitboards) {
+        bitboard = EMPTY_BITBOARD;
+    }
+
+    // Clear Squares representation
+    for (auto& square : m_squares) {
+        square = std::move(Square());
+    }
+}
+
 /* private */
 
 // Initializes all Bitboards in the Board to the starting positions of each Piece.
