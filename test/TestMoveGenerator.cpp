@@ -74,11 +74,11 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {
 
         // Add the Rook
         // TODO: Could this be improved??
-        Square startingRookSquare = Square(Piece(PieceType::Rook, PieceColor::White), BoardSquare::A1);
+        Square startingRookSquare = Square({ PieceType::Rook, PieceColor::White }, BoardSquare::A1);
         Bitboard startingBoardSquare = 1ULL << static_cast<Bitboard>(startingRookSquare.GetBoardSquare());
         Bitboard startingRookBitboard = EMPTY_BITBOARD | startingBoardSquare;
         board->SetSquare(startingRookSquare);
-        board->SetBitboard(startingRookSquare.GetPiece().GetPieceType(), startingRookSquare.GetPiece().GetPieceColor(), startingRookBitboard);
+        board->SetBitboard(startingRookSquare.GetPiece(), startingRookBitboard);
 
         // Generate actual pseudo-legal moves
         std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::White);

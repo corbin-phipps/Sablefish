@@ -23,8 +23,8 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
 
     // Generate moves for each PieceType of the given PieceColor
     for (size_t i = 0; i < static_cast<size_t>(PieceType::Empty); i++) {
-        PieceType pieceType = static_cast<PieceType>(i);
-        Bitboard pieceBitboard = m_board->GetBitboard(pieceType, pieceColor);
+        auto pieceType = static_cast<PieceType>(i);
+        Bitboard pieceBitboard = m_board->GetBitboard({ pieceType, pieceColor });
 
         // Generate moves for each piece of the current PieceType and PieceColor
         while (pieceBitboard != EMPTY_BITBOARD) {
@@ -70,11 +70,11 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
 
                 // Construct Move based on its MoveType
                 if (!attackedSquare.IsOccupied()) {
-                    if (IsPromotion(Piece(pieceType, pieceColor), targetSquare)) {
+                    if (IsPromotion({ pieceType, pieceColor }, targetSquare)) {
                         moveType = MoveType::QueenPromotion;
                     }
                 } else {
-                    if (IsPromotion(Piece(pieceType, pieceColor), targetSquare)) {
+                    if (IsPromotion({ pieceType, pieceColor }, targetSquare)) {
                         moveType = MoveType::QueenPromotionCapture;
                     } else if (attackedSquare.GetPiece().GetPieceColor() != pieceColor) {
                         moveType = MoveType::Capture;

@@ -22,8 +22,8 @@ class Board
 public:
     Board();
 
-    const Bitboard GetBitboard(const PieceType pieceType, const PieceColor pieceColor) const;
-    void SetBitboard(const PieceType pieceType, const PieceColor pieceColor, const Bitboard bitboard);
+    const Bitboard GetBitboard(const Piece& piece) const;
+    void SetBitboard(const Piece& piece, const Bitboard bitboard);
     const Square& GetSquare(const BoardSquare boardSquare) const;
     void SetSquare(const Square& square);
 
@@ -33,7 +33,7 @@ private:
     void Initialize();
     void InitializeBitboards();
     void InitializeSquares();
-    const size_t GetBitboardIndex(const PieceType pieceType, const PieceColor pieceColor) const;
+    const size_t GetBitboardIndex(const Piece& piece) const;
 
     std::array<Bitboard, constants::NUM_PIECE_TYPES * constants::NUM_COLORS> m_bitboards{};
     std::array<Square, constants::NUM_SQUARES> m_squares{};

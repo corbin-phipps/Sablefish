@@ -82,5 +82,5 @@ TEST_CASE("Piece data can be mapped to the appropriate starting position Bitboar
 TEST_CASE("BoardSquare can be mapped to the appropriate starting Square") {
     BoardSquare boardSquare = BoardSquare::A1;
     Square startingSquare = ConvertBoardSquareToStartingSquare(boardSquare);
-    REQUIRE(startingSquare == Square(Piece(PieceType::Rook, PieceColor::White), boardSquare));
+    REQUIRE(startingSquare == Square({ PieceType::Rook, PieceColor::White }, boardSquare));
 }

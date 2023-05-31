@@ -64,6 +64,6 @@ Square
 ConvertBoardSquareToStartingSquare(const BoardSquare boardSquare)
 {
     const auto& [pieceType, pieceColor] = STARTING_BOARD_SQUARE_DATA.at(static_cast<size_t>(boardSquare));
-    return Square(Piece(pieceType, pieceColor), boardSquare);
+    return Square({ pieceType, pieceColor }, boardSquare);
 }
 } // namespace sablefish::board

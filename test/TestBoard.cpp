@@ -14,7 +14,7 @@ TEST_CASE("Board can be constructed and initialized") {
     
     SECTION("Initial Bitboard representation is correct") {
         for (const auto& [pieceType, pieceColor] : PIECE_DATA) {
-            Bitboard actualBitboard = board.GetBitboard(pieceType, pieceColor);
+            Bitboard actualBitboard = board.GetBitboard({ pieceType, pieceColor });
             Bitboard expectedBitboard = ConvertPieceDataToStartingBitboard(pieceType, pieceColor);
             REQUIRE(actualBitboard == expectedBitboard);
         }
@@ -35,21 +35,21 @@ TEST_CASE("Board can be constructed and initialized") {
 TEST_CASE("Board representations can be viewed and modified") {
     Board board = Board();
     SECTION("Get and set Bitboards") {
-        Bitboard startingWhitePawnBitboard = board.GetBitboard(PieceType::Pawn, PieceColor::White);
+        Bitboard startingWhitePawnBitboard = board.GetBitboard({ PieceType::Pawn, PieceColor::White });
         REQUIRE(startingWhitePawnBitboard == WHITE_PAWNS_START);
 
-        board.SetBitboard(PieceType::Pawn, PieceColor::White, 0b00000000'00000000'00000000'00000000'00000000'11111111'00000000'00000000);
-        Bitboard modifiedWhitePawnBitboard = board.GetBitboard(PieceType::Pawn, PieceColor::White);
+        board.SetBitboard({ PieceType::Pawn, PieceColor::White }, 0b00000000'00000000'00000000'00000000'00000000'11111111'00000000'00000000);
+        Bitboard modifiedWhitePawnBitboard = board.GetBitboard({ PieceType::Pawn, PieceColor::White });
         REQUIRE(modifiedWhitePawnBitboard == 0b00000000'00000000'00000000'00000000'00000000'11111111'00000000'00000000);
     }
 
     SECTION("Get and set Squares") {
         Square startingA1Square = board.GetSquare(BoardSquare::A1);
-        REQUIRE(startingA1Square == Square(Piece(PieceType::Rook, PieceColor::White), BoardSquare::A1));
+        REQUIRE(startingA1Square == Square({ PieceType::Rook, PieceColor::White }, BoardSquare::A1));
 
-        board.SetSquare(Square(Piece(PieceType::King, PieceColor::Black), BoardSquare::A1));
+        board.SetSquare(Square({ PieceType::King, PieceColor::Black }, BoardSquare::A1));
         Square modifiedA1Square = board.GetSquare(BoardSquare::A1);
-        REQUIRE(modifiedA1Square == Square(Piece(PieceType::King, PieceColor::Black), BoardSquare::A1));
+        REQUIRE(modifiedA1Square == Square({ PieceType::King, PieceColor::Black }, BoardSquare::A1));
     }
 
     SECTION("Clear Board") {
@@ -57,7 +57,7 @@ TEST_CASE("Board representations can be viewed and modified") {
 
         // Check Bitboards
         for (const auto& [pieceType, pieceData] : PIECE_DATA) {
-            REQUIRE(board.GetBitboard(pieceType, pieceData) == EMPTY_BITBOARD);
+            REQUIRE(board.GetBitboard({ pieceType, pieceData }) == EMPTY_BITBOARD);
         }
 
         // Check Squares

@@ -14,7 +14,7 @@ Piece::Piece() :
 }
 
 // Constructs a Piece with the given PieceType and PieceColor.
-Piece::Piece(PieceType pieceType, PieceColor pieceColor) :
+Piece::Piece(const PieceType pieceType, const PieceColor pieceColor) :
     m_pieceType(pieceType),
     m_pieceColor(pieceColor)
 {
