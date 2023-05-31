@@ -17,14 +17,6 @@ Board::Board() :
 
 /* public */
 
-// Initializes both representations of the Board.
-void
-Board::Initialize()
-{
-    InitializeBitboards();
-    InitializeSquares();
-}
-
 // Given a Piece, returns the appropriate Bitboard.
 const Bitboard
 Board::GetBitboard(const Piece& piece) const
@@ -32,25 +24,11 @@ Board::GetBitboard(const Piece& piece) const
     return m_bitboards.at(GetBitboardIndex(piece));
 }
 
-// Given a Piece and a Bitboard, sets the appropriate Bitboard.
-void
-Board::SetBitboard(const Piece& piece, const Bitboard bitboard)
-{
-    m_bitboards.at(GetBitboardIndex(piece)) = bitboard;
-}
-
 // Given a BoardSquare, returns the appropriate Square in the Board.
 const Square&
 Board::GetSquare(const BoardSquare boardSquare) const
 {
     return m_squares.at(static_cast<size_t>(boardSquare));
-}
-
-// Given a BoardSquare and a Square, sets the appropriate Square in the Board.
-void
-Board::SetSquare(const Square& square)
-{
-    m_squares.at(static_cast<size_t>(square.GetBoardSquare())) = square;
 }
 
 // Clears the current Board
@@ -68,7 +46,61 @@ Board::Clear()
     }
 }
 
+// Returns a boolean representing whether or not the Board is empty.
+bool
+Board::IsEmpty()
+{
+    // Check Bitboards
+    for (const auto& [pieceType, pieceData] : PIECE_DATA) {
+        if (GetBitboard({ pieceType, pieceData }) != EMPTY_BITBOARD) {
+            return false;
+        }
+    }
+
+    // Check Squares
+    Square emptySquare = Square();
+    for (size_t i = 0; i < NUM_SQUARES; i++) {
+        if (GetSquare(static_cast<BoardSquare>(i)) != emptySquare) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// Updates the current Board by clearing the given starting Square and setting the given target Square.
+void
+Board::Update(const Square& startingSquare, const Square& targetSquare)
+{
+    // Clear starting Square unless Board is already empty
+    if (!IsEmpty()) {
+        auto emptySquare = Square({ PieceType::Empty, PieceColor::Empty }, startingSquare.GetBoardSquare());
+        SetSquare(emptySquare);
+
+        auto startingPiece = startingSquare.GetPiece();
+        auto startingPieceBitboard = GetBitboard(startingPiece);
+        ClearBit(startingPieceBitboard, startingSquare.GetBoardSquare());
+        SetBitboard(startingPiece, startingPieceBitboard);
+    }
+
+    // Set target Square   
+    SetSquare(targetSquare);
+
+    auto targetPiece = targetSquare.GetPiece();
+    auto targetPieceBitboard = GetBitboard(targetPiece);
+    SetBit(targetPieceBitboard, targetSquare.GetBoardSquare());
+    SetBitboard(targetPiece, targetPieceBitboard);
+}
+
 /* private */
+
+// Initializes both representations of the Board.
+void
+Board::Initialize()
+{
+    InitializeBitboards();
+    InitializeSquares();
+}
 
 // Initializes all Bitboards in the Board to the starting positions of each Piece.
 void
@@ -98,6 +130,20 @@ Board::InitializeSquares()
     for (const auto& boardSquare : boardSquares) {
         SetSquare(Square({ PieceType::Empty, PieceColor::Empty }, boardSquare));
     }
+}
+
+// Given a Piece and a Bitboard, sets the appropriate Bitboard.
+void
+Board::SetBitboard(const Piece& piece, const Bitboard bitboard)
+{
+    m_bitboards.at(GetBitboardIndex(piece)) = bitboard;
+}
+
+// Given a BoardSquare and a Square, sets the appropriate Square in the Board.
+void
+Board::SetSquare(const Square& square)
+{
+    m_squares.at(static_cast<size_t>(square.GetBoardSquare())) = square;
 }
 
 // Given a Piece, returns the index of the appropriate Bitboard.

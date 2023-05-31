@@ -34,22 +34,14 @@ TEST_CASE("Board can be constructed and initialized") {
 
 TEST_CASE("Board representations can be viewed and modified") {
     Board board = Board();
-    SECTION("Get and set Bitboards") {
+    SECTION("Get Bitboard") {
         Bitboard startingWhitePawnBitboard = board.GetBitboard({ PieceType::Pawn, PieceColor::White });
         REQUIRE(startingWhitePawnBitboard == WHITE_PAWNS_START);
-
-        board.SetBitboard({ PieceType::Pawn, PieceColor::White }, 0b00000000'00000000'00000000'00000000'00000000'11111111'00000000'00000000);
-        Bitboard modifiedWhitePawnBitboard = board.GetBitboard({ PieceType::Pawn, PieceColor::White });
-        REQUIRE(modifiedWhitePawnBitboard == 0b00000000'00000000'00000000'00000000'00000000'11111111'00000000'00000000);
     }
 
-    SECTION("Get and set Squares") {
+    SECTION("Get Square") {
         Square startingA1Square = board.GetSquare(BoardSquare::A1);
         REQUIRE(startingA1Square == Square({ PieceType::Rook, PieceColor::White }, BoardSquare::A1));
-
-        board.SetSquare(Square({ PieceType::King, PieceColor::Black }, BoardSquare::A1));
-        Square modifiedA1Square = board.GetSquare(BoardSquare::A1);
-        REQUIRE(modifiedA1Square == Square({ PieceType::King, PieceColor::Black }, BoardSquare::A1));
     }
 
     SECTION("Clear Board") {
@@ -65,5 +57,28 @@ TEST_CASE("Board representations can be viewed and modified") {
         for (size_t i = 0; i < NUM_SQUARES; i++) {
             REQUIRE(board.GetSquare(static_cast<BoardSquare>(i)) == emptySquare);
         }
+    }
+
+    SECTION("IsEmpty works correctly") {
+        // From starting Board
+        REQUIRE(!board.IsEmpty());
+
+        // Clear Board
+        board.Clear();
+        REQUIRE(board.IsEmpty());
+    }
+
+    SECTION("Update Board") {
+        auto whitePawn = Piece(PieceType::Pawn, PieceColor::White);
+        auto startingPawnSquare = Square(whitePawn, BoardSquare::A2);
+        auto targetPawnSquare = Square(whitePawn, BoardSquare::A3);
+        board.Update(startingPawnSquare, targetPawnSquare);
+
+        // Check Bitboard representation
+        REQUIRE(board.GetBitboard(whitePawn) == 0b00000000'00000000'00000000'00000000'00000000'00000001'11111110'00000000);
+
+        // Check Square representation
+        REQUIRE(board.GetSquare(BoardSquare::A2) == Square({ PieceType::Empty, PieceColor::Empty }, BoardSquare::A2));
+        REQUIRE(board.GetSquare(BoardSquare::A3) == targetPawnSquare);
     }
 }
