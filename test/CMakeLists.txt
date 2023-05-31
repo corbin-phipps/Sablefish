@@ -8,13 +8,13 @@ FetchContent_MakeAvailable(catch2)
 
 add_executable(sablefish-test
     Main.cpp
-    TestBoard.cpp
-    TestConversions.cpp
-    TestMoveGenerator.cpp
-    TestPiece.cpp
-    TestPlayer.cpp
-    TestPrecomputedMoveGeneration.cpp
-    TestSquare.cpp
+    BoardTest.cpp
+    ConversionsTest.cpp
+    MoveGeneratorTest.cpp
+    PieceTest.cpp
+    PlayerTest.cpp
+    PrecomputedMoveGenerationTest.cpp
+    SquareTest.cpp
 )
 
 target_link_libraries(sablefish-test PRIVATE sablefish Catch2::Catch2)
