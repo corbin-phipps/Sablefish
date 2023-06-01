@@ -4,6 +4,8 @@
 #include <sablefish/MoveGenerator.hpp>
 #include <sablefish/Utilities.hpp>
 
+#include "TestBoard.hpp"
+
 using namespace sablefish::board;
 using namespace sablefish::constants::bitfields;
 using namespace sablefish::moves;
@@ -58,14 +60,14 @@ TEST_CASE("Special moves can be identified correctly") {
 }
 
 TEST_CASE("MoveGenerator can generate basic pseudo-legal Pawn moves") {
-    std::shared_ptr<Board> board = std::make_shared<Board>();
+    std::shared_ptr<TestBoard> board = std::make_shared<TestBoard>();
     MoveGenerator moveGenerator = MoveGenerator(board);
 
     // TODO
 }
 
 TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {
-    std::shared_ptr<Board> board = std::make_shared<Board>();
+    std::shared_ptr<TestBoard> board = std::make_shared<TestBoard>();
     MoveGenerator moveGenerator = MoveGenerator(board);
 
     SECTION("Simple Rook quiet moves on empty Board") {
@@ -74,7 +76,7 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {
 
         // Add the Rook
         Square startingRookSquare = Square({ PieceType::Rook, PieceColor::White }, BoardSquare::A1);
-        board->Update({}, startingRookSquare);
+        board->UpdateSquare(startingRookSquare);
 
         // Generate actual pseudo-legal moves
         std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::White);

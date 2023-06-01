@@ -5,12 +5,14 @@
 #include <sablefish/Square.hpp>
 #include <sablefish/Utilities.hpp>
 
+#include "TestBoard.hpp"
+
 using namespace sablefish::board;
 using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
 TEST_CASE("Board can be constructed and initialized") {
-    Board board = Board();
+    TestBoard board = TestBoard();
     
     SECTION("Initial Bitboard representation is correct") {
         for (const auto& [pieceType, pieceColor] : PIECE_DATA) {
@@ -33,7 +35,7 @@ TEST_CASE("Board can be constructed and initialized") {
 }
 
 TEST_CASE("Board representations can be viewed and modified") {
-    Board board = Board();
+    TestBoard board = TestBoard();
     SECTION("Get Bitboard") {
         Bitboard startingWhitePawnBitboard = board.GetBitboard({ PieceType::Pawn, PieceColor::White });
         REQUIRE(startingWhitePawnBitboard == WHITE_PAWNS_START);
@@ -66,19 +68,5 @@ TEST_CASE("Board representations can be viewed and modified") {
         // Clear Board
         board.Clear();
         REQUIRE(board.IsEmpty());
-    }
-
-    SECTION("Update Board") {
-        auto whitePawn = Piece(PieceType::Pawn, PieceColor::White);
-        auto startingPawnSquare = Square(whitePawn, BoardSquare::A2);
-        auto targetPawnSquare = Square(whitePawn, BoardSquare::A3);
-        board.Update(startingPawnSquare, targetPawnSquare);
-
-        // Check Bitboard representation
-        REQUIRE(board.GetBitboard(whitePawn) == 0b00000000'00000000'00000000'00000000'00000000'00000001'11111110'00000000);
-
-        // Check Square representation
-        REQUIRE(board.GetSquare(BoardSquare::A2) == Square({ PieceType::Empty, PieceColor::Empty }, BoardSquare::A2));
-        REQUIRE(board.GetSquare(BoardSquare::A3) == targetPawnSquare);
     }
 }
