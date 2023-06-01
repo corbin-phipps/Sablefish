@@ -202,7 +202,7 @@ GeneratePawnMoves()
         size_t pawnFile = square % NUM_FILES;
 
         if (pieceColor == sablefish::board::PieceColor::White) {
-            if (pawnRank < NUM_RANKS - 1) {
+            if (pawnRank < RANK_8) {
                 // Quiet move
                 BoardSquare targetSquare = static_cast<BoardSquare>(((pawnRank + 1) * NUM_RANKS) + pawnFile);
                 SetBit(pawnBitboard, targetSquare);
@@ -214,7 +214,7 @@ GeneratePawnMoves()
                 }
             }
         } else if (pieceColor == sablefish::board::PieceColor::Black) {
-            if (pawnRank > 0) {
+            if (pawnRank > RANK_1) {
                 // Quiet move
                 BoardSquare targetSquare = static_cast<BoardSquare>(((pawnRank - 1) * NUM_RANKS) + pawnFile);
                 SetBit(pawnBitboard, targetSquare);
