@@ -2,6 +2,7 @@
 #define BOARD_HPP
 
 #include <array>
+#include <string>
 
 #include "Bitboard.hpp"
 #include "Constants.hpp"
@@ -24,6 +25,8 @@ public:
 
     const Bitboard GetBitboard(const Piece& piece) const;
     const Square& GetSquare(const BoardSquare boardSquare) const;
+
+    const std::string ToString();
 
 private:
     void Initialize();

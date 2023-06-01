@@ -16,7 +16,6 @@ const Bitboard ConvertBoardSquaresToBitboard(const std::vector<BoardSquare>& boa
 const Bitboard ConvertPieceDataToStartingBitboard(const PieceType pieceType, const PieceColor pieceColor);
 Square ConvertBoardSquareToStartingSquare(const BoardSquare boardSquare);
 
-std::string ToBoard(const Bitboard bitboard);
 std::string ToString(const Bitboard bitboard);
 } // namespace sablefish::board
 

@@ -1,6 +1,8 @@
 #include <sablefish/Board.hpp>
 #include <sablefish/Utilities.hpp>
 
+#include <iostream>
+
 using namespace sablefish::board;
 using namespace sablefish::constants;
 
@@ -28,6 +30,78 @@ const Square&
 Board::GetSquare(const BoardSquare boardSquare) const
 {
     return m_squares.at(static_cast<size_t>(boardSquare));
+}
+
+// Displays the current Board
+const std::string
+Board::ToString()
+{
+    std::string boardString;
+    for (int rank = NUM_RANKS - 1; rank >= 0; rank--) {
+        for (int file = 0; file < NUM_FILES; file++) {
+            Square square = m_squares.at(rank * 8 + file);
+            char squareChar = '-';
+            switch (square.GetPiece().GetPieceColor()) {
+                case PieceColor::White:
+                    switch (square.GetPiece().GetPieceType()) {
+                        case PieceType::Pawn:
+                            squareChar = 'P';
+                            break;
+                        case PieceType::Rook:
+                            squareChar = 'R';
+                            break;
+                        case PieceType::Knight:
+                            squareChar = 'N';
+                            break;
+                        case PieceType::Bishop:
+                            squareChar = 'B';
+                            break;
+                        case PieceType::Queen:
+                            squareChar = 'Q';
+                            break;
+                        case PieceType::King:
+                            squareChar = 'K';
+                            break;
+                        default:
+                            squareChar = '-';
+                            break;
+                    }
+                    break;
+                case PieceColor::Black:
+                    switch (square.GetPiece().GetPieceType()) {
+                        case PieceType::Pawn:
+                            squareChar = 'p';
+                            break;
+                        case PieceType::Rook:
+                            squareChar = 'r';
+                            break;
+                        case PieceType::Knight:
+                            squareChar = 'n';
+                            break;
+                        case PieceType::Bishop:
+                            squareChar = 'b';
+                            break;
+                        case PieceType::Queen:
+                            squareChar = 'q';
+                            break;
+                        case PieceType::King:
+                            squareChar = 'k';
+                            break;
+                        default:
+                            squareChar = '-';
+                            break;
+                    }
+                    break;
+                default:
+                    squareChar = '-';
+                    break;
+            }
+            boardString += squareChar;
+        }
+        boardString += '\n';
+    }
+
+    return boardString;
 }
 
 /* private */

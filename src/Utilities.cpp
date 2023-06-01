@@ -68,7 +68,7 @@ ConvertBoardSquareToStartingSquare(const BoardSquare boardSquare)
 
 // Displays a Bitboard as a chess board
 std::string
-ToBoard(const Bitboard bitboard)
+ToString(const Bitboard bitboard)
 {
     std::bitset<NUM_SQUARES> bits(bitboard);
     std::string boardString;
@@ -83,18 +83,5 @@ ToBoard(const Bitboard bitboard)
     }
 
     return boardString;
-}
-
-// Displays a Bitboard as a bit string
-std::string
-ToString(const Bitboard bitboard)
-{
-    std::bitset<NUM_SQUARES> bits(bitboard);
-    std::string bitsString(bits.to_string());
-    for (size_t i = bitsString.length() - 8; i > 0; i -= 8) {
-        bitsString.insert(i, "'");
-    }
-
-    return "0b" + bitsString;
 }
 } // namespace sablefish::board
