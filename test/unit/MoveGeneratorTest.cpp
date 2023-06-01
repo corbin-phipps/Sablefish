@@ -114,7 +114,7 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {
         
         // Generate expected pseudo-legal moves
         std::vector<Move> expectedMoves{};
-        Bitboard startingBoardSquare = 1ULL << static_cast<Bitboard>(startingRookSquare.GetBoardSquare());
+        Bitboard startingBoardSquare = 1ULL << startingRookSquare.GetBoardSquare();
         auto expectedMovesBitboard = (bitfields::RANK_1 | bitfields::FILE_A) & ~(startingBoardSquare);
         auto expectedMovesBoardSquares = ConvertBitboardToBoardSquares(expectedMovesBitboard);
         for (const auto& targetBoardSquare : expectedMovesBoardSquares) {

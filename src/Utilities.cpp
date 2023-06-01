@@ -30,8 +30,7 @@ ConvertBoardSquaresToBitboard(const std::vector<BoardSquare>& boardSquares)
 {
     std::bitset<NUM_SQUARES> bits;
     for (const auto& boardSquare : boardSquares) {
-        size_t boardSquareIndex = static_cast<size_t>(boardSquare);
-        bits.set(boardSquareIndex);
+        bits.set(static_cast<size_t>(boardSquare));
     }
 
     return bits.to_ullong();

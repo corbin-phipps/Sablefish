@@ -13,13 +13,13 @@ CreateMove(BoardSquare startingSquare, BoardSquare targetSquare, MoveType moveTy
     Move move = 0U;
     
     // Set the starting square
-    move |= (static_cast<uint16_t>(startingSquare) << 10) & STARTING_SQUARE_MASK;
+    move |= (startingSquare << 10) & STARTING_SQUARE_MASK;
 
     // Set the target square
-    move |= (static_cast<uint16_t>(targetSquare) << 4) & TARGET_SQUARE_MASK;
+    move |= (targetSquare << 4) & TARGET_SQUARE_MASK;
 
     // Set the move type
-    move |= static_cast<uint16_t>(moveType) & MOVE_TYPE_MASK;
+    move |= static_cast<size_t>(moveType) & MOVE_TYPE_MASK;
 
     return move;
 }
@@ -28,7 +28,7 @@ CreateMove(BoardSquare startingSquare, BoardSquare targetSquare, MoveType moveTy
 bool
 IsPromotion(Piece piece, BoardSquare targetSquare)
 {
-    Bitboard square = 1ULL << static_cast<Bitboard>(targetSquare);
+    Bitboard square = 1ULL << targetSquare;
     if (piece.GetPieceType() == PieceType::Pawn) {
         if (piece.GetPieceColor() == PieceColor::White) {
             return square & bitfields::RANK_8;

@@ -1,6 +1,7 @@
 #ifndef SQUARE_HPP
 #define SQUARE_HPP
 
+#include "Bitboard.hpp"
 #include "Piece.hpp"
 
 namespace sablefish::board
@@ -15,6 +16,18 @@ enum class BoardSquare {
     A7, B7, C7, D7, E7, F7, G7, H7,
     A8, B8, C8, D8, E8, F8, G8, H8,
 };
+
+constexpr size_t operator-(const BoardSquare& lhs, const BoardSquare& rhs) {
+    return static_cast<size_t>(lhs) - static_cast<size_t>(rhs);
+}
+
+constexpr size_t operator<<(const BoardSquare& lhs, int shift) {
+    return static_cast<size_t>(lhs) << shift;
+}
+
+constexpr Bitboard operator<<(Bitboard lhs, const BoardSquare& rhs) {
+    return lhs << static_cast<Bitboard>(rhs);
+}
 
 // A Square represents an individual square in a chess board and is used in one of the Board representations.
 //

@@ -82,8 +82,8 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
                     if (IsPromotion({ pieceType, pieceColor }, targetSquare)) {
                         moveType = MoveType::QueenPromotion;                                            // Queen Promotion
                     } else if (pieceType == PieceType::Pawn) {
-                        if (pieceColor == PieceColor::White && (static_cast<size_t>(targetSquare) - static_cast<size_t>(pieceSquare) == NUM_FILES * 2) ||
-                            pieceColor == PieceColor::Black && (static_cast<size_t>(pieceSquare) - static_cast<size_t>(targetSquare) == NUM_FILES * 2)) {
+                        if (pieceColor == PieceColor::White && (targetSquare - pieceSquare == NUM_FILES * 2) ||
+                            pieceColor == PieceColor::Black && (pieceSquare - targetSquare == NUM_FILES * 2)) {
                             moveType = MoveType::DoublePawnPush;                                       // Double Pawn Push
                         }
                     }
