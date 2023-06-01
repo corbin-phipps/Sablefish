@@ -19,7 +19,7 @@ TEST_CASE("Move can be created properly") {
     }
 }
 
-TEST_CASE("Special moves can be identified correctly") {
+TEST_CASE("Promotions can be identified correctly") {
     SECTION("White pawn promotion") {
         Piece whitePawn = Piece(PieceType::Pawn, PieceColor::White);
         BoardSquare promotionSquare = BoardSquare::D8;
@@ -60,7 +60,41 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Pawn moves") {
     std::shared_ptr<TestBoard> board = std::make_shared<TestBoard>();
     MoveGenerator moveGenerator = MoveGenerator(board);
 
-    // TODO
+    SECTION("White Pawn non-capture moves on empty Board") {
+        board->Clear();
+
+        // Add the White Pawn
+        Square startingPawnSquare = Square({ PieceType::Pawn, PieceColor::White }, BoardSquare::A2);
+        board->UpdateSquare(startingPawnSquare);
+
+        // Generate actual pseudo-legal moves
+        std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::White);
+
+        // Generate expected pseudo-legal moves
+        std::vector<Move> expectedMoves{};
+        expectedMoves.push_back(CreateMove(startingPawnSquare.GetBoardSquare(), BoardSquare::A3, MoveType::Quiet));
+        expectedMoves.push_back(CreateMove(startingPawnSquare.GetBoardSquare(), BoardSquare::A4, MoveType::DoublePawnPush));
+
+        REQUIRE(actualMoves == expectedMoves);
+    }
+
+    SECTION("Black Pawn non-capture moves on empty Board") {
+        board->Clear();
+
+        // Add the Black Pawn
+        Square startingPawnSquare = Square({ PieceType::Pawn, PieceColor::Black }, BoardSquare::A7);
+        board->UpdateSquare(startingPawnSquare);
+
+        // Generate actual pseudo-legal moves
+        std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::Black);
+
+        // Generate expected pseudo-legal moves
+        std::vector<Move> expectedMoves{};
+        expectedMoves.push_back(CreateMove(startingPawnSquare.GetBoardSquare(), BoardSquare::A5, MoveType::DoublePawnPush));
+        expectedMoves.push_back(CreateMove(startingPawnSquare.GetBoardSquare(), BoardSquare::A6, MoveType::Quiet));
+
+        REQUIRE(actualMoves == expectedMoves);
+    }
 }
 
 TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {

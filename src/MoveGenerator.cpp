@@ -35,9 +35,18 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
             // Generate target Bitboard for the current piece
             switch (pieceType) {
                 case PieceType::Pawn:
-                    // TODO: Fix once implemented
-                    targets = 0ULL;
-                    break;
+                    // TODO: PAWN_MOVES_WHITE and PAWN_MOVES_BLACK are for non-capture moves.
+                    // Still need to incorporate captures (regular + en passant)
+                    if (pieceColor == PieceColor::White) {
+                        targets = PAWN_MOVES_WHITE.at(square);
+                        break;
+                    } else if (pieceColor == PieceColor::Black) {
+                        targets = PAWN_MOVES_BLACK.at(square);
+                        break;
+                    } else {
+                        // TODO: Log error
+                        break;
+                    }
                 case PieceType::Rook:
                     targets = ROOK_MOVES.at(square);
                     break;
@@ -62,7 +71,7 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
             // Construct Moves based on current piece's square and the potential target squares
             //
             // TODO: Promotion piece is Queen by default, but this should be configurable
-            // TODO: Some MoveTypes are missing: Double Pawn Push, King/Queen Castle, En Passant
+            // TODO: Some MoveTypes are missing: King/Queen Castle, Pawn Captures (Regular + En Passant)
             while (targets != EMPTY_BITBOARD) {
                 BoardSquare targetSquare = PopLsb(targets);
                 MoveType moveType = MoveType::Quiet;                                                    // Default MoveType is Quiet
@@ -72,6 +81,11 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
                 if (!attackedSquare.IsOccupied()) {
                     if (IsPromotion({ pieceType, pieceColor }, targetSquare)) {
                         moveType = MoveType::QueenPromotion;                                            // Queen Promotion
+                    } else if (pieceType == PieceType::Pawn) {
+                        if (pieceColor == PieceColor::White && (static_cast<size_t>(targetSquare) - static_cast<size_t>(pieceSquare) == NUM_FILES * 2) ||
+                            pieceColor == PieceColor::Black && (static_cast<size_t>(pieceSquare) - static_cast<size_t>(targetSquare) == NUM_FILES * 2)) {
+                            moveType = MoveType::DoublePawnPush;                                       // Double Pawn Push
+                        }
                     }
                 } else {
                     if (IsPromotion({ pieceType, pieceColor }, targetSquare)) {
