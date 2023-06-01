@@ -1,5 +1,4 @@
 #include <catch2/catch.hpp>
-#include <sablefish/Piece.hpp>
 #include <sablefish/Square.hpp>
 
 using namespace sablefish::board;

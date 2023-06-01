@@ -1,10 +1,7 @@
 #include <catch2/catch.hpp>
-#include <sablefish/Board.hpp>
-#include <sablefish/Constants.hpp>
 #include <sablefish/Utilities.hpp>
 
 using namespace sablefish::board;
-using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
 TEST_CASE("Bitboard can be converted to a list of BoardSquares") {

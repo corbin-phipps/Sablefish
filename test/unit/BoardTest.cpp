@@ -1,14 +1,9 @@
 #include <catch2/catch.hpp>
-#include <sablefish/Board.hpp>
-#include <sablefish/Constants.hpp>
-#include <sablefish/Piece.hpp>
-#include <sablefish/Square.hpp>
 #include <sablefish/Utilities.hpp>
 
 #include "TestBoard.hpp"
 
 using namespace sablefish::board;
-using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
 TEST_CASE("Board can be constructed and initialized") {
@@ -45,8 +40,11 @@ TEST_CASE("Board representations can be viewed and modified") {
         Square startingA1Square = board.GetSquare(BoardSquare::A1);
         REQUIRE(startingA1Square == Square({ PieceType::Rook, PieceColor::White }, BoardSquare::A1));
     }
+}
 
-    SECTION("Clear Board") {
+TEST_CASE("TestBoard-specific functionality works correctly") {
+    TestBoard board = TestBoard();
+    SECTION("Clear works correctly") {
         board.Clear();
 
         // Check Bitboards
@@ -59,6 +57,21 @@ TEST_CASE("Board representations can be viewed and modified") {
         for (size_t i = 0; i < NUM_SQUARES; i++) {
             REQUIRE(board.GetSquare(static_cast<BoardSquare>(i)) == emptySquare);
         }
+    }
+
+    SECTION("UpdateSquare works correctly") {
+        board.Clear();
+
+        Piece whiteRook = Piece(PieceType::Rook, PieceColor::White);
+        BoardSquare whiteRookBoardSquare = BoardSquare::A1;
+        Square startingRookSquare = Square(whiteRook, whiteRookBoardSquare);
+        board.UpdateSquare(startingRookSquare);
+
+        // Check Bitboard representation
+        REQUIRE(board.GetBitboard(whiteRook) == 0b00000000'00000000'00000000'00000000'00000000'00000000'00000000'00000001);
+
+        // Check Square representation
+        REQUIRE(board.GetSquare(whiteRookBoardSquare) == startingRookSquare);
     }
 
     SECTION("IsEmpty works correctly") {

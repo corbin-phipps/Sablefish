@@ -5,6 +5,8 @@
 
 namespace sablefish::board
 {
+// A TestBoard is a type of Board with extra functionality that is used for
+// testing standard Board functionality.
 class TestBoard : public Board
 {
 public:

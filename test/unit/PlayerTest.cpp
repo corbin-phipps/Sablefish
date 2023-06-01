@@ -1,5 +1,4 @@
 #include <catch2/catch.hpp>
-#include <sablefish/Constants.hpp>
 #include <sablefish/Player.hpp>
 
 using namespace sablefish;

@@ -1,7 +1,6 @@
 #include "TestBoard.hpp"
 
 using namespace sablefish::board;
-using namespace sablefish::constants;
 using namespace sablefish::constants::bitfields;
 
 // Clears the current TestBoard

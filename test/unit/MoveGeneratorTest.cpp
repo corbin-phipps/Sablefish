@@ -1,6 +1,4 @@
 #include <catch2/catch.hpp>
-#include <sablefish/Constants.hpp>
-#include <sablefish/Move.hpp>
 #include <sablefish/MoveGenerator.hpp>
 #include <sablefish/Utilities.hpp>
 
