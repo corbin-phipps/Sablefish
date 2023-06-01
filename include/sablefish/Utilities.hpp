@@ -1,6 +1,7 @@
 #ifndef UTILITIES_HPP
 #define UTILITIES_HPP
 
+#include <string>
 #include <vector>
 
 #include "Bitboard.hpp"
@@ -14,6 +15,9 @@ const std::vector<BoardSquare> ConvertBitboardToBoardSquares(const Bitboard bitb
 const Bitboard ConvertBoardSquaresToBitboard(const std::vector<BoardSquare>& boardSquares);
 const Bitboard ConvertPieceDataToStartingBitboard(const PieceType pieceType, const PieceColor pieceColor);
 Square ConvertBoardSquareToStartingSquare(const BoardSquare boardSquare);
+
+std::string ToBoard(const Bitboard bitboard);
+std::string ToString(const Bitboard bitboard);
 } // namespace sablefish::board
 
 #endif // UTILITIES_HPP

@@ -8,4 +8,5 @@ target_sources(sablefish-test
     PlayerTest.cpp
     PrecomputedMoveGenerationTest.cpp
     SquareTest.cpp
+    ToStringTest.cpp
 )

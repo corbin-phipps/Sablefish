@@ -65,4 +65,36 @@ ConvertBoardSquareToStartingSquare(const BoardSquare boardSquare)
     const auto& [pieceType, pieceColor] = STARTING_BOARD_SQUARE_DATA.at(static_cast<size_t>(boardSquare));
     return Square({ pieceType, pieceColor }, boardSquare);
 }
+
+// Displays a Bitboard as a chess board
+std::string
+ToBoard(const Bitboard bitboard)
+{
+    std::bitset<NUM_SQUARES> bits(bitboard);
+    std::string boardString;
+
+    for (int rank = NUM_RANKS - 1; rank >= 0; rank--) {
+        for (int file = 0; file < NUM_FILES; file++) {
+            auto square = rank * 8 + file;
+            char squareChar = bits[square] ? '1' : '0';
+            boardString += squareChar;
+        }
+        boardString += '\n';
+    }
+
+    return boardString;
+}
+
+// Displays a Bitboard as a bit string
+std::string
+ToString(const Bitboard bitboard)
+{
+    std::bitset<NUM_SQUARES> bits(bitboard);
+    std::string bitsString(bits.to_string());
+    for (size_t i = bitsString.length() - 8; i > 0; i -= 8) {
+        bitsString.insert(i, "'");
+    }
+
+    return "0b" + bitsString;
+}
 } // namespace sablefish::board

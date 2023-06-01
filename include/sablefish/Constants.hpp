@@ -30,6 +30,15 @@ constexpr size_t RANK_6 = 5;
 constexpr size_t RANK_7 = 6;
 constexpr size_t RANK_8 = 7;
 
+constexpr size_t FILE_A = 0;
+constexpr size_t FILE_B = 1;
+constexpr size_t FILE_C = 2;
+constexpr size_t FILE_D = 3;
+constexpr size_t FILE_E = 4;
+constexpr size_t FILE_F = 5;
+constexpr size_t FILE_G = 6;
+constexpr size_t FILE_H = 7;
+
 // Represents every possible combination of Piece.
 constexpr std::array<std::pair<PieceType, PieceColor>, NUM_PIECE_TYPES * NUM_COLORS> PIECE_DATA = {
     { { PieceType::Pawn, PieceColor::White },
