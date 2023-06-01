@@ -5,7 +5,6 @@
 #include "TestBoard.hpp"
 
 using namespace sablefish::board;
-using namespace sablefish::constants::bitfields;
 using namespace sablefish::moves;
 
 TEST_CASE("Move can be created properly") {
@@ -82,7 +81,7 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {
         // Generate expected pseudo-legal moves
         std::vector<Move> expectedMoves{};
         Bitboard startingBoardSquare = 1ULL << static_cast<Bitboard>(startingRookSquare.GetBoardSquare());
-        auto expectedMovesBitboard = (RANK_1 | FILE_A) & ~(startingBoardSquare);
+        auto expectedMovesBitboard = (bitfields::RANK_1 | bitfields::FILE_A) & ~(startingBoardSquare);
         auto expectedMovesBoardSquares = ConvertBitboardToBoardSquares(expectedMovesBitboard);
         for (const auto& targetBoardSquare : expectedMovesBoardSquares) {
             expectedMoves.push_back(CreateMove(startingRookSquare.GetBoardSquare(), targetBoardSquare, MoveType::Quiet));

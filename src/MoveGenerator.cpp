@@ -65,19 +65,19 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
             // TODO: Some MoveTypes are missing: Double Pawn Push, King/Queen Castle, En Passant
             while (targets != EMPTY_BITBOARD) {
                 BoardSquare targetSquare = PopLsb(targets);
-                MoveType moveType = MoveType::Quiet; // Default MoveType is Quiet
+                MoveType moveType = MoveType::Quiet;                                                    // Default MoveType is Quiet
                 const auto& attackedSquare = m_board->GetSquare(targetSquare);
 
                 // Construct Move based on its MoveType
                 if (!attackedSquare.IsOccupied()) {
                     if (IsPromotion({ pieceType, pieceColor }, targetSquare)) {
-                        moveType = MoveType::QueenPromotion;
+                        moveType = MoveType::QueenPromotion;                                            // Queen Promotion
                     }
                 } else {
                     if (IsPromotion({ pieceType, pieceColor }, targetSquare)) {
-                        moveType = MoveType::QueenPromotionCapture;
+                        moveType = MoveType::QueenPromotionCapture;                                     // Queen Promotion-Capture
                     } else if (attackedSquare.GetPiece().GetPieceColor() != pieceColor) {
-                        moveType = MoveType::Capture;
+                        moveType = MoveType::Capture;                                                   // Capture
                     }
                 }
 

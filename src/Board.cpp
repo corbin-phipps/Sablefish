@@ -3,7 +3,6 @@
 
 using namespace sablefish::board;
 using namespace sablefish::constants;
-using namespace sablefish::constants::bitfields;
 
 /* constructor */
 
@@ -64,7 +63,7 @@ Board::InitializeSquares()
     }
 
     // Set empty Squares
-    Bitboard startingEmptyRanks = RANK_3 | RANK_4 | RANK_5 | RANK_6;
+    Bitboard startingEmptyRanks = bitfields::RANK_3 | bitfields::RANK_4 | bitfields::RANK_5 | bitfields::RANK_6;
     std::vector<BoardSquare> boardSquares = ConvertBitboardToBoardSquares(startingEmptyRanks);
     for (const auto& boardSquare : boardSquares) {
         SetSquare(Square({ PieceType::Empty, PieceColor::Empty }, boardSquare));

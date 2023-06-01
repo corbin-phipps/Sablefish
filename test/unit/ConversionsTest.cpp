@@ -49,7 +49,7 @@ TEST_CASE("List of BoardSquares can be converted to a Bitboard") {
             boardSquares.push_back(static_cast<BoardSquare>(i));
         }
 
-        REQUIRE(ConvertBoardSquaresToBitboard(boardSquares) == RANK_1);
+        REQUIRE(ConvertBoardSquaresToBitboard(boardSquares) == bitfields::RANK_1);
     }
 
     SECTION("Single file") {
@@ -57,7 +57,7 @@ TEST_CASE("List of BoardSquares can be converted to a Bitboard") {
             boardSquares.push_back(static_cast<BoardSquare>(i * NUM_RANKS));
         }
 
-        REQUIRE(ConvertBoardSquaresToBitboard(boardSquares) == FILE_A);
+        REQUIRE(ConvertBoardSquaresToBitboard(boardSquares) == bitfields::FILE_A);
     }
 
     SECTION("Diagonal across entire board") {

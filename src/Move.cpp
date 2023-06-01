@@ -3,7 +3,6 @@
 #include <sablefish/Move.hpp>
 
 using namespace sablefish::board;
-using namespace sablefish::constants::bitfields;
 
 namespace sablefish::moves
 {
@@ -32,9 +31,9 @@ IsPromotion(Piece piece, BoardSquare targetSquare)
     Bitboard square = 1ULL << static_cast<Bitboard>(targetSquare);
     if (piece.GetPieceType() == PieceType::Pawn) {
         if (piece.GetPieceColor() == PieceColor::White) {
-            return square & RANK_8;
+            return square & bitfields::RANK_8;
         } else if (piece.GetPieceColor() == PieceColor::Black) {
-            return square & RANK_1;
+            return square & bitfields::RANK_1;
         } else { // PieceColor::Empty
             // TODO: Log error
             return false;

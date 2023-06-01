@@ -21,6 +21,15 @@ constexpr size_t NUM_SQUARES = NUM_RANKS * NUM_FILES;
 constexpr size_t NUM_PIECE_TYPES = 6;                  // Pawn, Rook, Knight, Bishop, Queen, King
 constexpr size_t NUM_COLORS = 2;                       // White and Black
 
+constexpr size_t RANK_1 = 0;
+constexpr size_t RANK_2 = 1;
+constexpr size_t RANK_3 = 2;
+constexpr size_t RANK_4 = 3;
+constexpr size_t RANK_5 = 4;
+constexpr size_t RANK_6 = 5;
+constexpr size_t RANK_7 = 6;
+constexpr size_t RANK_8 = 7;
+
 // Represents every possible combination of Piece.
 constexpr std::array<std::pair<PieceType, PieceColor>, NUM_PIECE_TYPES * NUM_COLORS> PIECE_DATA = {
     { { PieceType::Pawn, PieceColor::White },
@@ -182,6 +191,50 @@ using namespace sablefish::constants::functions;
 using sablefish::board::BoardSquare;
 
 // Definitions
+template <sablefish::board::PieceColor pieceColor>
+constexpr std::array<Bitboard, NUM_SQUARES>
+GeneratePawnMoves()
+{
+    std::array<Bitboard, NUM_SQUARES> pawnMoves{};
+    for (size_t square = 0; square < NUM_SQUARES; square++) {
+        Bitboard pawnBitboard = 0;
+        size_t pawnRank = square / NUM_RANKS;
+        size_t pawnFile = square % NUM_FILES;
+
+        if (pieceColor == sablefish::board::PieceColor::White) {
+            if (pawnRank < NUM_RANKS - 1) {
+                // Quiet move
+                BoardSquare targetSquare = static_cast<BoardSquare>(((pawnRank + 1) * NUM_RANKS) + pawnFile);
+                SetBit(pawnBitboard, targetSquare);
+
+                // Double Pawn Push
+                if (pawnRank == RANK_2) {
+                    targetSquare = static_cast<BoardSquare>((RANK_4 * NUM_RANKS) + pawnFile);
+                    SetBit(pawnBitboard, targetSquare);
+                }
+            }
+        } else if (pieceColor == sablefish::board::PieceColor::Black) {
+            if (pawnRank > 0) {
+                // Quiet move
+                BoardSquare targetSquare = static_cast<BoardSquare>(((pawnRank - 1) * NUM_RANKS) + pawnFile);
+                SetBit(pawnBitboard, targetSquare);
+
+                // Double Pawn Push
+                if (pawnRank == RANK_7) {
+                    targetSquare = static_cast<BoardSquare>((RANK_5 * NUM_RANKS) + pawnFile);
+                    SetBit(pawnBitboard, targetSquare);
+                }
+            }
+        } else {
+            // TODO: Log error
+        }
+
+        pawnMoves.at(square) = pawnBitboard;
+    }
+
+    return pawnMoves;
+}
+
 constexpr std::array<Bitboard, NUM_SQUARES>
 GenerateRookMoves()
 {
@@ -354,6 +407,7 @@ GenerateQueenMoves()
     return queenMoves;
 }
 
+// TODO: Need to add castling moves
 constexpr std::array<Bitboard, NUM_SQUARES>
 GenerateKingMoves()
 {
@@ -391,6 +445,8 @@ GenerateKingMoves()
 }
 
 // Declarations
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> PAWN_MOVES_WHITE = GeneratePawnMoves<sablefish::board::PieceColor::White>();
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> PAWN_MOVES_BLACK = GeneratePawnMoves<sablefish::board::PieceColor::Black>();
 constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> ROOK_MOVES = GenerateRookMoves();
 constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> KNIGHT_MOVES = GenerateKnightMoves();
 constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> BISHOP_MOVES = GenerateBishopMoves();
