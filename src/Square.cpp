@@ -45,12 +45,12 @@ Square::IsOccupied() const
 
 // Returns a string representation of a Square.
 const std::string
-Square::ToString()
+Square::ToString() const
 {
     std::string squareString = "Square:\n";
-    squareString += "\tBoardSquare: " + sablefish::board::ToString(m_boardSquare) + "\n";
-    squareString += "\t" + m_piece.ToString() + "\n";
-    squareString += "\tOccupied: " + std::to_string(m_isOccupied) + "\n";
+    squareString += "BoardSquare: " + sablefish::board::ToString(m_boardSquare) + "\n";
+    squareString += m_piece.ToString() + "\n";
+    squareString += "Occupied: " + std::to_string(m_isOccupied);
 
     return squareString;
 }

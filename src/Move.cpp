@@ -77,7 +77,7 @@ ToString(const Move move)
 
     std::string moveString = "Starting Square: " + ToString(static_cast<BoardSquare>(startingSquare)) + "\n";
     moveString += "Target Square: " + ToString(static_cast<BoardSquare>(targetSquare)) + "\n";
-    moveString += "Move Type: " + ToString(static_cast<MoveType>(moveType)) + "\n";
+    moveString += "Move Type: " + ToString(static_cast<MoveType>(moveType));
 
     return moveString;
 }

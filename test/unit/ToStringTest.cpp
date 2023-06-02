@@ -57,7 +57,7 @@ TEST_CASE("Move can be printed") {
     Move move = CreateMove(startingBoardSquare, targetBoardSquare, moveType);
     std::string moveString = "Starting Square: A2\n"
                              "Target Square: A3\n"
-                             "Move Type: Quiet\n";
+                             "Move Type: Quiet";
 
     REQUIRE(ToString(move) == moveString);
 }
@@ -65,7 +65,7 @@ TEST_CASE("Move can be printed") {
 TEST_CASE("Piece can be printed") {
     Piece piece = Piece(PieceType::Pawn, PieceColor::White);
     std::string pieceString = "Piece Type: Pawn\n"
-                              "Piece Color: White\n";
+                              "Piece Color: White";
 
     REQUIRE(piece.ToString() == pieceString);
 }
@@ -73,10 +73,10 @@ TEST_CASE("Piece can be printed") {
 TEST_CASE("Square can be printe") {
     Square square = Square({ PieceType::Pawn, PieceColor::White }, BoardSquare::A2);
     std::string squareString = "Square:\n"
-                               "\tBoardSquare: A2\n"
-                               "\tPiece Type: Pawn\n"
-                               "Piece Color: White\n\n"
-                               "\tOccupied: 1\n";
+                               "BoardSquare: A2\n"
+                               "Piece Type: Pawn\n"
+                               "Piece Color: White\n"
+                               "Occupied: 1";
 
     REQUIRE(square.ToString() == squareString);
 }

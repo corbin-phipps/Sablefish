@@ -38,7 +38,7 @@ Piece::GetPieceColor() const
 
 // Returns the string representation of a Piece.
 const std::string
-Piece::ToString()
+Piece::ToString() const
 {
     std::string pieceTypeString;
     switch (m_pieceType) {
@@ -78,7 +78,7 @@ Piece::ToString()
             break;
     }
 
-    return "Piece Type: " + pieceTypeString + "\nPiece Color: " + pieceColorString + "\n";
+    return "Piece Type: " + pieceTypeString + "\nPiece Color: " + pieceColorString;
 }
 
 bool

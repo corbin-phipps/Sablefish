@@ -34,7 +34,7 @@ public:
     const PieceType GetPieceType() const;
     const PieceColor GetPieceColor() const;
 
-    const std::string ToString();
+    const std::string ToString() const;
 
     bool operator==(const Piece& other) const;
 
