@@ -1,6 +1,8 @@
 #ifndef PIECE_HPP
 #define PIECE_HPP
 
+#include <string>
+
 namespace sablefish::board
 {
 enum class PieceType {
@@ -31,6 +33,8 @@ public:
 
     const PieceType GetPieceType() const;
     const PieceColor GetPieceColor() const;
+
+    const std::string ToString();
 
     bool operator==(const Piece& other) const;
 

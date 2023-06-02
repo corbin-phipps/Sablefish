@@ -42,6 +42,8 @@ public:
     const Piece& GetPiece() const;
     bool IsOccupied() const;
 
+    const std::string ToString();
+
     bool operator==(const Square& other) const;
 
 private:

@@ -36,6 +36,51 @@ Piece::GetPieceColor() const
     return m_pieceColor;
 }
 
+// Returns the string representation of a Piece.
+const std::string
+Piece::ToString()
+{
+    std::string pieceTypeString;
+    switch (m_pieceType) {
+        case PieceType::Pawn:
+            pieceTypeString = "Pawn";
+            break;
+        case PieceType::Rook:
+            pieceTypeString = "Rook";
+            break;
+        case PieceType::Knight:
+            pieceTypeString = "Knight";
+            break;
+        case PieceType::Bishop:
+            pieceTypeString = "Bishop";
+            break;
+        case PieceType::Queen:
+            pieceTypeString = "Queen";
+            break;
+        case PieceType::King:
+            pieceTypeString = "King";
+            break;
+        default:
+            pieceTypeString = "Empty";
+            break;
+    }
+
+    std::string pieceColorString;
+    switch (m_pieceColor) {
+        case PieceColor::White:
+            pieceColorString = "White";
+            break;
+        case PieceColor::Black:
+            pieceColorString = "Black";
+            break;
+        default:
+            pieceColorString = "Empty";
+            break;
+    }
+
+    return "Piece Type: " + pieceTypeString + "\nPiece Color: " + pieceColorString + "\n";
+}
+
 bool
 Piece::operator==(const Piece& other) const {
     return m_pieceType == other.m_pieceType && m_pieceColor == other.m_pieceColor;

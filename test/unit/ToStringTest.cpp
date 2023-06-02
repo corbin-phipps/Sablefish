@@ -61,3 +61,22 @@ TEST_CASE("Move can be printed") {
 
     REQUIRE(ToString(move) == moveString);
 }
+
+TEST_CASE("Piece can be printed") {
+    Piece piece = Piece(PieceType::Pawn, PieceColor::White);
+    std::string pieceString = "Piece Type: Pawn\n"
+                              "Piece Color: White\n";
+
+    REQUIRE(piece.ToString() == pieceString);
+}
+
+TEST_CASE("Square can be printe") {
+    Square square = Square({ PieceType::Pawn, PieceColor::White }, BoardSquare::A2);
+    std::string squareString = "Square:\n"
+                               "\tBoardSquare: A2\n"
+                               "\tPiece Type: Pawn\n"
+                               "Piece Color: White\n\n"
+                               "\tOccupied: 1\n";
+
+    REQUIRE(square.ToString() == squareString);
+}

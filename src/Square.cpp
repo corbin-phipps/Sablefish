@@ -1,4 +1,5 @@
 #include <sablefish/Square.hpp>
+#include <sablefish/Utilities.hpp>
 
 using namespace sablefish::board;
 
@@ -40,6 +41,18 @@ bool
 Square::IsOccupied() const
 {
     return m_isOccupied;
+}
+
+// Returns a string representation of a Square.
+const std::string
+Square::ToString()
+{
+    std::string squareString = "Square:\n";
+    squareString += "\tBoardSquare: " + sablefish::board::ToString(m_boardSquare) + "\n";
+    squareString += "\t" + m_piece.ToString() + "\n";
+    squareString += "\tOccupied: " + std::to_string(m_isOccupied) + "\n";
+
+    return squareString;
 }
 
 bool
