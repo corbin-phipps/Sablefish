@@ -2,6 +2,7 @@
 #define MOVE_HPP
 
 #include <cstdint>
+#include <string>
 
 #include "Square.hpp"
 
@@ -58,6 +59,9 @@ constexpr uint16_t MOVE_TYPE_MASK = 0b00000000'00001111;
 Move CreateMove(sablefish::board::BoardSquare startingSquare, sablefish::board::BoardSquare targetSquare, MoveType moveType);
 
 bool IsPromotion(sablefish::board::Piece piece, sablefish::board::BoardSquare targetSquare);
+
+std::string ToString(const MoveType moveType);
+std::string ToString(const Move move);
 } // namespace sablefish::moves
 
 #endif // MOVE_HPP

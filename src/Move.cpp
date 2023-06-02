@@ -1,6 +1,7 @@
 #include <sablefish/Bitboard.hpp>
 #include <sablefish/Constants.hpp>
 #include <sablefish/Move.hpp>
+#include <sablefish/Utilities.hpp>
 
 using namespace sablefish::board;
 
@@ -24,7 +25,7 @@ CreateMove(BoardSquare startingSquare, BoardSquare targetSquare, MoveType moveTy
     return move;
 }
 
-// Returns a boolean representing whether or not a Move is a promotion based on the given Piece and target BoardSquare
+// Returns a boolean representing whether or not a Move is a promotion based on the given Piece and target BoardSquare.
 bool
 IsPromotion(Piece piece, BoardSquare targetSquare)
 {
@@ -41,5 +42,43 @@ IsPromotion(Piece piece, BoardSquare targetSquare)
     } else {
         return false;
     }
+}
+
+// Returns a string representation of the given MoveType.
+std::string
+ToString(const MoveType moveType)
+{
+    switch (moveType) {
+        case MoveType::Quiet: return "Quiet";
+        case MoveType::KingCastle: return "KingCastle";
+        case MoveType::QueenCastle: return "QueenCastle";
+        case MoveType::DoublePawnPush: return "DoublePawnPush";
+        case MoveType::Capture: return "Capture";
+        case MoveType::EnPassant: return "EnPassant";
+        case MoveType::KnightPromotion: return "KnightPromotion";
+        case MoveType::BishopPromotion: return "BishopPromotion";
+        case MoveType::RookPromotion: return "RookPromotion";
+        case MoveType::QueenPromotion: return "QueenPromotion";
+        case MoveType::KnightPromotionCapture: return "KnightPromotionCapture";
+        case MoveType::BishopPromotionCapture: return "BishopPromotionCapture";
+        case MoveType::RookPromotionCapture: return "RookPromotionCapture";
+        case MoveType::QueenPromotionCapture: return "QueenPromotionCapture";
+        default: return "Unknown MoveType";
+    }
+}
+
+// Returns a string representation of the given Move.
+std::string
+ToString(const Move move)
+{
+    auto startingSquare = (move & STARTING_SQUARE_MASK) >> 10;
+    auto targetSquare = (move & TARGET_SQUARE_MASK) >> 4;
+    auto moveType = move & MOVE_TYPE_MASK;
+
+    std::string moveString = "Starting Square: " + ToString(static_cast<BoardSquare>(startingSquare)) + "\n";
+    moveString += "Target Square: " + ToString(static_cast<BoardSquare>(targetSquare)) + "\n";
+    moveString += "Move Type: " + ToString(static_cast<MoveType>(moveType)) + "\n";
+
+    return moveString;
 }
 } // namespace sablefish::moves

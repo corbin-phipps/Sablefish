@@ -17,6 +17,7 @@ const Bitboard ConvertPieceDataToStartingBitboard(const PieceType pieceType, con
 Square ConvertBoardSquareToStartingSquare(const BoardSquare boardSquare);
 
 std::string ToString(const Bitboard bitboard);
+std::string ToString(const BoardSquare boardSquare);
 } // namespace sablefish::board
 
 #endif // UTILITIES_HPP
