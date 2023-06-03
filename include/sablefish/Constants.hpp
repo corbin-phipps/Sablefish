@@ -312,11 +312,11 @@ GenerateBishopMoves()
     std::array<Bitboard, NUM_SQUARES> bishopMoves{};
     for (size_t square = 0; square < NUM_SQUARES; square++) {
         Bitboard bishopBitboard = 0;
-        int bishopRank = square / NUM_RANKS;
-        int bishopFile = square % NUM_FILES;
+        size_t bishopRank = square / NUM_RANKS;
+        size_t bishopFile = square % NUM_FILES;
 
         // Positive rank; positive file
-        int offset = 1;
+        size_t offset = 1;
         while (bishopRank + offset < NUM_RANKS && bishopFile + offset < NUM_FILES) {
             BoardSquare targetSquare = static_cast<BoardSquare>(((bishopRank + offset) * NUM_RANKS) + (bishopFile + offset));
             SetBit(bishopBitboard, targetSquare);
@@ -325,7 +325,7 @@ GenerateBishopMoves()
         offset = 1;
 
         // Positive rank; negative file
-        while (bishopRank + offset < NUM_RANKS && bishopFile - offset >= 0) {
+        while (bishopRank + offset < NUM_RANKS && bishopFile >= offset) {
             BoardSquare targetSquare = static_cast<BoardSquare>(((bishopRank + offset) * NUM_RANKS) + (bishopFile - offset));
             SetBit(bishopBitboard, targetSquare);
             offset++;
@@ -333,7 +333,7 @@ GenerateBishopMoves()
         offset = 1;
 
         // Negative rank; positive file
-        while (bishopRank - offset >= 0 && bishopFile + offset < NUM_FILES) {
+        while (bishopRank >= offset && bishopFile + offset < NUM_FILES) {
             BoardSquare targetSquare = static_cast<BoardSquare>(((bishopRank - offset) * NUM_RANKS) + (bishopFile + offset));
             SetBit(bishopBitboard, targetSquare);
             offset++;
@@ -341,7 +341,7 @@ GenerateBishopMoves()
         offset = 1;
 
         // Negative rank; negative file
-        while (bishopRank - offset >= 0 && bishopFile - offset >= 0) {
+        while (bishopRank >= offset && bishopFile >= offset) {
             BoardSquare targetSquare = static_cast<BoardSquare>(((bishopRank - offset) * NUM_RANKS) + (bishopFile - offset));
             SetBit(bishopBitboard, targetSquare);
             offset++;
@@ -359,8 +359,8 @@ GenerateQueenMoves()
     std::array<Bitboard, NUM_SQUARES> queenMoves{};
     for (size_t square = 0; square < NUM_SQUARES; square++) {
         Bitboard queenBitboard = 0;
-        int queenRank = square / NUM_RANKS;
-        int queenFile = square % NUM_FILES;
+        size_t queenRank = square / NUM_RANKS;
+        size_t queenFile = square % NUM_FILES;
 
         // Add rook-style moves
         for (size_t rank = 0; rank < NUM_RANKS; rank++) {
@@ -379,7 +379,7 @@ GenerateQueenMoves()
 
         // Add bishop-style moves
         // Positive rank; positive file
-        int offset = 1;
+        size_t offset = 1;
         while (queenRank + offset < NUM_RANKS && queenFile + offset < NUM_FILES) {
             BoardSquare targetSquare = static_cast<BoardSquare>(((queenRank + offset) * NUM_RANKS) + (queenFile + offset));
             SetBit(queenBitboard, targetSquare);
@@ -388,7 +388,7 @@ GenerateQueenMoves()
         offset = 1;
 
         // Positive rank; negative file
-        while (queenRank + offset < NUM_RANKS && queenFile - offset >= 0) {
+        while (queenRank + offset < NUM_RANKS && queenFile >= offset) {
             BoardSquare targetSquare = static_cast<BoardSquare>(((queenRank + offset) * NUM_RANKS) + (queenFile - offset));
             SetBit(queenBitboard, targetSquare);
             offset++;
@@ -396,7 +396,7 @@ GenerateQueenMoves()
         offset = 1;
 
         // Negative rank; positive file
-        while (queenRank - offset >= 0 && queenFile + offset < NUM_FILES) {
+        while (queenRank >= offset && queenFile + offset < NUM_FILES) {
             BoardSquare targetSquare = static_cast<BoardSquare>(((queenRank - offset) * NUM_RANKS) + (queenFile + offset));
             SetBit(queenBitboard, targetSquare);
             offset++;
@@ -404,7 +404,7 @@ GenerateQueenMoves()
         offset = 1;
 
         // Negative rank; negative file
-        while (queenRank - offset >= 0 && queenFile - offset >= 0) {
+        while (queenRank >= offset && queenFile >= offset) {
             BoardSquare targetSquare = static_cast<BoardSquare>(((queenRank - offset) * NUM_RANKS) + (queenFile - offset));
             SetBit(queenBitboard, targetSquare);
             offset++;
