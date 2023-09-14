@@ -39,9 +39,9 @@ IsPromotion(Piece piece, BoardSquare targetSquare)
             // TODO: Log error
             return false;
         }
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 // Returns a string representation of the given MoveType.
