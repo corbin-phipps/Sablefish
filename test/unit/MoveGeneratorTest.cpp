@@ -176,3 +176,58 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Bishop moves") {
         REQUIRE(actualMoves == expectedMoves);
     }
 }
+
+TEST_CASE("MoveGenerator can generate basic pseudo-legal Queen moves") {
+    std::shared_ptr<TestBoard> board = std::make_shared<TestBoard>();
+    MoveGenerator moveGenerator = MoveGenerator(board);
+
+    SECTION("Simple Queen quiet moves on empty board") {
+        // Clear the default starting Board
+        board->Clear();
+
+        // Add the Queen
+        Square startingQueenSquare = Square({ PieceType::Queen, PieceColor::White }, BoardSquare::D1);
+        board->UpdateSquare(startingQueenSquare);
+
+        // Generate actual pseudo-legal moves
+        std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::White);
+
+        // Generate expected pseudo-legal moves
+        std::vector<Move> expectedMoves{};
+        Bitboard startingBoardSquare = 1ULL << startingQueenSquare.GetBoardSquare();
+        auto expectedMovesBitboard = (bitfields::RANK_1 | bitfields::FILE_D) & ~(startingBoardSquare);
+        expectedMovesBitboard |= 0b00000000'00000000'00000000'10000000'01000001'00100010'00010100'00000000;
+        auto expectedMovesBoardSquares = ConvertBitboardToBoardSquares(expectedMovesBitboard);
+        for (const auto& targetBoardSquare : expectedMovesBoardSquares) {
+            expectedMoves.push_back(CreateMove(startingQueenSquare.GetBoardSquare(), targetBoardSquare, MoveType::Quiet));
+        }
+
+        REQUIRE(actualMoves == expectedMoves);
+    }
+}
+
+TEST_CASE("MoveGenerator can generate basic pseudo-legal King moves") {
+    std::shared_ptr<TestBoard> board = std::make_shared<TestBoard>();
+    MoveGenerator moveGenerator = MoveGenerator(board);
+
+    SECTION("Simple King quiet moves on empty board") {
+        // Clear the default starting Board
+        board->Clear();
+
+        // Add the King
+        Square startingKingSquare = Square({ PieceType::King, PieceColor::White }, BoardSquare::E1);
+        board->UpdateSquare(startingKingSquare);
+
+        // Generate actual pseudo-legal moves
+        std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::White);
+
+        // Generate expected pseudo-legal moves
+        std::vector<Move> expectedMoves{};
+        std::vector<BoardSquare> expectedMovesBoardSquares{ BoardSquare::D1, BoardSquare::F1, BoardSquare::D2, BoardSquare::E2, BoardSquare::F2 };
+        for (const auto& targetBoardSquare : expectedMovesBoardSquares) {
+            expectedMoves.push_back(CreateMove(startingKingSquare.GetBoardSquare(), targetBoardSquare, MoveType::Quiet));
+        }
+
+        REQUIRE(actualMoves == expectedMoves);
+    }
+}

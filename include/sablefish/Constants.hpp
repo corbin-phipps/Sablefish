@@ -433,16 +433,36 @@ GenerateKingMoves()
         size_t nextKingRank = (kingRank < NUM_RANKS - 1) ? (kingRank + 1) : kingRank;
         size_t nextKingFile = (kingFile < NUM_FILES - 1) ? (kingFile + 1) : kingFile;
 
+        // Up
         BoardSquare targetSquare = static_cast<BoardSquare>((nextKingRank * NUM_RANKS) + kingFile);
         SetBit(kingBitboard, targetSquare);
-        
+
+        // Down
         targetSquare = static_cast<BoardSquare>((previousKingRank * NUM_RANKS) + kingFile);
         SetBit(kingBitboard, targetSquare);
 
+        // Right
         targetSquare = static_cast<BoardSquare>((kingRank * NUM_RANKS) + nextKingFile);
         SetBit(kingBitboard, targetSquare);
 
+        // Left
         targetSquare = static_cast<BoardSquare>((kingRank * NUM_RANKS) + previousKingFile);
+        SetBit(kingBitboard, targetSquare);
+
+        // Up-Right
+        targetSquare = static_cast<BoardSquare>((nextKingRank * NUM_RANKS) + nextKingFile);
+        SetBit(kingBitboard, targetSquare);
+
+        // Up-Left
+        targetSquare = static_cast<BoardSquare>((nextKingRank * NUM_RANKS) + previousKingFile);
+        SetBit(kingBitboard, targetSquare);
+
+        // Down-Right
+        targetSquare = static_cast<BoardSquare>((previousKingRank * NUM_RANKS) + nextKingFile);
+        SetBit(kingBitboard, targetSquare);
+
+        // Down-Left
+        targetSquare = static_cast<BoardSquare>((previousKingRank * NUM_RANKS) + previousKingFile);
         SetBit(kingBitboard, targetSquare);
 
         ClearBit(kingBitboard, static_cast<BoardSquare>(square));

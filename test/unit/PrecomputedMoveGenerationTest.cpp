@@ -88,13 +88,13 @@ TEST_CASE("Pre-computed queen moves are generated correctly") {
 TEST_CASE("Pre-computed king moves are generated correctly") {
     SECTION("King in corner") {
         Bitboard generatedKingMoves = KING_MOVES.at(static_cast<size_t>(BoardSquare::A1));
-        Bitboard expectedKingMoves = 0b00000000'00000000'00000000'00000000'00000000'00000000'00000001'00000010;
+        Bitboard expectedKingMoves = 0b00000000'00000000'00000000'00000000'00000000'00000000'00000011'00000010;
         REQUIRE(generatedKingMoves == expectedKingMoves);
     }
 
     SECTION("King in middle") {
         Bitboard generatedKingMoves = KING_MOVES.at(static_cast<size_t>(BoardSquare::E5));
-        Bitboard expectedKingMoves = 0b00000000'00000000'00010000'00101000'00010000'00000000'00000000'00000000;
+        Bitboard expectedKingMoves = 0b00000000'00000000'00111000'00101000'00111000'00000000'00000000'00000000;
         REQUIRE(generatedKingMoves == expectedKingMoves);
     }
 }
