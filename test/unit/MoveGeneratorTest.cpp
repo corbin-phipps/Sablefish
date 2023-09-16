@@ -124,3 +124,29 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Rook moves") {
         REQUIRE(actualMoves == expectedMoves);
     }
 }
+
+TEST_CASE("MoveGenerator can generate basic pseudo-legal Knight moves") {
+    std::shared_ptr<TestBoard> board = std::make_shared<TestBoard>();
+    MoveGenerator moveGenerator = MoveGenerator(board);
+
+    SECTION("Simple Knight quiet moves on empty board") {
+        // Clear the default starting Board
+        board->Clear();
+
+        // Add the Knight
+        Square startingKnightSquare = Square({ PieceType::Knight, PieceColor::White }, BoardSquare::B1);
+        board->UpdateSquare(startingKnightSquare);
+
+        // Generate actual pseudo-legal moves
+        std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::White);
+
+        // Generate expected pseudo-legal moves
+        std::vector<Move> expectedMoves{};
+        std::vector<BoardSquare> expectedMovesBoardSquares{ BoardSquare::D2, BoardSquare::A3, BoardSquare::C3 };
+        for (const auto& targetBoardSquare : expectedMovesBoardSquares) {
+            expectedMoves.push_back(CreateMove(startingKnightSquare.GetBoardSquare(), targetBoardSquare, MoveType::Quiet));
+        }
+
+        REQUIRE(actualMoves == expectedMoves);
+    }
+}
