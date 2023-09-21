@@ -5,26 +5,52 @@ using namespace sablefish::board;
 
 TEST_CASE("Pre-computed non-capture pawn moves are generated correctly") {
     SECTION("White Pawn in starting position") {
-        Bitboard generatedPawnMoves = PAWN_MOVES_WHITE.at(static_cast<size_t>(BoardSquare::A2));
+        Bitboard generatedPawnMoves = PAWN_NON_CAPTURE_MOVES_WHITE.at(static_cast<size_t>(BoardSquare::A2));
         Bitboard expectedPawnMoves = 0b00000000'00000000'00000000'00000000'00000001'00000001'00000000'00000000;
         REQUIRE(generatedPawnMoves == expectedPawnMoves);
     }
 
     SECTION("White Pawn in middle") {
-        Bitboard generatedPawnMoves = PAWN_MOVES_WHITE.at(static_cast<size_t>(BoardSquare::E5));
+        Bitboard generatedPawnMoves = PAWN_NON_CAPTURE_MOVES_WHITE.at(static_cast<size_t>(BoardSquare::E5));
         Bitboard expectedPawnMoves = 0b00000000'00000000'00010000'00000000'00000000'00000000'00000000'00000000;
         REQUIRE(generatedPawnMoves == expectedPawnMoves);
     }
 
     SECTION("Black Pawn in starting position") {
-        Bitboard generatedPawnMoves = PAWN_MOVES_BLACK.at(static_cast<size_t>(BoardSquare::A7));
+        Bitboard generatedPawnMoves = PAWN_NON_CAPTURE_MOVES_BLACK.at(static_cast<size_t>(BoardSquare::A7));
         Bitboard expectedPawnMoves = 0b00000000'00000000'00000001'00000001'00000000'00000000'00000000'00000000;
         REQUIRE(generatedPawnMoves == expectedPawnMoves);
     }
 
     SECTION("Black Pawn in middle") {
-        Bitboard generatedPawnMoves = PAWN_MOVES_BLACK.at(static_cast<size_t>(BoardSquare::E5));
+        Bitboard generatedPawnMoves = PAWN_NON_CAPTURE_MOVES_BLACK.at(static_cast<size_t>(BoardSquare::E5));
         Bitboard expectedPawnMoves = 0b00000000'00000000'00000000'00000000'00010000'00000000'00000000'00000000;
+        REQUIRE(generatedPawnMoves == expectedPawnMoves);
+    }
+}
+
+TEST_CASE("Pre-computed regular capture pawn moves are generated correctly") {
+    SECTION("White Pawn in starting position") {
+        Bitboard generatedPawnMoves = PAWN_CAPTURE_MOVES_WHITE.at(static_cast<size_t>(BoardSquare::A2));
+        Bitboard expectedPawnMoves = 0b00000000'00000000'00000000'00000000'00000000'00000010'00000000'00000000;
+        REQUIRE(generatedPawnMoves == expectedPawnMoves);
+    }
+
+    SECTION("White Pawn in middle") {
+        Bitboard generatedPawnMoves = PAWN_CAPTURE_MOVES_WHITE.at(static_cast<size_t>(BoardSquare::E5));
+        Bitboard expectedPawnMoves = 0b00000000'00000000'00101000'00000000'00000000'00000000'00000000'00000000;
+        REQUIRE(generatedPawnMoves == expectedPawnMoves);
+    }
+
+    SECTION("Black Pawn in starting position") {
+        Bitboard generatedPawnMoves = PAWN_CAPTURE_MOVES_BLACK.at(static_cast<size_t>(BoardSquare::A7));
+        Bitboard expectedPawnMoves = 0b00000000'00000000'00000010'00000000'00000000'00000000'00000000'00000000;
+        REQUIRE(generatedPawnMoves == expectedPawnMoves);
+    }
+
+    SECTION("Black Pawn in middle") {
+        Bitboard generatedPawnMoves = PAWN_CAPTURE_MOVES_BLACK.at(static_cast<size_t>(BoardSquare::E5));
+        Bitboard expectedPawnMoves = 0b00000000'00000000'00000000'00000000'00101000'00000000'00000000'00000000;
         REQUIRE(generatedPawnMoves == expectedPawnMoves);
     }
 }

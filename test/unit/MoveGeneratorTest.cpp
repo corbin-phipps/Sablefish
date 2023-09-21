@@ -78,6 +78,30 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Pawn moves") {
         REQUIRE(actualMoves == expectedMoves);
     }
 
+    SECTION("White Pawn regular capture moves") {
+        board->Clear();
+
+        // Add the White Pawn
+        Square playerPawnSquare = Square({ PieceType::Pawn, PieceColor::White }, BoardSquare::E4);
+        board->UpdateSquare(playerPawnSquare);
+
+        // Add the opponent Black Pawns
+        Square opponentBlockingPawnSquare = Square({ PieceType::Pawn, PieceColor::Black }, BoardSquare::E5);
+        board->UpdateSquare(opponentBlockingPawnSquare);
+
+        Square opponentToCapturePawnSquare = Square({ PieceType::Pawn, PieceColor::Black }, BoardSquare::D5);
+        board->UpdateSquare(opponentToCapturePawnSquare);
+
+        // Generate actual pseudo-legal moves
+        std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::White);
+
+        // Generate expected pseudo-legal moves
+        std::vector<Move> expectedMoves{};
+        expectedMoves.push_back(CreateMove(playerPawnSquare.GetBoardSquare(), BoardSquare::D5, MoveType::Capture));
+
+        REQUIRE(actualMoves == expectedMoves);
+    }
+
     SECTION("Black Pawn non-capture moves on empty Board") {
         board->Clear();
 
@@ -92,6 +116,30 @@ TEST_CASE("MoveGenerator can generate basic pseudo-legal Pawn moves") {
         std::vector<Move> expectedMoves{};
         expectedMoves.push_back(CreateMove(startingPawnSquare.GetBoardSquare(), BoardSquare::A5, MoveType::DoublePawnPush));
         expectedMoves.push_back(CreateMove(startingPawnSquare.GetBoardSquare(), BoardSquare::A6, MoveType::Quiet));
+
+        REQUIRE(actualMoves == expectedMoves);
+    }
+
+    SECTION("Black Pawn regular capture moves") {
+        board->Clear();
+
+        // Add the Black Pawn
+        Square playerPawnSquare = Square({ PieceType::Pawn, PieceColor::Black }, BoardSquare::D5);
+        board->UpdateSquare(playerPawnSquare);
+
+        // Add the opponent White Pawns
+        Square opponentBlockingPawnSquare = Square({ PieceType::Pawn, PieceColor::White }, BoardSquare::D4);
+        board->UpdateSquare(opponentBlockingPawnSquare);
+
+        Square opponentToCapturePawnSquare = Square({ PieceType::Pawn, PieceColor::White }, BoardSquare::E4);
+        board->UpdateSquare(opponentToCapturePawnSquare);
+
+        // Generate actual pseudo-legal moves
+        std::vector<Move> actualMoves = moveGenerator.GeneratePseudoLegalMoves(PieceColor::Black);
+
+        // Generate expected pseudo-legal moves
+        std::vector<Move> expectedMoves{};
+        expectedMoves.push_back(CreateMove(playerPawnSquare.GetBoardSquare(), BoardSquare::E4, MoveType::Capture));
 
         REQUIRE(actualMoves == expectedMoves);
     }

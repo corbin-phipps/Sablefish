@@ -202,7 +202,7 @@ using sablefish::board::BoardSquare;
 // Definitions
 template <sablefish::board::PieceColor pieceColor>
 constexpr std::array<Bitboard, NUM_SQUARES>
-GeneratePawnMoves()
+GeneratePawnNonCaptureMoves()
 {
     std::array<Bitboard, NUM_SQUARES> pawnMoves{};
     for (size_t square = 0; square < NUM_SQUARES; square++) {
@@ -231,6 +231,54 @@ GeneratePawnMoves()
                 // Double Pawn Push
                 if (pawnRank == RANK_7) {
                     targetSquare = static_cast<BoardSquare>((RANK_5 * NUM_RANKS) + pawnFile);
+                    SetBit(pawnBitboard, targetSquare);
+                }
+            }
+        } else {
+            // TODO: Log error
+        }
+
+        pawnMoves.at(square) = pawnBitboard;
+    }
+
+    return pawnMoves;
+}
+
+template <sablefish::board::PieceColor pieceColor>
+constexpr std::array<Bitboard, NUM_SQUARES>
+GeneratePawnCaptureMoves()
+{
+    std::array<Bitboard, NUM_SQUARES> pawnMoves{};
+    for (size_t square = 0; square < NUM_SQUARES; square++) {
+        Bitboard pawnBitboard = 0;
+        size_t pawnRank = square / NUM_RANKS;
+        size_t pawnFile = square % NUM_FILES;
+
+        if (pieceColor == sablefish::board::PieceColor::White) {
+            if (pawnRank < RANK_8) {
+                if (pawnFile > FILE_A) {
+                    // Capture left
+                    BoardSquare targetSquare = static_cast<BoardSquare>(((pawnRank + 1) * NUM_RANKS) + (pawnFile - 1));
+                    SetBit(pawnBitboard, targetSquare);
+                }
+
+                if (pawnFile < FILE_H) {
+                    // Capture right
+                    BoardSquare targetSquare = static_cast<BoardSquare>(((pawnRank + 1) * NUM_RANKS) + (pawnFile + 1));
+                    SetBit(pawnBitboard, targetSquare);
+                }
+            }
+        } else if (pieceColor == sablefish::board::PieceColor::Black) {
+            if (pawnRank > RANK_1) {
+                if (pawnFile > FILE_A) {
+                    // Capture left
+                    BoardSquare targetSquare = static_cast<BoardSquare>(((pawnRank - 1) * NUM_RANKS) + (pawnFile - 1));
+                    SetBit(pawnBitboard, targetSquare);
+                }
+
+                if (pawnFile < FILE_H) {
+                    // Capture right
+                    BoardSquare targetSquare = static_cast<BoardSquare>(((pawnRank - 1) * NUM_RANKS) + (pawnFile + 1));
                     SetBit(pawnBitboard, targetSquare);
                 }
             }
@@ -474,8 +522,10 @@ GenerateKingMoves()
 }
 
 // Declarations
-constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> PAWN_MOVES_WHITE = GeneratePawnMoves<sablefish::board::PieceColor::White>();
-constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> PAWN_MOVES_BLACK = GeneratePawnMoves<sablefish::board::PieceColor::Black>();
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> PAWN_NON_CAPTURE_MOVES_WHITE = GeneratePawnNonCaptureMoves<sablefish::board::PieceColor::White>();
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> PAWN_NON_CAPTURE_MOVES_BLACK = GeneratePawnNonCaptureMoves<sablefish::board::PieceColor::Black>();
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> PAWN_CAPTURE_MOVES_WHITE = GeneratePawnCaptureMoves<sablefish::board::PieceColor::White>();
+constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> PAWN_CAPTURE_MOVES_BLACK = GeneratePawnCaptureMoves<sablefish::board::PieceColor::Black>();
 constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> ROOK_MOVES = GenerateRookMoves();
 constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> KNIGHT_MOVES = GenerateKnightMoves();
 constexpr std::array<Bitboard, sablefish::constants::NUM_SQUARES> BISHOP_MOVES = GenerateBishopMoves();
