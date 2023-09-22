@@ -5,6 +5,7 @@ target_sources(sablefish-test
     ConversionsTest.cpp
     GameTest.cpp
     MoveGeneratorTest.cpp
+    MoveTest.cpp
     PieceTest.cpp
     PlayerTest.cpp
     PrecomputedMoveGenerationTest.cpp

@@ -5,6 +5,7 @@
 
 using namespace sablefish::board;
 using namespace sablefish::constants;
+using namespace sablefish::moves;
 
 /* constructor */
 
@@ -28,6 +29,14 @@ const Square&
 Board::GetSquare(const BoardSquare boardSquare) const
 {
     return m_squares.at(static_cast<size_t>(boardSquare));
+}
+
+// Given a valid Move and PieceColor, update the Board accordingly.
+void
+Board::UpdateBoard(const sablefish::moves::Move move, const PieceColor pieceColor)
+{
+    std::tuple<BoardSquare, BoardSquare, MoveType> moveData = GetMoveData(move);
+    // TODO: Update board
 }
 
 // Displays the current Board

@@ -6,6 +6,7 @@
 
 #include "Bitboard.hpp"
 #include "Constants.hpp"
+#include "Move.hpp"
 #include "Piece.hpp"
 #include "Square.hpp"
 
@@ -25,6 +26,8 @@ public:
 
     const Bitboard GetBitboard(const Piece& piece) const;
     const Square& GetSquare(const BoardSquare boardSquare) const;
+
+    void UpdateBoard(const sablefish::moves::Move move, const PieceColor pieceColor);
 
     const std::string ToString();
 

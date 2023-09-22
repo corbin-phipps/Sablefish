@@ -25,6 +25,17 @@ CreateMove(BoardSquare startingSquare, BoardSquare targetSquare, MoveType moveTy
     return move;
 }
 
+// Returns the starting BoardSquare, target BoardSquare, and MoveType for a given Move.
+std::tuple<BoardSquare, BoardSquare, MoveType>
+GetMoveData(const Move move)
+{
+    BoardSquare startingSquare = static_cast<BoardSquare>((move & STARTING_SQUARE_MASK) >> 10);
+    BoardSquare targetSquare = static_cast<BoardSquare>((move & TARGET_SQUARE_MASK) >> 4);
+    MoveType moveType = static_cast<MoveType>(move & MOVE_TYPE_MASK);
+
+    return std::make_tuple(startingSquare, targetSquare, moveType);
+}
+
 // Returns a boolean representing whether or not a Move is a promotion based on the given Piece and target BoardSquare.
 bool
 IsPromotion(Piece piece, BoardSquare targetSquare)
