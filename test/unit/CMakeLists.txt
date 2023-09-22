@@ -3,6 +3,7 @@ target_sources(sablefish-test
     Main.cpp
     BoardTest.cpp
     ConversionsTest.cpp
+    GameTest.cpp
     MoveGeneratorTest.cpp
     PieceTest.cpp
     PlayerTest.cpp
