@@ -38,7 +38,7 @@ Player::GetBoard() const
 
 // Returns the current Bitboard of all of the current Player's pieces.
 const Bitboard
-Player::GetPlayerPiecesBitboard()
+Player::GetPlayerPiecesBitboard() const
 {
     return CalculatePlayerPiecesBitboard();
 }
@@ -47,7 +47,7 @@ Player::GetPlayerPiecesBitboard()
 
 // Returns a Bitboard of all of the current Player's pieces on the shared Board.
 const Bitboard
-Player::CalculatePlayerPiecesBitboard()
+Player::CalculatePlayerPiecesBitboard() const
 {
     Bitboard playerPiecesBitboard = 0ULL;
     for (const auto& [pieceType, pieceColor] : PIECE_DATA) {

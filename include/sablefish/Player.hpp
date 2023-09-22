@@ -19,10 +19,10 @@ public:
     const board::PieceColor GetPlayerPieceColor() const;
     const size_t GetCompletedMovesCount() const;
     std::shared_ptr<board::Board> GetBoard() const;
-    const Bitboard GetPlayerPiecesBitboard();
+    const Bitboard GetPlayerPiecesBitboard() const;
 
 private:
-    const Bitboard CalculatePlayerPiecesBitboard();
+    const Bitboard CalculatePlayerPiecesBitboard() const;
 
     board::PieceColor m_playerPieceColor{};
     std::stack<sablefish::moves::Move> m_completedMoves{};
