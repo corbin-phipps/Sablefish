@@ -6,13 +6,6 @@ using namespace sablefish::constants;
 
 /* constructors */
 
-// Default constructor for a Piece object. Represents a non-existent Piece.
-Piece::Piece() :
-    m_pieceType(PieceType::Empty),
-    m_pieceColor(PieceColor::Empty)
-{
-}
-
 // Constructs a Piece with the given PieceType and PieceColor.
 Piece::Piece(const PieceType pieceType, const PieceColor pieceColor) :
     m_pieceType(pieceType),

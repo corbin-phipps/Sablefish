@@ -9,9 +9,7 @@ using namespace sablefish::constants;
 /* constructor */
 
 // Default constructor for a Board that also initializes it.
-Board::Board() :
-    m_bitboards{},
-    m_squares{}
+Board::Board()
 {
     Initialize();
 }

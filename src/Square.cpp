@@ -5,13 +5,6 @@ using namespace sablefish::board;
 
 /* constructors */
 
-// Default constructor for an empty Square.
-Square::Square() :
-    m_piece(Piece()),
-    m_isOccupied(false)
-{
-}
-
 // Constructs a Square with a given Piece.
 Square::Square(const Piece& piece, const BoardSquare boardSquare) :
     m_boardSquare(boardSquare),

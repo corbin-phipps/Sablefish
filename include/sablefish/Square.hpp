@@ -35,7 +35,7 @@ constexpr Bitboard operator<<(Bitboard lhs, const BoardSquare& rhs) {
 class Square
 {
 public:
-    Square();
+    Square() = default;
     Square(const Piece& piece, const BoardSquare boardSquare);
 
     const BoardSquare GetBoardSquare() const;

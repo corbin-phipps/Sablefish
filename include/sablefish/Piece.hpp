@@ -28,7 +28,7 @@ enum class PieceColor {
 class Piece
 {
 public:
-    Piece();
+    Piece() = default;
     Piece(const PieceType pieceType, const PieceColor pieceColor);
 
     const PieceType GetPieceType() const;
