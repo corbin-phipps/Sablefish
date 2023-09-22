@@ -33,10 +33,11 @@ Board::GetSquare(const BoardSquare boardSquare) const
 
 // Given a valid Move and PieceColor, update the Board accordingly.
 void
-Board::UpdateBoard(const sablefish::moves::Move move, const PieceColor pieceColor)
+Board::UpdateBoard(const Move move, const PieceColor pieceColor)
 {
-    std::tuple<BoardSquare, BoardSquare, MoveType> moveData = GetMoveData(move);
-    // TODO: Update board
+    auto [startingBoardSquare, targetBoardSquare, moveType] = GetMoveData(move);
+    auto startingSquare = GetSquare(startingBoardSquare);
+    auto targetSquare = GetSquare(targetBoardSquare);
 }
 
 // Displays the current Board

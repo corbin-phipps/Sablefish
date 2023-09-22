@@ -57,9 +57,9 @@ TEST_CASE("Promotions can be identified correctly") {
 
 TEST_CASE("Move data can be extracted correctly from a Move") {
     Move move = CreateMove(BoardSquare::A2, BoardSquare::A3, MoveType::Quiet);
-    auto moveData = GetMoveData(move);
+    auto [startingSquare, targetSquare, moveType] = GetMoveData(move);
 
-    REQUIRE(std::get<0>(moveData) == BoardSquare::A2);
-    REQUIRE(std::get<1>(moveData) == BoardSquare::A3);
-    REQUIRE(std::get<2>(moveData) == MoveType::Quiet);
+    REQUIRE(startingSquare == BoardSquare::A2);
+    REQUIRE(targetSquare == BoardSquare::A3);
+    REQUIRE(moveType == MoveType::Quiet);
 }

@@ -51,7 +51,7 @@ Player::GetPlayerPiecesBitboard() const
 
 // Plays the given move for the current Player.
 void
-Player::PlayMove(sablefish::moves::Move move)
+Player::PlayMove(Move move)
 {
     // Generate legal moves
     // TODO: Currently using pseudo-legal, update to legal
