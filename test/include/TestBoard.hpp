@@ -11,6 +11,7 @@ class TestBoard : public Board
 {
 public:
     void Clear();
+    void ClearSquare(const BoardSquare boardSquare);
     void UpdateSquare(const Square& square);
     bool IsEmpty();
 };

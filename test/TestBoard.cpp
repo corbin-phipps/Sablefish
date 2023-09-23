@@ -18,6 +18,13 @@ TestBoard::Clear()
     }
 }
 
+// Clears the Square corresponding to the given BoardSquare
+void
+TestBoard::ClearSquare(const BoardSquare boardSquare)
+{
+    Board::ClearSquare(boardSquare);
+}
+
 // Updates a Square in the current TestBoard. Used for setting up TestBoard positions
 void
 TestBoard::UpdateSquare(const Square& square)

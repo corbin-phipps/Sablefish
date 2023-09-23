@@ -36,8 +36,16 @@ void
 Board::UpdateBoard(const Move move, const PieceColor pieceColor)
 {
     auto [startingBoardSquare, targetBoardSquare, moveType] = GetMoveData(move);
-    auto startingSquare = GetSquare(startingBoardSquare);
-    auto targetSquare = GetSquare(targetBoardSquare);
+
+    // TODO: Set Bitboards as well
+
+    // Clear the starting square
+    auto updatedStartingSquare = Square(Piece(), startingBoardSquare);
+    SetSquare(updatedStartingSquare);
+
+    // Update the target square
+    auto updatedTargetSquare = Square(GetSquare(startingBoardSquare).GetPiece(), targetBoardSquare);
+    SetSquare(updatedTargetSquare);
 }
 
 // Displays the current Board
@@ -176,4 +184,12 @@ void
 Board::SetSquare(const Square& square)
 {
     m_squares.at(static_cast<size_t>(square.GetBoardSquare())) = square;
+}
+
+// Given a BoardSquare, clears the corresponding Square on the Board
+void
+Board::ClearSquare(BoardSquare boardSquare)
+{
+    auto emptySquare = Square(Piece(), boardSquare);
+    SetSquare(emptySquare);
 }

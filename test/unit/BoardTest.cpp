@@ -40,6 +40,11 @@ TEST_CASE("Board representations can be viewed and modified") {
         Square startingA1Square = board.GetSquare(BoardSquare::A1);
         REQUIRE(startingA1Square == Square({ PieceType::Rook, PieceColor::White }, BoardSquare::A1));
     }
+
+    SECTION("Clear Square") {
+        board.ClearSquare(BoardSquare::A1);
+        REQUIRE(board.GetSquare(BoardSquare::A1) == Square());
+    }
 }
 
 TEST_CASE("TestBoard-specific functionality works correctly") {
