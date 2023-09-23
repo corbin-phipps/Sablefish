@@ -42,7 +42,7 @@ private:
 protected:
     void SetBitboard(const Piece& piece, const Bitboard bitboard);
     void SetSquare(const Square& square);
-    void ClearSquare(BoardSquare boardSquare);
+    void ClearSquare(const BoardSquare boardSquare);
 
     std::array<Bitboard, constants::NUM_PIECE_TYPES * constants::NUM_COLORS> m_bitboards{};
     std::array<Square, constants::NUM_SQUARES> m_squares{};
