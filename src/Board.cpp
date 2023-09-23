@@ -21,6 +21,10 @@ Board::Board()
 const Bitboard
 Board::GetBitboard(const Piece& piece) const
 {
+    if (piece.GetPieceType() == PieceType::Empty) {
+        throw std::invalid_argument("Cannot get Bitboard of PieceType::Empty");
+    }
+
     return m_bitboards.at(GetBitboardIndex(piece));
 }
 
@@ -36,14 +40,34 @@ void
 Board::UpdateBoard(const Move move, const PieceColor pieceColor)
 {
     auto [startingBoardSquare, targetBoardSquare, moveType] = GetMoveData(move);
-    auto pieceToMove = GetSquare(startingBoardSquare).GetPiece();
 
-    // Clear the starting square and Bitboard
+    auto pieceToMove = GetSquare(startingBoardSquare).GetPiece();
+    auto pieceToMoveBitboard = GetBitboard(pieceToMove);
+
+    // TODO: Handle promotions since those bitboard changes are more complex
+
+    // If the move is a Capture, clear the target BoardSquare from the opponent's piece's Bitboard
+    auto targetSquare = GetSquare(targetBoardSquare);
+    if (targetSquare.IsOccupied()) {
+        auto opponentPiece = targetSquare.GetPiece();
+        auto opponentPieceBitboard = GetBitboard(opponentPiece);
+        Bitboard updatedOpponentPieceBitboard(opponentPieceBitboard);
+        ClearBit(updatedOpponentPieceBitboard, targetBoardSquare);
+        SetBitboard(opponentPiece, updatedOpponentPieceBitboard);
+    }
+
+    // Clear the starting Square
     ClearSquare(startingBoardSquare);
 
-    // Update the target square
+    // Update the target Square
     auto updatedTargetSquare = Square(pieceToMove, targetBoardSquare);
     SetSquare(updatedTargetSquare);
+
+    // Update the moving piece's Bitboard by clearing the starting square and setting the target square
+    Bitboard updatedPieceToMoveBitboard(pieceToMoveBitboard);
+    ClearBit(updatedPieceToMoveBitboard, startingBoardSquare);
+    SetBit(updatedPieceToMoveBitboard, targetBoardSquare);
+    SetBitboard(pieceToMove, updatedPieceToMoveBitboard);
 }
 
 // Displays the current Board
@@ -162,6 +186,10 @@ Board::InitializeSquares()
 const size_t
 Board::GetBitboardIndex(const Piece& piece) const
 {
+    if (piece.GetPieceType() == PieceType::Empty) {
+        throw std::invalid_argument("Cannot get Bitboard index of PieceType::Empty");
+    }
+
     auto pieceType = static_cast<size_t>(piece.GetPieceType());
     auto pieceColor = static_cast<size_t>(piece.GetPieceColor());
 
