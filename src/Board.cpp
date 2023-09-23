@@ -36,14 +36,13 @@ void
 Board::UpdateBoard(const Move move, const PieceColor pieceColor)
 {
     auto [startingBoardSquare, targetBoardSquare, moveType] = GetMoveData(move);
+    auto pieceToMove = GetSquare(startingBoardSquare).GetPiece();
 
-    // TODO: Set Bitboards as well
-
-    // Clear the starting square
+    // Clear the starting square and Bitboard
     ClearSquare(startingBoardSquare);
 
     // Update the target square
-    auto updatedTargetSquare = Square(GetSquare(startingBoardSquare).GetPiece(), targetBoardSquare);
+    auto updatedTargetSquare = Square(pieceToMove, targetBoardSquare);
     SetSquare(updatedTargetSquare);
 }
 
