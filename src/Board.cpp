@@ -18,14 +18,21 @@ Board::Board()
 /* public */
 
 // Given a Piece, returns the appropriate Bitboard.
-const Bitboard
-Board::GetBitboard(const Piece& piece) const
+Bitboard
+Board::GetBitboard(const Piece& piece)
 {
     if (piece.GetPieceType() == PieceType::Empty) {
         throw std::invalid_argument("Cannot get Bitboard of PieceType::Empty");
     }
 
     return m_bitboards.at(GetBitboardIndex(piece));
+}
+
+// Given a PieceType and PieceColor, returns the appropriate Bitboard.
+Bitboard
+Board::GetBitboard(const PieceType pieceType, const PieceColor pieceColor)
+{
+    return GetBitboard(Piece(pieceType, pieceColor));
 }
 
 // Given a BoardSquare, returns the appropriate Square in the Board.
@@ -51,9 +58,8 @@ Board::UpdateBoard(const Move move, const PieceColor pieceColor)
     if (targetSquare.IsOccupied()) {
         auto opponentPiece = targetSquare.GetPiece();
         auto opponentPieceBitboard = GetBitboard(opponentPiece);
-        Bitboard updatedOpponentPieceBitboard(opponentPieceBitboard);
-        ClearBit(updatedOpponentPieceBitboard, targetBoardSquare);
-        SetBitboard(opponentPiece, updatedOpponentPieceBitboard);
+        ClearBit(opponentPieceBitboard, targetBoardSquare);
+        SetBitboard(opponentPiece, opponentPieceBitboard);
     }
 
     // Clear the starting Square
@@ -64,10 +70,9 @@ Board::UpdateBoard(const Move move, const PieceColor pieceColor)
     SetSquare(updatedTargetSquare);
 
     // Update the moving piece's Bitboard by clearing the starting square and setting the target square
-    Bitboard updatedPieceToMoveBitboard(pieceToMoveBitboard);
-    ClearBit(updatedPieceToMoveBitboard, startingBoardSquare);
-    SetBit(updatedPieceToMoveBitboard, targetBoardSquare);
-    SetBitboard(pieceToMove, updatedPieceToMoveBitboard);
+    ClearBit(pieceToMoveBitboard, startingBoardSquare);
+    SetBit(pieceToMoveBitboard, targetBoardSquare);
+    SetBitboard(pieceToMove, pieceToMoveBitboard);
 }
 
 // Displays the current Board

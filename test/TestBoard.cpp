@@ -45,7 +45,7 @@ TestBoard::IsEmpty()
 {
     // Check Bitboards
     for (const auto& [pieceType, pieceData] : PIECE_DATA) {
-        if (GetBitboard({ pieceType, pieceData }) != EMPTY_BITBOARD) {
+        if (GetBitboard(pieceType, pieceData) != EMPTY_BITBOARD) {
             return false;
         }
     }

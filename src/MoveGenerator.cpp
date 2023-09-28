@@ -24,7 +24,7 @@ MoveGenerator::GeneratePseudoLegalMoves(const PieceColor pieceColor)
     // Generate moves for each PieceType of the given PieceColor
     for (size_t i = 0; i < static_cast<size_t>(PieceType::Empty); i++) {
         auto pieceType = static_cast<PieceType>(i);
-        Bitboard pieceBitboard = m_board->GetBitboard({ pieceType, pieceColor });
+        Bitboard pieceBitboard = m_board->GetBitboard(pieceType, pieceColor);
 
         // Generate moves for each piece of the current PieceType and PieceColor
         while (pieceBitboard != EMPTY_BITBOARD) {

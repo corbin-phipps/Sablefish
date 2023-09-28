@@ -77,7 +77,7 @@ Player::CalculatePlayerPiecesBitboard() const
     Bitboard playerPiecesBitboard = 0ULL;
     for (const auto& [pieceType, pieceColor] : PIECE_DATA) {
         if (pieceColor == m_playerPieceColor) {
-            playerPiecesBitboard |= m_board->GetBitboard({ pieceType, pieceColor });
+            playerPiecesBitboard |= m_board->GetBitboard(pieceType, pieceColor);
         }
     }
 

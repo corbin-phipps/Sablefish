@@ -13,7 +13,7 @@ TEST_CASE("Board can be constructed and initialized") {
     
     SECTION("Initial Bitboard representation is correct") {
         for (const auto& [pieceType, pieceColor] : PIECE_DATA) {
-            Bitboard actualBitboard = board.GetBitboard({ pieceType, pieceColor });
+            Bitboard actualBitboard = board.GetBitboard(pieceType, pieceColor);
             Bitboard expectedBitboard = ConvertPieceDataToStartingBitboard(pieceType, pieceColor);
             REQUIRE(actualBitboard == expectedBitboard);
         }
@@ -34,7 +34,7 @@ TEST_CASE("Board can be constructed and initialized") {
 TEST_CASE("Board representations can be viewed and modified") {
     TestBoard board = TestBoard();
     SECTION("Get Bitboard") {
-        Bitboard startingWhitePawnBitboard = board.GetBitboard({ PieceType::Pawn, PieceColor::White });
+        Bitboard startingWhitePawnBitboard = board.GetBitboard(PieceType::Pawn, PieceColor::White);
         REQUIRE(startingWhitePawnBitboard == WHITE_PAWNS_START);
     }
 
@@ -112,7 +112,7 @@ TEST_CASE("Board can be updated") {
         REQUIRE_THROWS(board.GetBitboard(a1Square.GetPiece()));
         REQUIRE(a8Square.GetPiece() == Piece(PieceType::Rook, PieceColor::White));
         REQUIRE(board.GetBitboard(a8Square.GetPiece()) == 0b00000001'00000000'00000000'00000000'00000000'00000000'00000000'00000000);
-        REQUIRE(board.GetBitboard(Piece(PieceType::Queen, PieceColor::Black)) == EMPTY_BITBOARD);
+        REQUIRE(board.GetBitboard(PieceType::Queen, PieceColor::Black) == EMPTY_BITBOARD);
     }
 
     // TODO: Other MoveTypes
@@ -125,7 +125,7 @@ TEST_CASE("TestBoard-specific functionality works correctly") {
 
         // Check Bitboards
         for (const auto& [pieceType, pieceData] : PIECE_DATA) {
-            REQUIRE(board.GetBitboard({ pieceType, pieceData }) == EMPTY_BITBOARD);
+            REQUIRE(board.GetBitboard(pieceType, pieceData) == EMPTY_BITBOARD);
         }
 
         // Check Squares
