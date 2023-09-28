@@ -19,7 +19,7 @@ Board::Board()
 
 // Given a Piece, returns the appropriate Bitboard.
 Bitboard
-Board::GetBitboard(const Piece& piece)
+Board::GetBitboard(const Piece& piece) const
 {
     if (piece.GetPieceType() == PieceType::Empty) {
         throw std::invalid_argument("Cannot get Bitboard of PieceType::Empty");
@@ -30,7 +30,7 @@ Board::GetBitboard(const Piece& piece)
 
 // Given a PieceType and PieceColor, returns the appropriate Bitboard.
 Bitboard
-Board::GetBitboard(const PieceType pieceType, const PieceColor pieceColor)
+Board::GetBitboard(const PieceType pieceType, const PieceColor pieceColor) const
 {
     return GetBitboard(Piece(pieceType, pieceColor));
 }

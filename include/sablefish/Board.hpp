@@ -24,8 +24,8 @@ class Board
 public:
     Board();
 
-    Bitboard GetBitboard(const Piece& piece);
-    Bitboard GetBitboard(const PieceType pieceType, const PieceColor pieceColor);
+    Bitboard GetBitboard(const Piece& piece) const;
+    Bitboard GetBitboard(const PieceType pieceType, const PieceColor pieceColor) const;
     const Square& GetSquare(const BoardSquare boardSquare) const;
 
     void UpdateBoard(const sablefish::moves::Move move, const PieceColor pieceColor);
