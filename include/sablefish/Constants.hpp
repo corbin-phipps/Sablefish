@@ -190,7 +190,7 @@ constexpr sablefish::board::BoardSquare PopLsb(Bitboard& bitboard)
 
     return static_cast<sablefish::board::BoardSquare>(lsb);
 }
-} // namespace sablefish::constants::bitmanipulations
+} // namespace sablefish::constants::functions
 
 // This namespace defines the pre-computed lookup tables of pseudo-legal moves
 namespace
